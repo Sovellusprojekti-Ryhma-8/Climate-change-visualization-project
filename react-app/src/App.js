@@ -1,11 +1,38 @@
+import React from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
+import Header from './components/Header';
+import Home from './components/Home';
+import N1 from './components/N1';
+import N2 from './components/N2';
+import N3 from './components/N3';
+import Footer from './components/Footer';
+import LogIn from './components/LogIn';
+import SignIn from './components/SignIn';
+import LuoVisualisointinäkymä from './components/LuoVisualisointinäkymä';
+import { Routes, Route } from 'react-router-dom';
+
 
 function App() {
-  return (
-    <div className="App">
-      <p>React app</p>
-    </div>
-  );
+ return (
+  <>
+  
+    <Navbar />
+    <Header />
+    <div classname='container'>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/N1" element={<N1 />} />
+        <Route path="/N2" element={<N2 />} />
+        <Route path="/N3" element={<N3 />} />
+        <Route path="/LogIn" element={<LogIn />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
+        </Routes>
+        </div>
+        <Footer />
+        </>
+ );
 }
 
 export default App;
