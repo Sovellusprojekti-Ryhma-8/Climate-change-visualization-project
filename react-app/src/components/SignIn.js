@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import '../styles/registeration.css'
 
 
 const URL = "http://localhost:8080/register"
