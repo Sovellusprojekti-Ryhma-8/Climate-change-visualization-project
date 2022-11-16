@@ -8,8 +8,7 @@ const URL = "http://localhost:8080/register"
 
 export default function SignIn() {
 
-
-    const [userName, setUsername] = useState('');
+    const [userName, setUserName] = useState('');
     const [passWord, setPassWord] = useState('');
     const [passWord2, setPassWord2] = useState('');
     const [message, setMessage] = useState('');
@@ -56,7 +55,6 @@ export default function SignIn() {
        
     }
 
-   
 
     return (
 
@@ -65,7 +63,7 @@ export default function SignIn() {
                 <form class="register-form" onSubmit={handleSubmit}>
                     <div class="block">
                         <label>Käyttäjänimi</label>
-                        <input class="input" type="text" value={userName} onChange={(e) => setUsername(e.target.value)}/>
+                        <input class="input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)}/>
                     </div>
                     <div class="block">
                         <label>Salasana</label>
