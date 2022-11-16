@@ -35,11 +35,11 @@ public class UserController {
      public ResponseEntity<String> login(
         @RequestParam String userName,
         @RequestParam String passWord) {
-            User user = uService.login(userName, passWord);
-            if(user==null){
+            String token = uService.login(userName, passWord);
+            if(token==null){
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<>(user.getUserName(), HttpStatus.OK);
+            return new ResponseEntity<>(token, HttpStatus.OK);
         }
 
     @GetMapping("private")

@@ -46,16 +46,15 @@ public class UserService {
     }
 
 
-    public User login(String userName, String passWord){
+    public String login(String userName, String passWord){
         
-        User user = (User) uRepo.findByName(userName);
+        User user =  uRepo.findById(userName).orElse(null);
         if(user==null || !encoder.matches(passWord, user.getPassWord())){
             return null;
         }
 
-        return encoder.matches(passWord, user.getPassWord()) ? user : null;
-        //Algorithm alg = Algorithm.HMAC256(jwtKey);
-       // return JWT.create().withSubject(user.getUserName()).sign(alg);
+        Algorithm alg = Algorithm.HMAC256(jwtKey);
+        return JWT.create().withSubject(user.getUserName()).sign(alg);
     }
 
      public String validateJwt(String jwtToken){

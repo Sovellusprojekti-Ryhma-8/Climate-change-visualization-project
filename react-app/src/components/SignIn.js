@@ -7,7 +7,7 @@ const URL = "http://localhost:8080/register"
 
 export default function SignIn() {
 
-    const [userName, setUserame] = useState('');
+    const [userName, setUserName] = useState('');
     const [passWord, setPassWord] = useState('');
     const form = new FormData;
 
@@ -38,7 +38,7 @@ export default function SignIn() {
         <>
             <div class="register">
                 <form class="register-form" onSubmit={handleSubmit}>
-                    <input type="text" value={userName} onChange={(e) => setUserame(e.target.value)}/>
+                    <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}/>
                     <input type="text" value={passWord} onChange={(e) => setPassWord(e.target.value)}/>
                     <button class='button' type='submit'>Rekisteröidy</button>
                 </form>

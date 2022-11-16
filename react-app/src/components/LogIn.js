@@ -3,15 +3,12 @@ import { useState } from 'react';
 
 const URL= "http://localhost:8080/login"
 
+
 export default function LogIn() {
     const [userName, setUserName] = useState('');
     const [passWord, setPassword] = useState('');
-    
+   
 
-
-    
-    
-    
     return (
         <>
     <div>
@@ -33,7 +30,8 @@ export default function LogIn() {
     </div>
     </>
     )
-}
+    
+    }
 
 
 
