@@ -1,35 +1,39 @@
-
+import React from 'react'
 import { useState } from 'react';
 
-function LogIn() {
-    const [useName, setUserName] = useState('')
-    const [password, setPassword] = useState('')
+const URL= "http://localhost:8080/login"
+
+export default function LogIn() {
+    const [userName, setUserName] = useState('');
+    const [passWord, setPassword] = useState('');
+    
+
+
+    
+    
     
     return (
         <>
     <div>
-        <h3></h3>
-        <form>
+        <form className="login-form" on submit={handleSubmit}>
         <div>
             <label>Username</label>
             <div>
-                <input></input>
+                <input value={userName} onChange={(e) => setUserName(e.target.value)}/>
             </div>
         </div>
         <div>
             <label>Password</label>
             <div>
-                <output></output>
+                <input value={passWord} onChange={(e) => setPassword(e.target.value)}/>
             </div>
         </div>
-        <button>Log In</button>
+        <button class='button' type='submit'>Kirjaudu</button>
         </form>
     </div>
     </>
-);
+    )
 }
 
-
-export default LogIn;
 
 
