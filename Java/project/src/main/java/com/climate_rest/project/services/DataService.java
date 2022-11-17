@@ -9,7 +9,7 @@ import com.climate_rest.project.repo.V3_annualRepo;
 import java.util.List;
 
 @Service
-public class V3_annualService {
+public class DataService {
     
     @Autowired
     V3_annualRepo v3Repo;

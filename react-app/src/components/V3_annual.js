@@ -18,25 +18,7 @@ export default function V3_annual() {
             })
             
     },[])
-    /* const productSales = [
-        {year: 1993, sales: 500},
-        {year: 1994, sales: 340},
-        {year: 1995, sales: 700},
-        {year: 1996, sales: 700},
-    ]; */
 
-    /* const [chart, setChart] = useState({
-        labels : chartData.map(d => d.year),
-        datasets: [
-            {
-                label: "Product sales",
-                data: chartData.map(d => d.co2),
-                backgroundColor: [
-                    '#99346C', '#E6DA85', '#E66EB0', '#57D8E6'
-                ]
-            }
-        ],
-    }); */
     const data = {
         labels: chartData.map(d => d.year),
         datasets: [
@@ -45,10 +27,6 @@ export default function V3_annual() {
                 borderColor: "rgb(255, 99, 132)",
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
                 yAxisID: "co2",
-                parsing: {
-                xAxisKey: "TimeYrBP",
-                yAxisKey: "Co2ppm",
-                },
                 pointRadius: 1,
             }
         ]
