@@ -17,7 +17,8 @@
   
   .register .button {
     padding: 10px 15px;
-    margin-top: 1em;  
+    margin-top: 1em;
+    margin-bottom: 1em;  
     background-color: #42d806;
     border: none;
     border-radius: 5px;
@@ -25,13 +26,12 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 15px;
+    font-size: 16px;
 
   }
 
   .register .register-form .input {
-    width: 100%;
-    
+    width: 100%;  
   }
 
   .block {

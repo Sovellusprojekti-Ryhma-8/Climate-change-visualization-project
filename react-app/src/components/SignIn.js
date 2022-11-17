@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import '../styles/registeration.css'
 
 
@@ -40,13 +41,13 @@ export default function SignIn() {
                 if (res.status === 200) {
                     console.log(res.status)
                     navigate('/LogIn')
-                }else {
-                    setMessage("Vituiks män")
+                }else if (res.status === 403) {
+                    setMessage("Käyttäjänimi jo olemassa!")
                 }
             }) 
             .catch((error) => {
                 console.log(error+ "  error")
-                setMessage("error")
+                setMessage("Jokin meni vikaan")
             })
         } catch(err) {
             console.log(err+ "   err");
@@ -74,6 +75,9 @@ export default function SignIn() {
                         <input class="input" type="text" value={passWord2} onChange={(e) => setPassWord2(e.target.value)}/>
                     </div>
                     <button class='button' type='submit'>Rekisteröidy</button>
+                    <div>
+                        <Link to='/LogIn'>Log in</Link>
+                    </div>
                 </form>
                 <p>{message}</p>
             </div>

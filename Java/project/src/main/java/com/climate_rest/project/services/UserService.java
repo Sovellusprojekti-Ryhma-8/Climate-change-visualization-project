@@ -38,11 +38,23 @@ public class UserService {
     
     public User userRegisteration(String userName, String passWord) {
         User user = new User(userName, encoder.encode(passWord));         
-        users.add(user); // tähän database lisäys
-        uRepo.save(user);
+            if (sameUsername(userName)) {
+                return null;
+            } else {
+                System.out.println(userName+" "+encoder.encode(passWord));
+                users.add(user);
+                uRepo.save(user);
+                return user;        
+            }
+    }
 
-        System.out.println(userName+" "+encoder.encode(passWord));
-        return user;
+    public boolean sameUsername(String userName) {
+        User user =  uRepo.findById(userName).orElse(null);
+        if (user != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
