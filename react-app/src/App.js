@@ -19,19 +19,19 @@ function App() {
   
     <Navbar />
     <Header />
-    <div classname='container'>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/N1" element={<N1 />} />
-        <Route path="/N2" element={<N2 />} />
-        <Route path="/N3" element={<N3 />} />
-        <Route path="/LogIn" element={<LogIn />} />
-        <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
+      <div classname='container'>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/N1" element={<N1 />} />
+          <Route path="/N2" element={<N2 />} />
+          <Route path="/N3" element={<N3 />} />
+          <Route path="/LogIn" element={<LogIn />} />
+          <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
         </Routes>
-        </div>
-        <Footer />
-        </>
+      </div>
+    <Footer />
+  </>
  );
 }
 
