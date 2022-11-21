@@ -1,55 +1,64 @@
 package com.climate_rest.project.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="v1_monthly")
 public class V1 {
     
-    private String timeMonthly;  
-    private float globalMonthly;   
-    private float northernMonthly;   
-    private float southernMonthly;
+    @Id
+    @Column(name="time")
+    private String time;
+    @Column(name="global_anomaly")  
+    private double global;   
+    @Column(name="northern_anomaly")
+    private double northern;   
+    @Column(name="southern_anomaly")
+    private double southern;
     
+    public V1() {}
 
-
-    public V1(String timeMonthly, float globalMonthly,
-     float northernMonthly, float southernMonthly) {
-        this.timeMonthly = timeMonthly;
-        this.globalMonthly = globalMonthly;
-        this.northernMonthly = northernMonthly;
-        this.southernMonthly = southernMonthly;
+    public V1(String time, double global,
+     double northern, double southern) {
+        this.time = time;
+        this.global = global;
+        this.northern = northern;
+        this.southern = southern;
     }
 
-
-
-
-    public String getTimeMonthly() {
-        return this.timeMonthly;
+    public String getTime() {
+        return this.time;
     }
 
-    public void setTimeMonthly(String timeMonthly) {
-        this.timeMonthly = timeMonthly;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public float getGlobalMonthly() {
-        return this.globalMonthly;
+    public double getGlobal() {
+        return this.global;
     }
 
-    public void setGlobalMonthly(float globalMonthly) {
-        this.globalMonthly = globalMonthly;
+    public void setGlobal(double global) {
+        this.global = global;
     }
 
-    public float getNorthernMonthly() {
-        return this.northernMonthly;
+    public double getNorthern() {
+        return this.northern;
     }
 
-    public void setNorthernMonthly(float northernMonthly) {
-        this.northernMonthly = northernMonthly;
+    public void setNorthern(double northern) {
+        this.northern = northern;
     }
 
-    public float getSouthernMonthly() {
-        return this.southernMonthly;
+    public double getSouthern() {
+        return this.southern;
     }
 
-    public void setSouthernMonthly(float southernMonthly) {
-        this.southernMonthly = southernMonthly;
+    public void setSouthern(double southern) {
+        this.southern = southern;
     }
 
 }

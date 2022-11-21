@@ -29,8 +29,8 @@ public class V1_annual {
     }
 
 
-    public int getYear() {
-        return this.time;
+    public String getYear() {
+        return Integer.toString(this.time);
     }
 
     public void setYear(int time) {
