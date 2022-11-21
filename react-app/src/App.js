@@ -31,9 +31,9 @@ function App() {
         <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
         <Route path="/Profile"element={<Profile />} />
         </Routes>
-        </div>
-        <Footer />
-        </>
+      </div>
+    <Footer />
+  </>
  );
 }
 
