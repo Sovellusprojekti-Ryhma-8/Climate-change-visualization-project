@@ -43,6 +43,7 @@ export default function V3_annual() {
             yAxisKey: "co2",
           },
           pointRadius: 1,
+          borderWidth: 2
         },
         {
           label: "Monthly mean co2",
@@ -55,6 +56,7 @@ export default function V3_annual() {
             yAxisKey: "co2"
           },
           pointRadius: 1,
+          borderWidth: 2
         }
         ]
     }

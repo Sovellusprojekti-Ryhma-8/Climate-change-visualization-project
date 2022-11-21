@@ -34,7 +34,6 @@ public class DataController {
     @GetMapping("V1monthly")
     public List<V1> getV1_monthlyData(){
         return dataService.getV1_monthlyData();
-        return dataService.getV3_annualData();
     }
 
     @GetMapping("V3monthly")
