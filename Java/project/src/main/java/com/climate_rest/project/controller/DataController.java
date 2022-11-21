@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.climate_rest.project.data.V3_annual;
+import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.services.DataService;
 
 import java.util.List;
@@ -15,10 +16,15 @@ import java.util.List;
 public class DataController {
     
     @Autowired
-    DataService v3Service;
+    DataService dataService;
 
     @GetMapping("V3annual")
     public List<V3_annual> getV3_annualData(){
-        return v3Service.getV3_annualData();
+        return dataService.getV3_annualData();
+    }
+
+    @GetMapping("V3monthly")
+    public List<V3_monthly> getV3_monthlyData(){
+        return dataService.getV3_monthlyData();
     }
 }
