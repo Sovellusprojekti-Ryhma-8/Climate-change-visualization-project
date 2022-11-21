@@ -9,8 +9,9 @@ import javax.persistence.Table;
 @Table(name="v3_annual")
 public class V3_annual {
     @Id
+    private int id;
     @Column(name="time")
-    private int time;
+    private int year;
     @Column(name="co2")
     private double co2;
 
@@ -19,16 +20,17 @@ public class V3_annual {
     }
 
     public V3_annual(int time, double co2) {
-        this.time = time;
+        this.year = time;
         this.co2 = co2;
     }
 
-    public int getYear() {
-        return this.time;
+    public String getTime() {
+        return this.year + "-01";
+        //return Integer.toString(year);
     }
 
     public void setYear(int year) {
-        this.time = year;
+        this.year = year;
     }
 
     public double getCo2() {

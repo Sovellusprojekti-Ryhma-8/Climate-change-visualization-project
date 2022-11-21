@@ -138,13 +138,13 @@ export default function V1() {
             yAxis: {
                 type: "linear",
                 display: true,
-                // position: "right",
+                position: "right",
             },
         },
     };
 
     return (
-        <div style={{width:"90%"}}>
+        <div>
             <Line data={data} options={options}/>
         </div>
     )
