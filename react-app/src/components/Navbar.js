@@ -22,7 +22,8 @@ export default function Navbar() {
                     {!localStorage.getItem('token') && (
                     <>
                     <Link class="link" to="/LogIn">Log In</Link>
-                                    
+                    <li>
+                    </li>           
                     <Link class="link" to ="/SignIn">Sign In</Link>
                     </>
                     )}

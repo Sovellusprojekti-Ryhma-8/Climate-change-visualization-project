@@ -1,4 +1,5 @@
 import {useNavigate } from "react-router-dom";
+import '../styles/profile.css'
 
 export default function Profile(){
 
