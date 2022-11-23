@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import LogIn from './components/LogIn';
 import SignIn from './components/SignIn';
 import LuoVisualisointinäkymä from './components/LuoVisualisointinäkymä';
+import Profile from './components/Profile';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -19,15 +20,16 @@ function App() {
   
     <Navbar />
     <Header />
-      <div class='container'>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/N1" element={<N1 />} />
-          <Route path="/N2" element={<N2 />} />
-          <Route path="/N3" element={<N3 />} />
-          <Route path="/LogIn" element={<LogIn />} />
-          <Route path="/SignIn" element={<SignIn />} />
-          <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
+    <div class='container'>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/N1" element={<N1 />} />
+        <Route path="/N2" element={<N2 />} />
+        <Route path="/N3" element={<N3 />} />
+        <Route path="/LogIn" element={<LogIn />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
+        <Route path="/Profile"element={<Profile />} />
         </Routes>
       </div>
     <Footer />
