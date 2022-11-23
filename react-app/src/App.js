@@ -20,7 +20,7 @@ function App() {
   
     <Navbar />
     <Header />
-    <div classname='container'>
+    <div class='container'>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/N1" element={<N1 />} />
