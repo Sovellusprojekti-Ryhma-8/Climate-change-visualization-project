@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.climate_rest.project.data.V1_annual;
+import com.climate_rest.project.data.V2;
 import com.climate_rest.project.repo.V1_annualRepo;
 
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.repo.V1_monthlyRepo;
 import com.climate_rest.project.data.V3_monthly;
+import com.climate_rest.project.repo.V2_Repo;
 import com.climate_rest.project.repo.V3_annualRepo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
 
@@ -23,6 +25,9 @@ public class DataService {
 
     @Autowired
     V1_monthlyRepo v1monthlyRepo;
+
+    @Autowired
+    V2_Repo v2repo;
     
     @Autowired
     V3_annualRepo v3annualRepo;
@@ -43,6 +48,10 @@ public class DataService {
 
     public List<V1> getV1_monthlyData(){
         return v1monthlyRepo.findAll();
+    }
+
+    public List<V2> getV2_Data() {
+        return v2repo.findAll();
     }
 
 }
