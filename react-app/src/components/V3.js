@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "chart.js/auto";
 import {Line} from "react-chartjs-2"
 import axios from 'axios'
-import '../styles/V3_annual.css'
 
 const URL_annual = 'http://localhost:8080/V3annual'
 const URL_monthly = 'http://localhost:8080/V3monthly'
 
-export default function V3_annual() {
+export default function V3() {
     const [annualData, setAnnualData] = useState([])
     const [monthlyData, setMonthlyData] = useState([])
+    const [chartData, setChartData] = useState([])
 
     useEffect(() => {
         axios.get(URL_annual)
@@ -25,12 +25,11 @@ export default function V3_annual() {
             }).catch(error => {
               alert(error)
             })
-            
+        
     },[])
 
     const data = {
       labels: monthlyData.map(d => d.time),
-      //labels: annualData.map(d => d.time), 
       datasets: [
         {
           label: "Annual mean co2",
@@ -50,7 +49,6 @@ export default function V3_annual() {
           data: monthlyData,
           borderColor: "rgb(60, 179, 113)",
           backgroundColor: "rgb(60, 179, 113, 0.5)",
-          
           parsing: {
             xAxisKey: "time",
             yAxisKey: "co2"
@@ -68,7 +66,7 @@ export default function V3_annual() {
           },
           title: {
             display: true,
-            text: "V3",
+            text: "Atmospheric CO2 measurements from Mauna Loa",
           },
         },
         scales: {
@@ -78,12 +76,21 @@ export default function V3_annual() {
             position: "right",
           },
         },
-      };
+    };
+
+    
 
     return (
-    <div id="container">
-        <Line data={data} options={options}/>
-    </div>
+      <div >
+          <Line data={data} options={options}/>
+          <div>
+            <h4>Description</h4>
+            <h4>Data source</h4>
+            <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt" target="_blank">Annual data source</a>
+            <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt" target="_blank">Monthly data source</a>
+          </div>
+      </div>
+      
     );
 
 }

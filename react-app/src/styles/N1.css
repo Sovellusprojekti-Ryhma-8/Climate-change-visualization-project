@@ -1,4 +1,14 @@
 #container {
     width: 90%;
     margin: auto;
+    padding: 20px;
+    text-indent: 5em;
+}
+
+#container > * {
+    margin-bottom: 40px;
+}
+
+a {
+    display: block;
 }

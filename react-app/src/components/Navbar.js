@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-
 export default function Navbar() {
     return (
         <div class="navbar">
@@ -20,13 +19,25 @@ export default function Navbar() {
                     <Link class="link" to="/N3">N3</Link>
                 </li>
                 <li>
+                    {!localStorage.getItem('token') && (
+                    <>
                     <Link class="link" to="/LogIn">Log In</Link>
-                </li>
-                <li>
+                    <li>
+                    </li>           
                     <Link class="link" to ="/SignIn">Sign In</Link>
+                    </>
+                    )}
                 </li>
                 <li>
+                
                     <Link class="link" to="/LuoVisualisointinäkymä">Luo Visualisointinäkymä</Link>
+                </li>
+                <li>
+                    {localStorage.getItem('token') && (
+                    <>
+                    <Link class="link" to="/Profile">Profile</Link>
+                    </>
+                    )}
                 </li>
             </ul>
 
