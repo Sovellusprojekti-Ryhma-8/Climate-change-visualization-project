@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "v4_data")
 public class V4 {
@@ -30,12 +32,13 @@ public class V4 {
         this.co2 = co2;
     }
 
+    @JsonIgnore
     public String getIce_core(){
         return this.ice_core;
     }
 
-    public int getTime() {
-        return this.time;
+    public String getTime() {
+        return Integer.toString(time);
     }
 
     public void setTime(int time) {

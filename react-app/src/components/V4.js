@@ -24,15 +24,10 @@ export default function V4() {
     },[])
 
     const data = {
-        labels: dss.map(d => d.time),
         datasets: [
             {
                 label:"DSS",
                 data: dss,
-                parsing:{
-                    xAxisKey: "time",
-                    yAxisKey: "co2"
-                },
                 borderWidth: 2,
                 borderColor:  "rgb(60, 179, 113)",
                 backgroundColor: "rgba(60, 179, 113, 0.5)",
@@ -41,10 +36,6 @@ export default function V4() {
             {
                 label:"DE08-2",
                 data: de08_2,
-                parsing:{
-                    xAxisKey: "time",
-                    yAxisKey: "co2"
-                },
                 borderWidth: 2,
                 borderColor:  "rgba(0, 0, 255)",
                 backgroundColor: "rgba(0, 0, 255, 0.5)",
@@ -53,10 +44,6 @@ export default function V4() {
             {
                 label:"DE08",
                 data: de08,
-                parsing:{
-                    xAxisKey: "time",
-                    yAxisKey: "co2"
-                },
                 borderWidth: 2,
                 borderColor:  "rgba(255, 165, 0)",
                 backgroundColor: "rgba(255, 165, 0, 0.5)",
@@ -75,12 +62,46 @@ export default function V4() {
                 display: true,
                 text: "V4",
             },
+            subtitle: {
+                display: true,
+                text: "Tähä subtitle"
+            },
+            tooltip: {
+                callbacks: {
+                    title: (context) => {
+                        return "Year: " +  context[0].raw.time;
+                    }
+                }
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: "nearest",
+            axis: "x",
+        },
+        parsing:{
+            xAxisKey: "time",
+            yAxisKey: "co2"
         },
         scales: {
-            yAxis: {
+            x: {
+                type: "time",
+                display: true,
+                title: {
+                    display: true,
+                    text: "Year",
+                    color: "" //Tähän joku väri?
+                }
+            },
+            co2: {
                 type: "linear",
                 display: true,
                 position: "right",
+                title: {
+                    display: true,
+                    text: "CO2",
+                    color: "" //Tähän joku väri?
+                }
             },
         },
     }
@@ -90,9 +111,7 @@ export default function V4() {
           <Line data={data} options={options}/>
           <div>
             <h4>Description</h4>
-            <h4>Data source</h4>
-            <a href="" target="_blank">Annual data source</a>
-            <a href="" target="_blank">Monthly data source</a>
+            <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel='noreferrer'>Data source</a>
           </div>
     </div>
   )
