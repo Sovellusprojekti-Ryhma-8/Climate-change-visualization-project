@@ -10,10 +10,12 @@ import com.climate_rest.project.data.V2;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V3_monthly;
+import com.climate_rest.project.data.V4;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.services.DataService;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -46,6 +48,11 @@ public class DataController {
     @GetMapping("V2")
     public List<V2> getV2_Data(){
         return dataService.getV2_Data();
+    }
+
+    @GetMapping("V4")
+    public Map<String, List<V4>> getV4_Data(){
+        return dataService.getV4_Data();
     }
 
     @GetMapping("V5")

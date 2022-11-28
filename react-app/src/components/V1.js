@@ -291,8 +291,9 @@ export default function V1() {
             <div>
                 <h4>Description</h4>
                 <h4>Data source</h4>
-                <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html " target="_blank">Surface temperatures</a>
-                <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank">2000 year temperatures</a>
+                <p>
+                    <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html " target="_blank">Surface temperatures</a>, <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank">2000 year temperatures</a>
+                </p>
             </div>
         </div>
     )

@@ -4,6 +4,7 @@ import V1 from "./V1";
 import V2 from "./V2";
 import V5 from "./V5";
 import '../styles/N1.css'
+import V4 from "./V4";
 
 
 export default function N1() {
@@ -11,7 +12,7 @@ export default function N1() {
         <div id="container">
             <V1/>
             <V2/>
-            <V3/>
+            <V4/>
             <V5/>
         </div>
     )
