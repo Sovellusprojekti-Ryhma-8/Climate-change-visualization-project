@@ -4,14 +4,17 @@ import {Line} from "react-chartjs-2"
 import axios from 'axios'
 
 const URL = 'http://localhost:8080/V4'
-const URL_V3 = 'http://localhost:8080/V3annual'
+const URL_V3_ANNUAL = 'http://localhost:8080/V3annual'
+const URL_V3_MONTHLY = 'http://localhost:8080/V3monthly'
+
 
 
 export default function V4() {
     const [de08, setDe08] = useState([]);
     const [de08_2, setDe08_02] = useState([]);
     const [dss, setDss] = useState([]);
-    const [v3data, setV3data] = useState([])
+    const [v3annuadata, setV3annualdata] = useState([])
+    const [v3monthlydata, setV3monthlydata] = useState([])
 
     useEffect(() => {
         axios.get(URL)
@@ -23,13 +26,18 @@ export default function V4() {
         }).catch(error => {
             alert(error)
         })
-        axios.get(URL_V3)
+        axios.get(URL_V3_ANNUAL)
             .then((response) => {
-              setV3data(response.data)
-              console.log(v3data)
+              setV3annualdata(response.data)
             }).catch(error => {
               alert(error)
             })
+        axios.get(URL_V3_MONTHLY)
+        .then((response) => {
+            setV3monthlydata(response.data)
+        }).catch(error => {
+            alert(error)
+        })
     },[])
 
     const data = {
@@ -60,10 +68,18 @@ export default function V4() {
             },
             {
                 label:"Mauna Loa Annual CO2",
-                data: v3data,
+                data: v3annuadata,
                 borderWidth: 2,
                 borderColor:  "rgba(255, 99, 132)",
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
+                pointRadius: 1,
+            },
+            {
+                label:"Mauna Loa Monthly CO2",
+                data: v3monthlydata,
+                borderWidth: 2,
+                borderColor:  "rgba(171, 51, 245, 0.7)",
+                backgroundColor: "rgba(171, 51, 245, 0.5)",
                 pointRadius: 1,
             }
         ]
@@ -77,19 +93,12 @@ export default function V4() {
             },
             title: {
                 display: true,
-                text: "Antarctic Ice Core CO2 records with Mauna Loa annual CO2",
+                text: "Antarctic Ice Core CO2 records with Mauna Loa CO2 measurements",
             },
             subtitle: {
                 display: true,
-                text: "This graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica and annual mean co2 measurements from Mauna Loa, Hawaii."
+                text: "This graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica and CO2 measurements monthly and annually from Mauna Loa, Hawaii."
             },
-            tooltip: {
-                callbacks: {
-                    title: (context) => {
-                        return "Year: " +  context[0].raw.time;
-                    }
-                }
-            }
         },
         interaction: {
             intersect: false,
@@ -132,7 +141,7 @@ export default function V4() {
             </p>
             <h4>Data Source</h4>
             <p>
-                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel='noreferrer'>Law Dome</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt" target="_blank" rel="noreferrer">Mauna Loa</a>
+                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel='noreferrer'>Law Dome</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt" target="_blank" rel="noreferrer">Mauna Loa Annual</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt" target="_blank" rel="noreferrer">Mauna Loa Monthly</a>.
             </p>
           </div>
     </div>

@@ -12,9 +12,8 @@ export default function N1() {
         <div id="container">
             <V1/>
             <V2/>
-            <V3/>
-            <V5/>
             <V4/>
+            <V5/>
         </div>
     )
 }
