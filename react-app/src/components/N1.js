@@ -9,8 +9,8 @@ import V4 from "./V4";
 export default function N1() {
     return (
         <div id="container">
-            {/* <V1/>
-            <V2/> */}
+            <V1/>
+            <V2/>
             <V3/>
             <V4/>
         </div>

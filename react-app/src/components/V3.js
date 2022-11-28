@@ -56,8 +56,12 @@ export default function V3() {
           },
           title: {
             display: true,
-            text: "Atmospheric CO2 measurements from Mauna Loa",
+            text: "CO2 measurements from Mauna Loa",
           },
+          subtitle: {
+            display: true,
+            text: "This graph presents atmospheric carbon dioxide measurements annually and monthly from Mauna Loa Observatory in Hawaii"
+        },
         },
         parsing: {
           xAxisKey: "time",
@@ -94,10 +98,13 @@ export default function V3() {
       <div >
           <Line data={data} options={options}/>
           <div>
-            <h4>Description</h4>
+            <p>
+              Learn more of <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" rel="noreferrer">Mauna Loa</a> measurements
+            </p>
             <h4>Data source</h4>
-            <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt" target="_blank" rel="noreferrer">Annual data source</a>
-            <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt" target="_blank" rel="noreferrer">Monthly data source</a>
+            <p>
+              <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt" target="_blank" rel="noreferrer">Annual data source</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt" target="_blank" rel="noreferrer">Monthly data source</a>
+            </p>
           </div>
       </div>
       
