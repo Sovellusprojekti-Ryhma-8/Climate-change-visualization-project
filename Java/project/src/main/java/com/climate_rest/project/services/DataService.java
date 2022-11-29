@@ -4,14 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.climate_rest.project.data.V1_annual;
+import com.climate_rest.project.data.V2;
 import com.climate_rest.project.repo.V1_annualRepo;
 
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
 import com.climate_rest.project.repo.V1_monthlyRepo;
+import com.climate_rest.project.data.V3_monthly;
+import com.climate_rest.project.repo.V2_Repo;
 import com.climate_rest.project.repo.V3_annualRepo;
 import com.climate_rest.project.repo.V7_Repo;
+import com.climate_rest.project.repo.V3_monthlyRepo;
 
 import java.util.List;
 
@@ -23,15 +27,25 @@ public class DataService {
 
     @Autowired
     V1_monthlyRepo v1monthlyRepo;
+
+    @Autowired
+    V2_Repo v2repo;
     
     @Autowired
-    V3_annualRepo v3Repo;
+    V3_annualRepo v3annualRepo;
+
+    @Autowired
+    V3_monthlyRepo v3monthlyRepo;
 
     @Autowired
     V7_Repo v7Repo;
 
+
     public List<V3_annual> getV3_annualData(){
-        return v3Repo.findAll();
+        return v3annualRepo.findAll();
+    }
+    public List<V3_monthly> getV3_monthlyData(){
+        return v3monthlyRepo.findAll();
     }
 
     public List<V1_annual> getV1_annualData(){
@@ -45,4 +59,8 @@ public class DataService {
     public List<V7> getV7_data(){
         return v7Repo.findAll();
     }
+    public List<V2> getV2_Data() {
+        return v2repo.findAll();
+    }
+
 }

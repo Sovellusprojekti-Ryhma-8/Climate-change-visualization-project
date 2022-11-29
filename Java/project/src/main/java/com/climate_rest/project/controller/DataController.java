@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.climate_rest.project.data.V1_annual;
+import com.climate_rest.project.data.V2;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
+import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.services.DataService;
 
 import java.util.List;
@@ -39,5 +41,15 @@ public class DataController {
     @GetMapping("V7")
     public List<V7> getV7_data(){
         return dataService.getV7_data();
+    }
+
+    @GetMapping("V3monthly")
+    public List<V3_monthly> getV3_monthlyData(){
+        return dataService.getV3_monthlyData();
+    }
+
+    @GetMapping("V2")
+    public List<V2> getV2_Data(){
+        return dataService.getV2_Data();
     }
 }
