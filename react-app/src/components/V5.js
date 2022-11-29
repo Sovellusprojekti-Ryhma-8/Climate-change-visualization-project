@@ -18,7 +18,7 @@ export default function V5() {
     },[])
 
     const data = {
-        labels: chartData.map(d => d.year),
+        labels: chartData.map(d => d.year-1950+"BC"),
         datasets: [
             {
                 label: "Co2",
@@ -40,20 +40,31 @@ export default function V5() {
             title: {
                 display: true,
                 text: "Vostok Ice Core Co2 measurements",
-            },      
+            },  
+            subtitle: {
+                display: true,
+                text: "Graph displays Co2 measurements from Vostok station."
+            }    
         },
         scales: {
             yAxis: {
                 type: "linear",
                 display: true,
                 position: "right",
+                title: {
+                    display: true,
+                    text: "Co2"
+                }
             },
             x: { 
                 reverse: true,
                 title: {
                     display: true,
-                    text: "Time before present"
-                }                
+                    text: "Year"
+                }, 
+                ticks: {
+                    maxTicksLimit: 36
+                }               
             }
         },
     }
@@ -62,10 +73,13 @@ export default function V5() {
         <div>
             <Line data={data} options={options}/>
             <div>
-                <h4>Description</h4>
+                <p>
+                    Learn more about <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank">Vostok ice core measurements</a>.
+                </p>
                 <h4>Data source</h4>
+                <p>
                 <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank">Vostok Co2 measurements</a>
-                <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank">Description</a>
+                </p>
             </div>
         </div>
     )

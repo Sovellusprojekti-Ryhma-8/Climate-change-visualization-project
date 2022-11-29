@@ -269,6 +269,10 @@ export default function V1() {
                 type: "linear",
                 display: true,
                 position: "right",
+                title: {
+                    display: true,
+                    text: "K"
+                }
             },
         },
     };
@@ -277,7 +281,6 @@ export default function V1() {
     
     if (counter < 1) {
         setData(data);
-        console.log(v2Data)
         setCounter(1);
     }
     
@@ -289,7 +292,6 @@ export default function V1() {
             <input type="checkbox" onClick={handleClick}/>
             <span style={{fontSize:14}}>2000 Year Temperatures</span>
             <div>
-                <h4>Description</h4>
                 <h4>Data source</h4>
                 <p>
                     <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html " target="_blank">Surface temperatures</a>, <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank">2000 year temperatures</a>
