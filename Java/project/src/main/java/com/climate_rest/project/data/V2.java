@@ -23,8 +23,8 @@ public class V2{
 
     public V2(){}
 
-    public int getYear() {
-        return this.year;
+    public String getYear() {
+        return Integer.toString(this.year);
     }
 
     public void setYear(int year) {
