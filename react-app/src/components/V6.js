@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
 import axios from "axios";
+import { Line } from "react-chartjs-2";
 
-const URL = "http://localhost:8080/V5"
+const URL = "http://localhost:8080/V6"
 
-export default function V5() {
+export default function V6() {
     const [chartData, setData] = useState([]);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function V5() {
     },[])
 
     const data = {
-        labels: chartData.map(d => d.year-1950+"BC"),
+        labels: chartData.map(d => 1950-d.year),
         datasets: [
             {
                 label: "Co2",
@@ -35,18 +35,28 @@ export default function V5() {
         responsive: true,
         plugins: {
             legend: {
-                position: "top",
+                position: "top"
             },
             title: {
                 display: true,
-                text: "Vostok Ice Core Co2 measurements",
-            },  
+                text: "Antarctic 800k year ice core Co2 measurements"   // Otsikko
+            },
             subtitle: {
                 display: true,
-                text: "Graph displays Co2 measurements from Vostok station."
-            }    
+                text: "Reconstruction of atmospheric CO2 measurements from past 800,000 years."
+            }
         },
         scales: {
+            x: {
+                reverse: true,
+                title: {
+                    display: true,
+                    text: "Year"
+                },
+                ticks: {
+                    maxTicksLimit: 50
+                }
+            },
             yAxis: {
                 type: "linear",
                 display: true,
@@ -56,17 +66,7 @@ export default function V5() {
                     text: "Co2"
                 }
             },
-            x: { 
-                reverse: true,
-                title: {
-                    display: true,
-                    text: "Year"
-                }, 
-                ticks: {
-                    maxTicksLimit: 36
-                }               
-            }
-        },
+        }
     }
 
     return (
@@ -74,11 +74,11 @@ export default function V5() {
             <Line data={data} options={options}/>
             <div>
                 <p>
-                    Learn more about <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank">Vostok ice core measurements</a>.
+                    Learn more about <a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975" target="_blank">measurements</a>.
                 </p>
                 <h4>Data source</h4>
                 <p>
-                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank">Vostok Co2 measurements</a>
+                <a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank">Co2 concentrations</a>
                 </p>
             </div>
         </div>
