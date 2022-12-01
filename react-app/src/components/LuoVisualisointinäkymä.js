@@ -32,6 +32,7 @@ export default function CreateVisualization() {
             setStyle(1)
         }else {
             setStyle(0)
+            
         }
     }
 
