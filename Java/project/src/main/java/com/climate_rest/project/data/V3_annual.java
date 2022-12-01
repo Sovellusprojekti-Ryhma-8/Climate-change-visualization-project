@@ -25,8 +25,8 @@ public class V3_annual {
     }
 
     public String getTime() {
-        return this.year + "-01";
-        //return Integer.toString(year);
+        //return this.year + "-01";
+        return Integer.toString(year);
     }
 
     public void setYear(int year) {

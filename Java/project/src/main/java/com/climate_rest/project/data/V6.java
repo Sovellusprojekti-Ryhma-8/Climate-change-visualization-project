@@ -1,8 +1,18 @@
 package com.climate_rest.project.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="v6_data")
 public class V6 {
     
+    @Id
+    @Column(name="time_bp")
     private int year;
+    @Column(name="co2")
     private double co2;
 
 

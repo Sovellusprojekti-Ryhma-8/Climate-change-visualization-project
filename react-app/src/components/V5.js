@@ -1,12 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Chart as chartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 
-const URL = "http://localhost:8080/V2"
+const URL = "http://localhost:8080/V5"
 
-export default function V2() {
+export default function V5() {
     const [chartData, setData] = useState([]);
 
     useEffect(() => {
@@ -19,14 +18,14 @@ export default function V2() {
     },[])
 
     const data = {
-        labels: chartData.map(d => d.year),
+        labels: chartData.map(d => d.year-1950+"BC"),
         datasets: [
             {
-                label:"Temperature",
-                data: chartData.map(d => d.temp),
+                label: "Co2",
+                data: chartData.map(d => d.co2),
                 borderWidth: 2,
-                borderColor:  "rgb(255, 165, 0)",
-                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                borderColor:  "rgb(60, 179, 113)",
+                backgroundColor: "rgba(60, 179, 113, 0.5)",
                 pointRadius: 1,
             }
         ]
@@ -40,12 +39,12 @@ export default function V2() {
             },
             title: {
                 display: true,
-                text: "Northern Hemisphere 2000-year temperature reconstruction",
-            },
+                text: "Vostok Ice Core Co2 measurements",
+            },  
             subtitle: {
                 display: true,
-                text: "2000-year temperature reconstruction mainly from tree-ring data and other data sets."
-            }
+                text: "Graph displays Co2 measurements from Vostok station."
+            }    
         },
         scales: {
             yAxis: {
@@ -54,14 +53,18 @@ export default function V2() {
                 position: "right",
                 title: {
                     display: true,
-                    text: "K"
+                    text: "Co2"
                 }
             },
-            x: {
+            x: { 
+                reverse: true,
                 title: {
                     display: true,
                     text: "Year"
-                }
+                }, 
+                ticks: {
+                    maxTicksLimit: 36
+                }               
             }
         },
     }
@@ -70,12 +73,14 @@ export default function V2() {
         <div>
             <Line data={data} options={options}/>
             <div>
+                <p>
+                    Learn more about <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank">Vostok ice core measurements</a>.
+                </p>
                 <h4>Data source</h4>
                 <p>
-                    <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005" target="_blank">Temperature reconstruction</a>
+                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank">Vostok Co2 measurements</a>
                 </p>
             </div>
         </div>
     )
-
 }
