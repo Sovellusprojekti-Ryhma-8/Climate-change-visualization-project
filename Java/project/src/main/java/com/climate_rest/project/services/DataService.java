@@ -21,7 +21,9 @@ import com.climate_rest.project.repo.V9_Repo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
 import com.climate_rest.project.repo.V4_Repo;
 import com.climate_rest.project.repo.V5_Repo;
+import com.climate_rest.project.repo.V6_repo;
 import com.climate_rest.project.data.V5;
+import com.climate_rest.project.data.V6;
 
 import java.util.List;
 import java.util.Map;
@@ -53,10 +55,12 @@ public class DataService {
     V4_Repo v4repo;
 
     @Autowired
-    V5_Repo v5repo;
+    V5_Repo v5repo;  
 
     @Autowired
     V9_Repo v9Repo;
+    @Autowired
+    V6_repo v6repo;
 
     public List<V3_annual> getV3_annualData(){
         return v3annualRepo.findAll();
@@ -94,4 +98,7 @@ public class DataService {
         return v9Repo.findAll();
     }
 
+    public List<V6> getV6_Data() {
+        return v6repo.findAll();
+    }
 }
