@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState } from 'react';
 import '../styles/createVisualization.css'
+import { Component } from 'react';
 import DropDownMenu from './DropDownMenu'
 
 let cb1 = document.getElementById('cb1')
 let tb1 = document.getElementById('tb1')
 
 export default function CreateVisualization() {
-
+    
     const [visualizations, setVisualizations] = useState([]);
     const [descriptions, setDescriptions] = useState([]);
     const [style, setStyle] = useState(0);
     const [next, setNext] = useState([]);
+
+    let callback = async (data) => {
+        setVisualizations(
+            visualizations => [...visualizations, data]
+        )
+        console.log(data)
+    }
+
+    let callback2 = async (data) => {
+        setDescriptions(
+            descriptions => [...descriptions, data]
+        )
+        console.log(data)
+    }
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,7 +38,7 @@ export default function CreateVisualization() {
 
     let addElement = async (e) => {
         e.preventDefault();
-        setNext(next.concat(<DropDownMenu key={next.length}/>))
+        setNext(next.concat(<DropDownMenu key={next.length} func={callback} func2={callback2}/>))
 
     }
 
@@ -47,7 +62,7 @@ export default function CreateVisualization() {
 
     return (
         <div class="visual-container">
-            <DropDownMenu/>
+            <DropDownMenu func={callback} func2={callback2}/>
             {next}
             <div>
                 <button class="button" type='submit' onClick={addElement}>Add new</button>
