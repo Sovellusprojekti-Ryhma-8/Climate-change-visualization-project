@@ -1,13 +1,23 @@
 package com.climate_rest.project.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="v7_data")
 public class V7 {
     
+    @Id
+    @Column(name="time_kyr_bp")
     private int year;
+    @Column(name="temperature_change")
     private double temp;
+    @Column(name="co2")
     private double co2;
 
-    public V7() {
-    }
+    public V7() {}
 
     public V7(int year, double temp, double co2) {
         this.year = year;
