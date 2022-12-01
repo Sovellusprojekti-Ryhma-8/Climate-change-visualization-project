@@ -19,7 +19,6 @@ export default function N1() {
             <V5/>
             <V6/>
             <V7/>
->>>>>>>>> Temporary merge branch 2
         </div>
     )
 }
