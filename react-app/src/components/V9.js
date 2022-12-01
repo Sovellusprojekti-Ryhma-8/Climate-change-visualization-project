@@ -55,7 +55,7 @@ export default function V9() {
         },
         plugins: {
             legend: {
-                position: 'right',
+                position: 'left',
                 temsLayout: 'vertical'
             },
             title:{
