@@ -71,4 +71,9 @@ public class DataController {
     public List<V6> getV6_Data(){
         return dataService.getV6_Data();
     }
+
+    @GetMapping("V8")
+    public List<Map<String, Object>> getV8_Data() {
+        return dataService.getV8_Data();
+    }
 }

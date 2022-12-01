@@ -1,7 +1,14 @@
 package com.climate_rest.project.data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="v8_data_karsittu")
 public class V8 {
     
+    @Id
     private int year;
     private String country;
     private double co2;

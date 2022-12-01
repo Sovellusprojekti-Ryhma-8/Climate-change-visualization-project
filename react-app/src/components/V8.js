@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Chart } from "chart.js/auto";
 import {Line} from "react-chartjs-2"
 import axios from 'axios'
+import { Colors } from 'chart.js'
 
 const URL = 'http://localhost:8080/V4'
 const URL_V3_ANNUAL = 'http://localhost:8080/V3annual'
 const URL_V3_MONTHLY = 'http://localhost:8080/V3monthly'
 const URL_annual = "http://localhost:8080/V1annual"
-
-
 
 
 export default function V4() {
@@ -22,6 +21,7 @@ export default function V4() {
     const [annualData, setAnnualData] = useState([])
     const [results, setResults] = useState([])
 
+
     useEffect(() => {
         axios.get(URL)
         .then((res) => {
@@ -30,7 +30,8 @@ export default function V4() {
             setDss(res.data.DSS)
             setDe08_02(res.data["DE08-2"])
             setDe08(res.data.DE08)
-            setupData(res.data)
+            
+            //setupData(res.data)
         }).catch(error => {
             alert(error)
         })
@@ -54,8 +55,35 @@ export default function V4() {
         })
     },[])
 
+    const setupData = (data) =>{
+        const results2 = Object.keys(data).map(value => {
+            return {
+                label: value,
+                data: data[value],
+                borderWidth: 2,
+                pointRadius: 0,
+                
+            }
+            /* console.log({
+                label: value,
+                data: chartData[value]
+            }) */
+            /* console.log("testi")
+            setResults(current => [...current, {
+                label: value,
+                data: data[value]
+            }]) */
+            /* return {
+                label: value,
+                data: chartData[value]
+            } */
+        })
+        console.log(results2)
+        return results2
+    } 
+
     const data1 = {
-        datasets: [] = results
+        datasets: [] = setupData(chartData)
     }
     
     const data = {
@@ -117,7 +145,13 @@ export default function V4() {
                 display: true,
                 text: "This graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica and CO2 measurements monthly and annually from Mauna Loa, Hawaii."
             },
+            
         },
+        borderColor: [
+            "red",
+            'blue',
+            'green'
+        ],
         interaction: {
             intersect: false,
             mode: "nearest",
@@ -140,7 +174,7 @@ export default function V4() {
             co2: {
                 type: "linear",
                 display: true,
-                position: "right",
+                position: "left",
                 title: {
                     display: true,
                     text: "CO2",
@@ -151,24 +185,7 @@ export default function V4() {
     }
 
     
-    const setupData = (data) =>{
-
-        Object.keys(data).forEach(value => {
-            /* console.log({
-                label: value,
-                data: chartData[value]
-            }) */
-            console.log("testi")
-            setResults(current => [...current, {
-                label: value,
-                data: data[value]
-            }])
-            /* return {
-                label: value,
-                data: chartData[value]
-            } */
-        })
-    } 
+    
     return (
         <div >
           <Line data={data1} options={options}/>
