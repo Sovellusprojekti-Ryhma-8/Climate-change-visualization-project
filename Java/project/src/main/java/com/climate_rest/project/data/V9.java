@@ -1,8 +1,18 @@
 package com.climate_rest.project.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="v9_data")
 public class V9 {
     
+    @Id
+    @Column(name="sub_sector")
     private String sector;
+    @Column(name="emissions")
     private double co2;
 
     public V9() {

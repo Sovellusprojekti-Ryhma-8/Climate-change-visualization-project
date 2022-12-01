@@ -23,9 +23,9 @@ export default function V7() {
         datasets: [
             {
                 label:"Co2 ppm",
-                data: chartData.map(d=>d.co2),
+                data: chartData.filter(d=>d.co2>0).map(d=>d.co2),
                 borderWidth: 2,
-                borderColor: "rgb(255, 99, 132)",
+                borderColor: "rgb(255, 99, 132)", 
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
                 yAxisID: "co2",
                 tension: 0.4,
@@ -57,7 +57,7 @@ export default function V7() {
           },
           title: {
             display: true,
-            text: "V7",
+            text: "Evolution of global temperature over the past two million years",
           },
         },
         scales: {
