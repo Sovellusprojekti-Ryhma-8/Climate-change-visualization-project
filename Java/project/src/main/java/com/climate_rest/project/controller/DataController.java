@@ -10,6 +10,7 @@ import com.climate_rest.project.data.V2;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
+import com.climate_rest.project.data.V8;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
 import com.climate_rest.project.data.V5;
@@ -73,7 +74,7 @@ public class DataController {
     }
 
     @GetMapping("V8")
-    public List<Map<String, Object>> getV8_Data() {
+    public Map<String,List<V8>> getV8_Data() {
         return dataService.getV8_Data();
     }
 }

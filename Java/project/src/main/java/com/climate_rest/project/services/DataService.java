@@ -10,6 +10,7 @@ import com.climate_rest.project.repo.V1_annualRepo;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
+import com.climate_rest.project.data.V8;
 import com.climate_rest.project.repo.V1_monthlyRepo;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
@@ -24,6 +25,7 @@ import com.climate_rest.project.repo.V6_repo;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.data.V6;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -98,7 +100,24 @@ public class DataService {
         return v6repo.findAll();
     }
 
-    public List<Map<String, Object>> getV8_Data(){
-        return v8Repo.getAllData();
+    public Map<String,List<V8>> getV8_Data(){
+        //Get data from database
+        List<Map<String,Object>> data = v8Repo.getAllData();
+        //Create new list of V8 objects that have year, country and co2
+        List<V8> result = new ArrayList<>();
+
+        //Loop through data to add them to list as V8 objects
+        for (Map<String,Object> map : data) {
+            String year = map.get("year").toString();
+            for(Map.Entry<String, Object> entry : map.entrySet()){
+                //Filter column "year" away
+                if(!entry.getKey().equals("year")){
+                    result.add(new V8(year, entry.getKey(), (Double.valueOf(entry.getValue().toString()))));
+                }
+            }
+        }
+        //Group list to map by country
+        Map<String,List<V8>> resultGrouped = result.stream().collect(Collectors.groupingBy(w -> w.getCountry()));
+        return resultGrouped;
     }
 }
