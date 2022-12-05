@@ -51,15 +51,11 @@ export default function CreateVisualization() {
 
     let addElement = (e) => {
         e.preventDefault();
-        // setNext(next.concat(<DropDownMenu key={next.length}
-        //     func={callback} func2={callback2} delete={deleteComponent} 
-        //     componentKey={next.length+1}/>))
         setNext(
             next => [...next, <DropDownMenu key={next.length}
                 func={callback} func2={callback2} 
                 componentKey={next.length+1}/>]
         )
-        // console.log(next)
     }
 
     let deleteComponent = async () => {
@@ -70,6 +66,14 @@ export default function CreateVisualization() {
                 element.key != next.length-1
             )
         )
+        setVisualizations(
+            visualizations.filter(element =>
+                element.id !== next.length)
+            ) 
+        setDescriptions(
+            descriptions.filter(element =>
+                element.id !== next.length)
+        )  
     }
 
     let handleChange1 = event => {
