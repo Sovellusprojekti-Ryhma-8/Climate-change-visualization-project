@@ -4,8 +4,6 @@ import '../styles/createVisualization.css'
 import { Component } from 'react';
 import DropDownMenu from './DropDownMenu'
 
-let cb1 = document.getElementById('cb1')
-let tb1 = document.getElementById('tb1')
 
 export default function CreateVisualization() {
     
@@ -14,16 +12,31 @@ export default function CreateVisualization() {
     const [style, setStyle] = useState(0);
     const [next, setNext] = useState([]);
 
-    let callback = async (data) => {
-        setVisualizations(
-            visualizations => [...visualizations, data]
-        )
+    let callback = async (data, key) => {
+        visualizations.forEach(element => {
+            if (element.id == key){
+                setVisualizations(
+                    visualizations.filter(element =>
+                        element.id !== key)
+                )
+            }
+        });
+        setVisualizations(current => [...current, {id: key, component: data}])
         console.log(data)
+        console.log(key)
     }
 
-    let callback2 = async (data) => {
+    let callback2 = async (data, key) => {
+        descriptions.forEach(element => {
+            if (element.id == key) {    
+                setDescriptions(
+                    descriptions.filter(element =>
+                        element.id !== key)
+                )
+            }
+        })
         setDescriptions(
-            descriptions => [...descriptions, data]
+            descriptions => [...descriptions, {id: key, text: data}]
         )
         console.log(data)
     }
@@ -36,10 +49,27 @@ export default function CreateVisualization() {
         console.log(style)
     }
 
-    let addElement = async (e) => {
+    let addElement = (e) => {
         e.preventDefault();
-        setNext(next.concat(<DropDownMenu key={next.length} func={callback} func2={callback2}/>))
+        // setNext(next.concat(<DropDownMenu key={next.length}
+        //     func={callback} func2={callback2} delete={deleteComponent} 
+        //     componentKey={next.length+1}/>))
+        setNext(
+            next => [...next, <DropDownMenu key={next.length}
+                func={callback} func2={callback2} 
+                componentKey={next.length+1}/>]
+        )
+        // console.log(next)
+    }
 
+    let deleteComponent = async () => {
+        console.log("poistetaan ")
+        console.log(next)
+        setNext(
+            next.filter(element =>
+                element.key != next.length-1
+            )
+        )
     }
 
     let handleChange1 = event => {
@@ -62,10 +92,13 @@ export default function CreateVisualization() {
 
     return (
         <div class="visual-container">
-            <DropDownMenu func={callback} func2={callback2}/>
+            <h1 class="heading">Create your own view</h1>
+            <DropDownMenu func={callback} func2={callback2} delete={deleteComponent}/>
             {next}
             <div>
-                <button class="button" type='submit' onClick={addElement}>Add new</button>
+                <button style={{padding: 10, fontSize: 14}} class="button" type='submit' onClick={addElement}>Add new</button>
+                <button style={{backgroundColor: "red", padding: 10, fontSize: 14}} class="button" onClick={deleteComponent}>Delete</button>
+
             </div>
             <div>
                 <span>Tyyli 1</span>

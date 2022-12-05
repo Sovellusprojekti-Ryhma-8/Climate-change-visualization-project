@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/DropDown.css'
 
 const DropDown = (props) => {
     
     const [text, setText] = useState('');
-    
+    let ID = props.componentKey    
+
+    if (ID == undefined) {
+        ID = 0
+    }
 
     let handleClick = async (e) => {
         console.log("click")
@@ -12,39 +16,39 @@ const DropDown = (props) => {
         switch (e.target.text) {
             case "V1":
                 console.log("v1")
-                props.func("v1")
+                props.func("v1", ID)
                 break;
             case "V2":
                 console.log("v2")
-                props.func("v2")
+                props.func("v2", ID)
                 break;
             case "V3":
                 console.log("v3")
-                props.func("v3")
+                props.func("v3", ID)
                 break;
             case "V4":
                 console.log("v4")
-                props.func("v4")
+                props.func("v4", ID)
                 break;
             case "V5":
                 console.log("v5")
-                props.func("v5")
+                props.func("v5", ID)
                 break;
             case "V6":
                 console.log("v6")
-                props.func("v6")
+                props.func("v6", ID)
                 break;
             case "V7":
                 console.log("v7")
-                props.func("v7")
+                props.func("v7", ID)
                 break;
             case "V8":
                 console.log("v8")
-                props.func("v8")
+                props.func("v8", ID)
                 break;
             case "V9":
                 console.log("v9")
-                props.func("v9")
+                props.func("v9", ID)
                 break;
             default:
                 console.log("Ei ole")
@@ -55,8 +59,11 @@ const DropDown = (props) => {
 
     let handleChange = (e) => {
         setText(e.target.value)
-        console.log(text)
-        props.func2(text)
+    }
+
+    let addVisualization = (e) => {
+        props.func2(text, ID)
+        console.log("componentID = "+ID)
     }
 
     return (
@@ -75,9 +82,9 @@ const DropDown = (props) => {
                 <a href='#' onClick={handleClick}>V9</a>
             </div>
         </div>
-            <div class="textbox" onChange={handleChange}>
-                {/* <input type="text"></input> */}
-                <textarea class="textarea"></textarea>
+            <div class="textbox" >
+                <textarea class="textarea" onChange={handleChange}></textarea>
+                <button style={{padding: 10, fontSize: 14}} class="button" onClick={addVisualization}>Add visualization</button>
             </div>
         </div>
     )

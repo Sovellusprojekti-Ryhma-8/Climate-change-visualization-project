@@ -3,6 +3,12 @@
     margin-right: 25%;
 }
 
+.heading {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: chartreuse;
+    font-size: 3em;
+}
 
 .button {
     padding: 10px 20px;
