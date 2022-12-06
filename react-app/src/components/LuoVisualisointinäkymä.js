@@ -1,16 +1,16 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import '../styles/createVisualization.css'
-import { Component } from 'react';
 import DropDownMenu from './DropDownMenu'
 
 
-export default function CreateVisualization() {
+const CreateVisualization = (props) => {
     
     const [visualizations, setVisualizations] = useState([]);
     const [descriptions, setDescriptions] = useState([]);
     const [style, setStyle] = useState(0);
     const [next, setNext] = useState([]);
+    // const [components, setComp] = useState([]);
 
     let callback = async (data, key) => {
         visualizations.forEach(element => {
@@ -43,10 +43,11 @@ export default function CreateVisualization() {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-
         console.log(visualizations)
         console.log(descriptions)
         console.log(style)
+
+        
     }
 
     let addElement = (e) => {
@@ -116,3 +117,5 @@ export default function CreateVisualization() {
         </div>
     )
 }
+
+export default CreateVisualization;
