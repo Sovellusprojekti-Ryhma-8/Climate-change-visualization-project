@@ -12,6 +12,6 @@ import com.climate_rest.project.data.V8;
 @Repository
 public interface V8_Repo extends JpaRepository<V8, Integer> {
     
-    @Query(value = "SELECT * FROM v8_data_karsittu", nativeQuery = true)
+    @Query(value = "SELECT * FROM v8_data", nativeQuery = true)
     List<Map<String, Object>> getAllData();
 }

@@ -12,14 +12,7 @@ const URL_V8 = "http://localhost:8080/V8"
 
 
 export default function V4() {
-    const [de08, setDe08] = useState([]);
-    const [de08_2, setDe08_02] = useState([]);
-    const [dss, setDss] = useState([]);
-    const [v3annuadata, setV3annualdata] = useState([])
-    const [v3monthlydata, setV3monthlydata] = useState([])
-    const [keys, setKeys] = useState([])
     const [chartData, setChartData] = useState([])
-    const [annualData, setAnnualData] = useState([])
 
 
     useEffect(() => {
@@ -31,7 +24,7 @@ export default function V4() {
         })
     },[])
 
-    const setupData = (data) =>{
+    const setupDatasets = (data) =>{
         const results = Object.keys(data).map(value => {
             return {
                 label: value,
@@ -45,7 +38,7 @@ export default function V4() {
     } 
 
     const data = {
-        datasets: [] = setupData(chartData)
+        datasets: [] = setupDatasets(chartData)
     }
     
 
@@ -54,6 +47,10 @@ export default function V4() {
         plugins: {
             legend: {
                 position: "top",
+                labels: {
+                    boxWidth: 10,
+                },
+                align: "center"
             },
             title: {
                 display: true,
@@ -62,8 +59,7 @@ export default function V4() {
             subtitle: {
                 display: true,
                 text: ""
-            },
-            
+            },            
         },
         borderColor: [
             "red",
@@ -72,8 +68,7 @@ export default function V4() {
         ],
         interaction: {
             intersect: false,
-            mode: "nearest",
-            axis: "x",
+            mode: "point",
         },
         parsing:{
             xAxisKey: "year",
@@ -90,6 +85,7 @@ export default function V4() {
                 }
             },
             co2: {
+                stacked: true,
                 type: "linear",
                 display: true,
                 position: "left",

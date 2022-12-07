@@ -25,10 +25,18 @@ import com.climate_rest.project.repo.V6_repo;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.data.V6;
 
+import java.io.Console;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class DataService {
@@ -116,8 +124,36 @@ public class DataService {
                 }
             }
         }
+        
         //Group list to map by country
         Map<String,List<V8>> resultGrouped = result.stream().collect(Collectors.groupingBy(w -> w.getCountry()));
-        return resultGrouped;
+        
+        return sortCountriesByCO2(resultGrouped);
+    }
+
+    //Sorts coutries by total CO2 emissions
+    private Map<String,List<V8>> sortCountriesByCO2(Map<String,List<V8>> map){
+        List<Entry<String,List<V8>>> countriesListed = new LinkedList<>(map.entrySet());
+
+        Collections.sort(countriesListed, new Comparator<Entry<String,List<V8>>>() {
+            public int compare(Entry<String,List<V8>> list1, Entry<String,List<V8>> list2){
+                double sum1 = list1.getValue().stream().mapToDouble(o -> o.getCo2()).sum();
+                double sum2 = list2.getValue().stream().mapToDouble(o -> o.getCo2()).sum();
+                if(sum1 > sum2){
+                    return 1;
+                }else if(sum2 > sum1){
+                    return -1;
+                }else{
+                    return 0;
+                }
+            }
+        });
+
+        Map<String,List<V8>> sortedList = new LinkedHashMap<String,List<V8>>();
+        for (Entry<String,List<V8>> entry : countriesListed){
+            sortedList.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedList;
     }
 }
