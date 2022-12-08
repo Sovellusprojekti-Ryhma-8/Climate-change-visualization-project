@@ -6,32 +6,52 @@ import V2 from "./V2";
 import { useParams } from "react-router";
 import axios from "axios";
 
-const URL = "http://localhost:3000/views/${Id}"
+const URL = "http://localhost:8080/setView"
 
 const UserComponent = (props) => {
 
     const [components, setComp] = useState([]);
-    const [counter, setCounter] = useState(0);
+    const [data, setData] = useState([]);
+    const [counter, setCounter] = useState(1);
     const Id = useParams()
-    // useEffect(() => {
-    //     // axios.get(URL)
+    const form = new FormData;
+
+    useEffect(() => {
+        form.append("Id", Id.id)
+
+        axios({
+            method: 'post',
+            url: URL,
+            data: form,
+        })
+        .then((res) => {
+            setData(res.data)
+            // console.log(res.data)
+            setCounter(0)                
+        }).catch(error => {
+            alert(error)
+        })
+        
+    },[counter])
+
+    if (counter < 1) {
+        // console.log(data)
+        // setComp(
+        //     components => [...components, <V1/>]
+        // )
+        // setComp(
+        //     components => [...components, <V2/>]
+        // )
         
 
-    // })
-
-    if (counter < 1 && Id.id == "jaa") {
-        setComp(
-            components => [...components, <V1/>]
-        )
-        setComp(
-            components => [...components, <V2/>]
-        )
+        console.log(data)
         setCounter(1)    
     }
+
     
     
 
-    console.log(Id)
+    // console.log(Id.id)
     return (
         <>
         {components}

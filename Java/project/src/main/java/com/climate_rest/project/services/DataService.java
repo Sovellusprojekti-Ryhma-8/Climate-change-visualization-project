@@ -10,6 +10,7 @@ import com.climate_rest.project.repo.V1_annualRepo;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
+import com.climate_rest.project.data.view;
 import com.climate_rest.project.repo.V1_monthlyRepo;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
@@ -26,6 +27,11 @@ import com.climate_rest.project.data.V6;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+
 
 @Service
 public class DataService {
@@ -57,6 +63,10 @@ public class DataService {
 
     @Autowired
     V6_repo v6repo;
+
+    // testi lista
+    List<view> viewList = new ArrayList<>();
+    List<String> sorted = new ArrayList<>();
 
     public List<V3_annual> getV3_annualData(){
         return v3annualRepo.findAll();
@@ -93,4 +103,37 @@ public class DataService {
     public List<V6> getV6_Data() {
         return v6repo.findAll();
     }
+
+    public view saveView(String Id, List<String> visualizations,
+    List<String> descriptions, int style) {
+        
+        Collections.sort(visualizations); // Visualizations get sorted in right display order
+        Collections.sort(descriptions);
+
+        List<String> sortedVisuals = new ArrayList<>();
+        List<String> sortedDesc = new ArrayList<>();
+
+        for (String string : visualizations) {
+            sortedVisuals.add(string.substring(2));
+        }
+
+        for (String string : descriptions) {
+            sortedDesc.add(string.substring(3));
+        }
+
+        view v = new view(Id,sortedVisuals,sortedDesc,style);
+        System.out.println("URL: "+Id+", "+sortedVisuals+", "+sortedDesc+" "+style);
+        //repo savet tähän
+        viewList.add(v);
+        return v;
+     }
+
+     public view getView(String Id) {
+        for (view v : viewList) {
+            if (Id.equals(v.getId())) {
+                return v;
+            }
+        }
+        return null;
+     }
 }

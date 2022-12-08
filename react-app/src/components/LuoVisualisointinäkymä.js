@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/createVisualization.css'
 import DropDownMenu from './DropDownMenu'
 
+const URL = "http://localhost:8080/saveView"
 
 const CreateVisualization = (props) => {
     
@@ -10,7 +12,8 @@ const CreateVisualization = (props) => {
     const [descriptions, setDescriptions] = useState([]);
     const [style, setStyle] = useState(0);
     const [next, setNext] = useState([]);
-    // const [components, setComp] = useState([]);
+    const form = new FormData;
+
 
     let callback = async (data, key) => {
         visualizations.forEach(element => {
@@ -41,13 +44,44 @@ const CreateVisualization = (props) => {
         console.log(data)
     }
 
+    /*When "Create" button is pressed, all data about view is send to server
+    and unique id for view is generated. */
+
     let handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(visualizations)
-        console.log(descriptions)
-        console.log(style)
 
+        const uid = () => 
+        String(
+            Date.now().toString(32) +
+            Math.random().toString(16)
+        ).replace(/\./g, '')
         
+        
+
+        form.append("Id", uid())
+        visualizations.forEach((item) => form.append("visualizations", item.id+" "+item.component))
+        descriptions.forEach((item) => form.append("descriptions", item.id+", "+item.text))
+        form.append("style", style)
+        console.log(form.getAll("visualizations"))
+        console.log(form.getAll("descriptions"))
+
+        /* hae data arraysta ja aseta fomiin uudestaan */
+
+        try {
+            fetch(URL, {
+                method: 'POST',
+                body: form,
+            })
+            .then((res) => {
+                console.log(res.status)
+            })
+        } catch (error) {
+            alert(error)
+        }
+
+        // console.log(visualizations)
+        // console.log(descriptions)
+        console.log(style)      
     }
 
     let addElement = (e) => {

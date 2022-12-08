@@ -1,8 +1,12 @@
 package com.climate_rest.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.climate_rest.project.data.V1_annual;
@@ -14,10 +18,12 @@ import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.data.V6;
+import com.climate_rest.project.data.view;
 import com.climate_rest.project.services.DataService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 @CrossOrigin
 @RestController
@@ -70,5 +76,26 @@ public class DataController {
     @GetMapping("V6")
     public List<V6> getV6_Data(){
         return dataService.getV6_Data();
+    }
+
+    @PostMapping("saveView")
+    public ResponseEntity<String> saveView(
+        @RequestParam String Id,
+        @RequestParam List<String> visualizations,
+        @RequestParam List<String> descriptions,
+        @RequestParam int style
+        ) {
+            view v = dataService.saveView(Id, visualizations, descriptions, style);
+            if (v != null) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+    @PostMapping("setView")
+    public view getView(@RequestParam String Id){
+        view v = dataService.getView(Id);
+            return v;
+        
     }
 }
