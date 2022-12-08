@@ -10,12 +10,14 @@ import com.climate_rest.project.repo.V1_annualRepo;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
+import com.climate_rest.project.data.V8;
 import com.climate_rest.project.repo.V1_monthlyRepo;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
 import com.climate_rest.project.repo.V2_Repo;
 import com.climate_rest.project.repo.V3_annualRepo;
 import com.climate_rest.project.repo.V7_Repo;
+import com.climate_rest.project.repo.V8_Repo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
 import com.climate_rest.project.repo.V4_Repo;
 import com.climate_rest.project.repo.V5_Repo;
@@ -23,9 +25,18 @@ import com.climate_rest.project.repo.V6_repo;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.data.V6;
 
+import java.io.Console;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class DataService {
@@ -57,6 +68,9 @@ public class DataService {
 
     @Autowired
     V6_repo v6repo;
+
+    @Autowired
+    V8_Repo v8Repo;
 
     public List<V3_annual> getV3_annualData(){
         return v3annualRepo.findAll();
@@ -92,5 +106,54 @@ public class DataService {
 
     public List<V6> getV6_Data() {
         return v6repo.findAll();
+    }
+
+    public Map<String,List<V8>> getV8_Data(){
+        //Get data from database
+        List<Map<String,Object>> data = v8Repo.getAllData();
+        //Create new list of V8 objects that have year, country and co2
+        List<V8> result = new ArrayList<>();
+
+        //Loop through data to add them to list as V8 objects
+        for (Map<String,Object> map : data) {
+            String year = map.get("year").toString();
+            for(Map.Entry<String, Object> entry : map.entrySet()){
+                //Filter column "year" away
+                if(!entry.getKey().equals("year")){
+                    result.add(new V8(year, entry.getKey(), (Double.valueOf(entry.getValue().toString()))));
+                }
+            }
+        }
+        
+        //Group list to map by country
+        Map<String,List<V8>> resultGrouped = result.stream().collect(Collectors.groupingBy(w -> w.getCountry()));
+        
+        return sortCountriesByCO2(resultGrouped);
+    }
+
+    //Sorts coutries by total CO2 emissions
+    private Map<String,List<V8>> sortCountriesByCO2(Map<String,List<V8>> map){
+        List<Entry<String,List<V8>>> countriesListed = new LinkedList<>(map.entrySet());
+
+        Collections.sort(countriesListed, new Comparator<Entry<String,List<V8>>>() {
+            public int compare(Entry<String,List<V8>> list1, Entry<String,List<V8>> list2){
+                double sum1 = list1.getValue().stream().mapToDouble(o -> o.getCo2()).sum();
+                double sum2 = list2.getValue().stream().mapToDouble(o -> o.getCo2()).sum();
+                if(sum1 > sum2){
+                    return 1;
+                }else if(sum2 > sum1){
+                    return -1;
+                }else{
+                    return 0;
+                }
+            }
+        });
+
+        Map<String,List<V8>> sortedList = new LinkedHashMap<String,List<V8>>();
+        for (Entry<String,List<V8>> entry : countriesListed){
+            sortedList.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedList;
     }
 }

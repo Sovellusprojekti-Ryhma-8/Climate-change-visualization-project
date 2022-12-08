@@ -2,11 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
+import Colors from './Colors'
 
 const URL = "http://localhost:8080/V6"
 
 export default function V6() {
     const [chartData, setData] = useState([]);
+    const [colors, setColors] = useState(Colors())
 
     useEffect(() => {
         axios.get(URL)
@@ -24,8 +26,8 @@ export default function V6() {
                 label: "Co2",
                 data: chartData.map(d => d.co2),
                 borderWidth: 2,
-                borderColor:  "rgb(60, 179, 113)",
-                backgroundColor: "rgba(60, 179, 113, 0.5)",
+                borderColor: colors[0],
+                backgroundColor: colors[0] + "50",
                 pointRadius: 1,
             }
         ]

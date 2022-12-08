@@ -1,25 +1,37 @@
 package com.climate_rest.project.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="v8_data_karsittu")
 public class V8 {
     
-    private int year;
+    @Id
+    private int id;
+    @Column(name = "year")
+    private String year;
     private String country;
     private double co2;
 
     public V8() {
     }
 
-    public V8(int year, String country, double co2) {
+    public V8(String year, String country, double co2) {
         this.year = year;
         this.country = country;
         this.co2 = co2;
     }
 
-    public int getYear() {
+    public String getYear() {
         return this.year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -27,6 +39,7 @@ public class V8 {
         return this.country;
     }
 
+    @JsonIgnore
     public void setCountry(String country) {
         this.country = country;
     }
@@ -39,7 +52,7 @@ public class V8 {
         this.co2 = co2;
     }
 
-    public V8 year(int year) {
+    public V8 year(String year) {
         setYear(year);
         return this;
     }

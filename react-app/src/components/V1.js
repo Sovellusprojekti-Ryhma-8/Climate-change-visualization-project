@@ -7,6 +7,7 @@ import Chart from "chart.js/auto";
 import {Line } from "react-chartjs-2";
 import axios from "axios";
 import 'chartjs-adapter-moment';
+import Colors from './Colors'
 
 
 const URL_annual = "http://localhost:8080/V1annual"
@@ -21,6 +22,7 @@ export default function V1() {
     const [display2, setDisplay2] = useState(false);
     const [btnState, setState] = useState(false);
     const [counter, setCounter] = useState(0);
+    const [colors, setColors] = useState(Colors())
 
     
     
@@ -74,8 +76,8 @@ export default function V1() {
                 label:"Global Annual",
                 data: annualData,
                 borderWidth: 2,
-                borderColor:  "rgb(60, 179, 113)",
-                backgroundColor: "rgba(60, 179, 113, 0.5)",
+                borderColor: colors[0],
+                backgroundColor: colors[0] + "50",
                 parsing: {
                     xAxisKey: "year",
                     yAxisKey: "global",
@@ -86,8 +88,8 @@ export default function V1() {
                 label:"Northern Hemisphere Annual",
                 data: annualData,
                 borderWidth: 2,
-                borderColor:  "rgb(0, 0, 255)",
-                backgroundColor: "rgba(0, 0, 255, 0.5)",
+                borderColor: colors[1],
+                backgroundColor: colors[1] + "50",
                 parsing: {
                     xAxisKey: "year",
                     yAxisKey: "northern",
@@ -98,8 +100,8 @@ export default function V1() {
                 label:"Southern Hemisphere Annual",
                 data: annualData,
                 borderWidth: 2,
-                borderColor:  "rgb(255, 165, 0)",
-                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                borderColor: colors[2],
+                backgroundColor: colors[2] + "50",
                 parsing: {
                     xAxisKey: "year",
                     yAxisKey: "southern",
@@ -110,8 +112,8 @@ export default function V1() {
                 label:"Global Monthly",
                 data: monthlyData,
                 borderWidth: 2,
-                borderColor:  "rgb(0, 0, 0)",
-                backgroundColor: "rgba(60, 179, 113, 0.5)",
+                borderColor: colors[3],
+                backgroundColor: colors[3] + "50",
                 parsing: {
                     xAxisKey: "time",
                     yAxisKey: "global",
@@ -122,8 +124,8 @@ export default function V1() {
                 label:"Northern Hemisphere Monthly",
                 data: monthlyData,
                 borderWidth: 2,
-                borderColor:  "rgb(0, 0, 255)",
-                backgroundColor: "rgba(0, 0, 255, 0.5)",
+                borderColor: colors[4],
+                backgroundColor: colors[4] + "50",
                 parsing: {
                     xAxisKey: "time",
                     yAxisKey: "northern",
@@ -134,8 +136,8 @@ export default function V1() {
                 label:"Southern Hemisphere Monthly",
                 data: monthlyData,
                 borderWidth: 2,
-                borderColor:  "rgb(255, 165, 0)",
-                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                borderColor: colors[5],
+                backgroundColor: colors[5] + "50",
                 parsing: {
                     xAxisKey: "time",
                     yAxisKey: "southern",
@@ -151,8 +153,8 @@ export default function V1() {
                 label:"2000 Year Temperatures",
                 data: v2Data,
                 borderWidth: 2,
-                borderColor:  "rgb(255, 165, 0)",
-                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                borderColor: colors[0],
+                backgroundColor: colors[0] + "50",
                 parsing: {
                     xAxisKey: "year",
                     yAxisKey: "temp",
@@ -164,8 +166,8 @@ export default function V1() {
                 label:"Global Annual",
                 data: annualData,
                 borderWidth: 2,
-                borderColor:  "rgb(60, 179, 113)",
-                backgroundColor: "rgba(60, 179, 113, 0.5)",
+                borderColor: colors[1],
+                backgroundColor: colors[1] + "50",
                 parsing: {
                     xAxisKey: "year",
                     yAxisKey: "global",
@@ -177,8 +179,8 @@ export default function V1() {
                 label:"Northern Hemisphere Annual",
                 data: annualData,
                 borderWidth: 2,
-                borderColor:  "rgb(0, 0, 255)",
-                backgroundColor: "rgba(0, 0, 255, 0.5)",
+                borderColor: colors[2],
+                backgroundColor: colors[2] + "50",
                 parsing: {
                     xAxisKey: "year",
                     yAxisKey: "northern",
@@ -190,8 +192,8 @@ export default function V1() {
                 label:"Southern Hemisphere Annual",
                 data: annualData,
                 borderWidth: 2,
-                borderColor:  "rgb(255, 165, 0)",
-                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                borderColor: colors[3],
+                backgroundColor: colors[3] + "50",
                 parsing: {
                     xAxisKey: "year",
                     yAxisKey: "southern",
@@ -203,8 +205,8 @@ export default function V1() {
                 label:"Global Monthly",
                 data: monthlyData,
                 borderWidth: 2,
-                borderColor:  "rgb(0, 0, 0)",
-                backgroundColor: "rgba(60, 179, 113, 0.5)",
+                borderColor: colors[4],
+                backgroundColor: colors[4] + "50",
                 parsing: {
                     xAxisKey: "time",
                     yAxisKey: "global",
@@ -215,8 +217,8 @@ export default function V1() {
                 label:"Northern Hemisphere Monthly",
                 data: monthlyData,
                 borderWidth: 2,
-                borderColor:  "rgb(0, 0, 255)",
-                backgroundColor: "rgba(0, 0, 255, 0.5)",
+                borderColor: colors[5],
+                backgroundColor: colors[5] + "50",
                 parsing: {
                     xAxisKey: "time",
                     yAxisKey: "northern",
@@ -227,8 +229,8 @@ export default function V1() {
                 label:"Southern Hemisphere Monthly",
                 data: monthlyData,
                 borderWidth: 2,
-                borderColor:  "rgb(255, 165, 0)",
-                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                bborderColor: colors[6],
+                backgroundColor: colors[6] + "50",
                 parsing: {
                     xAxisKey: "time",
                     yAxisKey: "southern",
