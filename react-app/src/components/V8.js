@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Chart } from "chart.js/auto";
 import {Line} from "react-chartjs-2"
 import axios from 'axios'
-import { Colors } from 'chart.js'
-
-const URL = 'http://localhost:8080/V4'
-const URL_V3_ANNUAL = 'http://localhost:8080/V3annual'
-const URL_V3_MONTHLY = 'http://localhost:8080/V3monthly'
-const URL_annual = "http://localhost:8080/V1annual"
+import Colors from './Colors'
 const URL_V8 = "http://localhost:8080/V8"
 
 
-export default function V4() {
+export default function V8() {
     const [chartData, setChartData] = useState([])
+    const [colors, setColors] = useState(Colors())
+    let colorPicker = 0
 
 
     useEffect(() => {
@@ -24,12 +21,23 @@ export default function V4() {
         })
     },[])
 
+    const getColor = () => {
+        const color = colors[colorPicker]
+        colorPicker++
+        if(colorPicker == colors.length){
+            colorPicker = 0
+        }
+
+        return color
+    };
+
     const setupDatasets = (data) =>{
         const results = Object.keys(data).map(value => {
             return {
                 label: value,
                 data: data[value],
                 borderWidth: 2,
+                borderColor: getColor(),
                 pointRadius: 0,   
             }
         })
@@ -54,18 +62,13 @@ export default function V4() {
             },
             title: {
                 display: true,
-                text: "V8",
+                text: "CO2 Emission by country",
             },
             subtitle: {
                 display: true,
-                text: ""
+                text: "Graph presents carbondioxide emissions by country from year 1959 to 2020"
             },            
         },
-        borderColor: [
-            "red",
-            'blue',
-            'green'
-        ],
         interaction: {
             intersect: false,
             mode: "point",
@@ -105,11 +108,11 @@ export default function V4() {
           <Line data={data} options={options}/>
           <div>
             <p>
-                Learn more about <a href='https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html' target="_blank" rel="noreferrer">Law Dome</a> or <a href='https://gml.noaa.gov/ccgg/about/co2_measurements.html' target="_blank" rel="noreferrer"> Mauna Loa</a> measurements.
+                <a href='https://www.icos-cp.eu/science-and-impact/global-carbon-budget/2021' target="_blank" rel="noreferrer">Global Carbon Project.</a> (2021). Supplemental data of Global Carbon Budget 2021 (Version 1.0)
             </p>
             <h4>Data Source</h4>
             <p>
-                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel='noreferrer'>Law Dome</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt" target="_blank" rel="noreferrer">Mauna Loa Annual</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt" target="_blank" rel="noreferrer">Mauna Loa Monthly</a>.
+                <a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D" target="_blank" rel='noreferrer'>National Emissions (xlsx)</a>
             </p>
           </div>
     </div>

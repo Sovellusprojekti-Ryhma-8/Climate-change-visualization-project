@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Chart } from "chart.js/auto";
 import {Line} from "react-chartjs-2"
 import axios from 'axios'
+import Colors from './Colors'
 
 const URL = 'http://localhost:8080/V4'
 const URL_V3_ANNUAL = 'http://localhost:8080/V3annual'
@@ -15,6 +16,7 @@ export default function V4() {
     const [dss, setDss] = useState([]);
     const [v3annuadata, setV3annualdata] = useState([])
     const [v3monthlydata, setV3monthlydata] = useState([])
+    const [colors, setColors] = useState(Colors())
 
     useEffect(() => {
         axios.get(URL)
@@ -46,40 +48,40 @@ export default function V4() {
                 label:"DSS Ice Core",
                 data: dss,
                 borderWidth: 2,
-                borderColor:  "rgb(60, 179, 113)",
-                backgroundColor: "rgba(60, 179, 113, 0.5)",
+                borderColor: colors[0],
+                backgroundColor: colors[0] + "50",
                 pointRadius: 1,
             },
             {
                 label:"DE08-2 Ice Core",
                 data: de08_2,
                 borderWidth: 2,
-                borderColor:  "rgba(0, 0, 255)",
-                backgroundColor: "rgba(0, 0, 255, 0.5)",
+                borderColor: colors[1],
+                backgroundColor: colors[1] + "50",
                 pointRadius: 1,
             },
             {
                 label:"DE08 Ice Core",
                 data: de08,
                 borderWidth: 2,
-                borderColor:  "rgba(255, 165, 0)",
-                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                borderColor: colors[2],
+                backgroundColor: colors[2] + "50",
                 pointRadius: 1,
             },
             {
                 label:"Mauna Loa Annual CO2",
                 data: v3annuadata,
                 borderWidth: 2,
-                borderColor:  "rgba(255, 99, 132)",
-                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                borderColor: colors[3],
+                backgroundColor: colors[3] + "50",
                 pointRadius: 1,
             },
             {
                 label:"Mauna Loa Monthly CO2",
                 data: v3monthlydata,
                 borderWidth: 2,
-                borderColor:  "rgba(171, 51, 245, 0.7)",
-                backgroundColor: "rgba(171, 51, 245, 0.5)",
+                borderColor: colors[4],
+                backgroundColor: colors[4] + "50",
                 pointRadius: 1,
             }
         ]

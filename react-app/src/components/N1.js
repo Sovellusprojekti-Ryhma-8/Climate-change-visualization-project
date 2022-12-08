@@ -13,13 +13,11 @@ import V8 from "./V8"
 export default function N1() {
     return (
         <div id="container">
-            {/* <V1/>
-            <V2/>
+            <V1/>
             <V4/>
             <V5/>
-            <V6/> */}
-            <V8/>
-            {/* <V7/> */}
+            <V6/>
+            <V7/>
         </div>
     )
 }
