@@ -19,6 +19,12 @@ export default function V7() {
             }).catch(error => {
                 alert(error)
             })
+        axios.get(URL2)
+            .then((response) => {
+                setEventData(response.data)
+            }).catch(error => {
+                alert(error)
+            })
             
     },[])
 
@@ -49,8 +55,8 @@ export default function V7() {
                 label:"Events",
                 data: eventData.map(d=>d.events),
                 borderWidth: 2,
-                borderColor: "rgb(255, 99, 132)", 
-                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                borderColor: colors[1],
+                backgroundColor: colors[1] + "50",
                 yAxisID: "events",
                 tension: 0.4,
                 pointRadius: 1

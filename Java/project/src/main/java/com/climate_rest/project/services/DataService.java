@@ -31,18 +31,15 @@ import com.climate_rest.project.repo.V6_repo;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.data.V6;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class DataService {

@@ -283,7 +283,7 @@ export default function V9() {
 
 
     return (
-      <div style={{ width: "50%" }}>
+      <div>
         <Doughnut data={chartData} options={options}/>
           <form onSubmit={e => Back(e)}>
             <button> Back </button>
