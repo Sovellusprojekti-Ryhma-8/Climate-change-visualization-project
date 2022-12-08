@@ -19,6 +19,9 @@ export default function Navbar() {
                     <Link class="link" to="/N3">N3</Link>
                 </li>
                 <li>
+                <li>
+                    <Link class="link" to="/Emissions">Emissions</Link>
+                </li>
                     {!localStorage.getItem('token') && (
                     <>
                     <Link class="link" to="/LogIn">Log In</Link>

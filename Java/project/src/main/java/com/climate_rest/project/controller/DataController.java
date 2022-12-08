@@ -10,7 +10,9 @@ import com.climate_rest.project.data.V2;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
-import com.climate_rest.project.data.V9;
+import com.climate_rest.project.data.V9_info;
+import com.climate_rest.project.data.V9_sector;
+import com.climate_rest.project.data.V9_sub_sector;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
 import com.climate_rest.project.data.V5;
@@ -67,10 +69,20 @@ public class DataController {
     public List<V5> getV5_Data(){
         return dataService.getV5_Data();
     }
-
-    @GetMapping("V9")
-    public List<V9> getV9_data(){
+    @CrossOrigin
+    @GetMapping("V9_info")
+    public List<V9_info> getV9_data(){
         return dataService.getV9_data();
+    }
+    @CrossOrigin
+    @GetMapping("V9_sector")
+    public List<V9_sector> getV9_sector(){
+        return dataService.getV9_sector();
+    }
+    @CrossOrigin
+    @GetMapping("V9_sub_sector")
+    public List<V9_sub_sector> getV9_sub_sector(){
+        return dataService.getV9_sub_sector();
     }
 
     @GetMapping("V6")

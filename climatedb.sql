@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 15.11.2022 klo 09:28
+-- Generation Time: 08.12.2022 klo 03:37
 -- Palvelimen versio: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -38,7 +38,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
-(1, '', '');
+(1, '', ''),
+(2, 'qwer', '$2a$10$aP3V4Ik7gVfJSoLDQHtd1eZv7uSON22QxqAXbIrTLAygQNPcALEua');
 
 -- --------------------------------------------------------
 
@@ -4334,14 +4335,14 @@ INSERT INTO `v2_data` (`id`, `time`, `temperature`) VALUES
 CREATE TABLE `v3_annual` (
   `id` int(11) NOT NULL,
   `time` int(4) DEFAULT NULL,
-  `mean` decimal(5,2) DEFAULT NULL
+  `co2` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Vedos taulusta `v3_annual`
 --
 
-INSERT INTO `v3_annual` (`id`, `time`, `mean`) VALUES
+INSERT INTO `v3_annual` (`id`, `time`, `co2`) VALUES
 (1, 1959, '315.98'),
 (2, 1960, '316.91'),
 (3, 1961, '317.64'),
@@ -4416,14 +4417,14 @@ CREATE TABLE `v3_monthly` (
   `id` int(11) NOT NULL,
   `year` int(4) DEFAULT NULL,
   `month` varchar(2) DEFAULT NULL,
-  `mean` decimal(5,2) DEFAULT NULL
+  `co2` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Vedos taulusta `v3_monthly`
 --
 
-INSERT INTO `v3_monthly` (`id`, `year`, `month`, `mean`) VALUES
+INSERT INTO `v3_monthly` (`id`, `year`, `month`, `co2`) VALUES
 (1, 1958, '03', '315.70'),
 (2, 1958, '04', '317.45'),
 (3, 1958, '05', '317.51'),
@@ -9633,7 +9634,7 @@ INSERT INTO `v7_data` (`id`, `time_kyr_bp`, `temperature_change`, `co2`) VALUES
 
 CREATE TABLE `v9_data` (
   `id` int(11) NOT NULL,
-  `sub_sector` varchar(37) DEFAULT NULL,
+  `sub_sector_info` varchar(37) DEFAULT NULL,
   `emissions` decimal(3,1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -9641,7 +9642,7 @@ CREATE TABLE `v9_data` (
 -- Vedos taulusta `v9_data`
 --
 
-INSERT INTO `v9_data` (`id`, `sub_sector`, `emissions`) VALUES
+INSERT INTO `v9_data` (`id`, `sub_sector_info`, `emissions`) VALUES
 (1, 'Road', '11.9'),
 (2, 'Aviation', '1.9'),
 (3, 'Rail', '0.4'),
@@ -9671,6 +9672,28 @@ INSERT INTO `v9_data` (`id`, `sub_sector`, `emissions`) VALUES
 (27, 'Grassland', '0.1'),
 (28, 'Landfills', '1.9'),
 (29, 'Wastewater', '1.3');
+
+-- --------------------------------------------------------
+
+--
+-- Rakenne taululle `v9_sector`
+--
+
+CREATE TABLE `v9_sector` (
+  `id` int(11) NOT NULL,
+  `sector` varchar(255) DEFAULT NULL,
+  `emissions` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Vedos taulusta `v9_sector`
+--
+
+INSERT INTO `v9_sector` (`id`, `sector`, `emissions`) VALUES
+(1, 'Energy', '73.2'),
+(2, 'Industrial processes', '5.2'),
+(3, 'Waste', '3.2'),
+(4, 'Agriculture, Forestry & Land Use (AFOLU)', '18.4');
 
 -- --------------------------------------------------------
 
@@ -9768,6 +9791,12 @@ ALTER TABLE `v9_data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `v9_sector`
+--
+ALTER TABLE `v9_sector`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `v10_data`
 --
 ALTER TABLE `v10_data`
@@ -9781,7 +9810,7 @@ ALTER TABLE `v10_data`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `v1_annual`

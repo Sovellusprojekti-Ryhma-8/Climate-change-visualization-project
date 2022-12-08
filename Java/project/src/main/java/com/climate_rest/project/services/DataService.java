@@ -10,14 +10,18 @@ import com.climate_rest.project.repo.V1_annualRepo;
 import com.climate_rest.project.data.V1;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
-import com.climate_rest.project.data.V9;
+import com.climate_rest.project.data.V9_info;
+import com.climate_rest.project.data.V9_sector;
+import com.climate_rest.project.data.V9_sub_sector;
 import com.climate_rest.project.repo.V1_monthlyRepo;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
 import com.climate_rest.project.repo.V2_Repo;
 import com.climate_rest.project.repo.V3_annualRepo;
 import com.climate_rest.project.repo.V7_Repo;
-import com.climate_rest.project.repo.V9_Repo;
+import com.climate_rest.project.repo.V9_infoRepo;
+import com.climate_rest.project.repo.V9_sectorRepo;
+import com.climate_rest.project.repo.V9_sub_sectorRepo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
 import com.climate_rest.project.repo.V4_Repo;
 import com.climate_rest.project.repo.V5_Repo;
@@ -48,19 +52,25 @@ public class DataService {
     V3_monthlyRepo v3monthlyRepo;
 
     @Autowired
-    V7_Repo v7Repo;
-
-
-    @Autowired
     V4_Repo v4repo;
 
     @Autowired
-    V5_Repo v5repo;  
+    V5_Repo v5repo;
 
     @Autowired
-    V9_Repo v9Repo;
-    @Autowired
     V6_repo v6repo;
+
+    @Autowired
+    V7_Repo v7Repo;
+
+    @Autowired
+    V9_infoRepo v9Repo;
+
+    @Autowired
+    V9_sectorRepo v9secRepo;
+
+    @Autowired
+    V9_sub_sectorRepo v9subsecRepo;
 
     public List<V3_annual> getV3_annualData(){
         return v3annualRepo.findAll();
@@ -94,8 +104,16 @@ public class DataService {
         return v5repo.findAll();
     }
 
-    public List<V9> getV9_data() {
+    public List<V9_info> getV9_data() {
         return v9Repo.findAll();
+    }
+
+    public List<V9_sector> getV9_sector() {
+        return v9secRepo.findAll();
+    }
+
+    public List<V9_sub_sector> getV9_sub_sector() {
+        return v9subsecRepo.findAll();
     }
 
     public List<V6> getV6_Data() {
