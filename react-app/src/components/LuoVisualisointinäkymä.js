@@ -60,7 +60,7 @@ const CreateVisualization = (props) => {
 
         form.append("Id", uid())
         visualizations.forEach((item) => form.append("visualizations", item.id+" "+item.component))
-        descriptions.forEach((item) => form.append("descriptions", item.id+", "+item.text))
+        descriptions.forEach((item) => form.append("descriptions", item.id+" "+item.text))
         form.append("style", style)
         console.log(form.getAll("visualizations"))
         console.log(form.getAll("descriptions"))
