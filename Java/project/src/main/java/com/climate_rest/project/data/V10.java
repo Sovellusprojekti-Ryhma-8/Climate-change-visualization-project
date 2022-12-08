@@ -1,16 +1,26 @@
 package com.climate_rest.project.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="v10_data")
 public class V10 {
     
+    @Id
+    @Column(name="year_kyr_bp")
     private int year;
-    private String event;
+    @Column(name="events")
+    private String events;
 
     public V10() {
     }
 
-    public V10(int year, String event) {
+    public V10(int year, String events) {
         this.year = year;
-        this.event = event;
+        this.events = events;
     }
 
     public int getYear() {
@@ -21,12 +31,12 @@ public class V10 {
         this.year = year;
     }
 
-    public String getEvent() {
-        return this.event;
+    public String getevents() {
+        return this.events;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setevents(String events) {
+        this.events = events;
     }
 
     public V10 year(int year) {
@@ -34,8 +44,8 @@ public class V10 {
         return this;
     }
 
-    public V10 event(String event) {
-        setEvent(event);
+    public V10 events(String events) {
+        setevents(events);
         return this;
     }
 

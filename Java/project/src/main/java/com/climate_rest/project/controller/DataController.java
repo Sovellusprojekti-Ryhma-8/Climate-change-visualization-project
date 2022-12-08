@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.climate_rest.project.data.V1_annual;
 import com.climate_rest.project.data.V2;
 import com.climate_rest.project.data.V1;
+import com.climate_rest.project.data.V10;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
 import com.climate_rest.project.data.V9_info;
 import com.climate_rest.project.data.V9_sector;
-import com.climate_rest.project.data.V9_sub_sector;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
 import com.climate_rest.project.data.V5;
@@ -79,10 +79,10 @@ public class DataController {
     public List<V9_sector> getV9_sector(){
         return dataService.getV9_sector();
     }
-    @CrossOrigin
-    @GetMapping("V9_sub_sector")
-    public List<V9_sub_sector> getV9_sub_sector(){
-        return dataService.getV9_sub_sector();
+
+    @GetMapping("V10")
+    public List<V10> getV10_data(){
+        return dataService.getV10_data();
     }
 
     @GetMapping("V6")

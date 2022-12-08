@@ -5,14 +5,15 @@ import org.springframework.stereotype.Service;
 
 import com.climate_rest.project.data.V1_annual;
 import com.climate_rest.project.data.V2;
+import com.climate_rest.project.repo.V10_Repo;
 import com.climate_rest.project.repo.V1_annualRepo;
 
 import com.climate_rest.project.data.V1;
+import com.climate_rest.project.data.V10;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
 import com.climate_rest.project.data.V9_info;
 import com.climate_rest.project.data.V9_sector;
-import com.climate_rest.project.data.V9_sub_sector;
 import com.climate_rest.project.repo.V1_monthlyRepo;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
@@ -21,7 +22,6 @@ import com.climate_rest.project.repo.V3_annualRepo;
 import com.climate_rest.project.repo.V7_Repo;
 import com.climate_rest.project.repo.V9_infoRepo;
 import com.climate_rest.project.repo.V9_sectorRepo;
-import com.climate_rest.project.repo.V9_sub_sectorRepo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
 import com.climate_rest.project.repo.V4_Repo;
 import com.climate_rest.project.repo.V5_Repo;
@@ -70,7 +70,8 @@ public class DataService {
     V9_sectorRepo v9secRepo;
 
     @Autowired
-    V9_sub_sectorRepo v9subsecRepo;
+    V10_Repo v10Repo;
+
 
     public List<V3_annual> getV3_annualData(){
         return v3annualRepo.findAll();
@@ -112,10 +113,9 @@ public class DataService {
         return v9secRepo.findAll();
     }
 
-    public List<V9_sub_sector> getV9_sub_sector() {
-        return v9subsecRepo.findAll();
+    public List<V10> getV10_data() {
+        return v10Repo.findAll();
     }
-
     public List<V6> getV6_Data() {
         return v6repo.findAll();
     }

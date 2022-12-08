@@ -2,47 +2,90 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
+import 'chartjs-plugin-datalabels';
 
-
-
-const URL = "http://localhost:8080/V9_sector"
 
 export default function V9() {
-    const [chartData, setData] = useState([]);
-    const [viewData, setViewData] = useState([]);
-    const [V9Data, setV9Data] = useState([]);
-    const [loading, setloading] = useState(true)
+    const [chartData, setChartData] = useState([]);
+    const [viewData, setInfoData] = useState([]);
+    const [loading, setloading] = useState(true);
+
+    const URL1 = "http://localhost:8080/V9_sector"
+    const URL2 = "http://localhost:8080/V9_info"
+
 
     useEffect(() => {
       V9Chart()
     },[])
 
      const V9Chart = () => {
-        let co2 = []
-        let sector = []
+        const co2 = []
+        const sector = [] 
     
-        axios.get("http://localhost:8080/V9_sector")
-          .then(response => {
-            for (const dataObj of response.data) {
-              sector.push(dataObj.sector)
-              co2.push(dataObj.co2)
+        axios.get(URL1)
+          .then(res => {
+            for (const Object of res.data) 
+            {
+              sector.push(Object.sector)
+              co2.push(Object.co2)
             }
-            setV9Data({
+            setChartData(
+              {
               labels: sector,
-              datasets: [{
+              datasets: [
+                {
                 data: co2,
-                backgroundColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(54, 162, 235)',
-                  'rgb(255, 205, 86)',
-                  'rgb(105, 25, 10)'
+                backgroundColor: 
+                [
+                  '#D8D829',
+                    '#CA334E',
+                    '#44CA33',
+                    '#2DD9BC'
                 ]
-              }]
-            })
-            setloading(false)
-          })
-    
+              }
+            ]
+          }
+        )
+         setloading(false)
       }
+    )
+  }
+
+  while (loading === true) {
+    return(null)
+  } 
+
+  function Back(e) {
+    e.preventDefault();
+    const co2 = []
+    const sector = [] 
+      axios.get(URL1)
+          .then(res => {
+            for (const Object of res.data) 
+            {
+              sector.push(Object.sector)
+              co2.push(Object.co2)
+            }
+            setChartData(
+              {
+              labels: sector,
+              datasets: [
+                {
+                data: co2,
+                backgroundColor: 
+                [
+                  '#D8D829',
+                  '#CA334E',
+                  '#44CA33',
+                  '#2DD9BC'
+                ]
+              }
+            ]
+          }
+        )
+      }
+    )
+  } 
 
       
  
@@ -76,134 +119,143 @@ export default function V9() {
     } */
 
    function Detail (e){
+
         const co2 = []
-        const info = []
-        setViewData(e.chart.tooltip.dataPoints?.[0]?.label)
+        const info = []  
+
+        setInfoData(e.chart.tooltip.dataPoints?.[0]?.label)
         if (e.chart.tooltip.dataPoints?.[0]?.label === "Energy") {
-          axios.get("http://localhost:8080/V9_info")
-            .then(response => {
-              for (const dataObj of response.data) {
-                if (dataObj.sector_info === "Iron & Steel" || dataObj.sector_info === "Chemical & petrochemical (energy)" || dataObj.sector_info === "Food and tobacco" 
-                  || dataObj.sector_info === "Non-ferous metals" || dataObj.sector_info === "Paper. pulp & printing" || dataObj.sector_info === "Machinery" 
-                  || dataObj.sector_info === "Aviation" || dataObj.sector_info === "Ship" || dataObj.sector_info === "Rail" || dataObj.sector_info === "Road" 
-                  || dataObj.sector_info === "Pipeline" || dataObj.sector_info === "Residential" || dataObj.sector_info === "Commercial"  
-                  || dataObj.sector_info === "Energy in Agri and Fishing" || dataObj.sector_info === "Oil and Natural Gas" || dataObj.sector_info === "Coal"
-                  || dataObj.sector_info === "Other industry" || dataObj.sector_info === "Unallocated fuel combustion") {
-                  info.push(dataObj.sector_info)
-                  co2.push(dataObj.co2)
-                }
-    
-              }
-              setV9Data({
-                labels: info,
-                datasets: [{
-                  data: co2,
-                  backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(105, 205, 10)',
-                    'rgb(105, 25, 100)'
-                    
-                  ]
-                }]
-              })
-            })
-        }else if (e.chart.tooltip.dataPoints?.[0]?.label === "Industrial processes") {
-            axios.get("http://localhost:8080/V9_info")
-              .then(response => {
-                for (const dataObj of response.data) {
-                  if (dataObj.sector_info === "Cement" || dataObj.sector_info === "Chemical & petrochemical (industrial)") {
-                    info.push(dataObj.sector_info)
-                    co2.push(dataObj.co2)
+          axios.get(URL2)
+            .then(res => {
+              for (const Object of res.data) {
+                if (Object.sector_info === "Iron & Steel" || Object.sector_info === "Chemical & petrochemical (energy)" || Object.sector_info === "Food and tobacco" 
+                  || Object.sector_info === "Non-ferous metals" || Object.sector_info === "Paper. pulp & printing" || Object.sector_info === "Machinery" 
+                  || Object.sector_info === "Aviation" || Object.sector_info === "Ship" || Object.sector_info === "Rail" || Object.sector_info === "Road" 
+                  || Object.sector_info === "Pipeline" || Object.sector_info === "Residential" || Object.sector_info === "Commercial"  
+                  || Object.sector_info === "Energy in Agri and Fishing" || Object.sector_info === "Oil and Natural Gas" || Object.sector_info === "Coal"
+                  || Object.sector_info === "Other industry" || Object.sector_info === "Unallocated fuel combustion") 
+                  {
+                  info.push(Object.sector_info)
+                  co2.push(Object.co2)
                   }
-      
                 }
-                setV9Data({
+              setChartData({
+                labels: info,
+                datasets: [
+                  {
+                  data: co2,
+                  backgroundColor: 
+                  [
+                    '#D8D829',
+                    '#CA334E',
+                    '#44CA33',
+                    '#2DD9BC',
+                    '#5FB237',
+                    '#37B28B',
+                    '#B24D37',
+                    '#3837B2',
+                    '#37B0B2',
+                    '#B237B0',
+                    '#9237B2',
+                    '#BAA233',
+                    '#BA334B',
+                    '#B2BA33',
+                    '#73BA33',
+                    '#3BD92D'
+                  ]
+                }
+              ]
+            }
+          )
+        }
+      )
+    }else if (e.chart.tooltip.dataPoints?.[0]?.label === "Industrial processes") {
+          axios.get(URL2)
+            .then(res => {
+              for (const Object of res.data) {
+                if (Object.sector_info === "Cement" || Object.sector_info === "Chemical & petrochemical (industrial)") 
+                  {
+                  info.push(Object.sector_info)
+                  co2.push(Object.co2)
+                  }
+                }
+                setChartData({
                   labels: info,
-                  datasets: [{
+                  datasets: [
+                    {
                     data: co2,
-                    backgroundColor: [
-                      'rgb(255, 99, 132)',
-                      'rgb(54, 162, 235)'
+                    backgroundColor: 
+                    [
+                      '#D8D829',
+                      '#CA334E',
                     ]
-                  }]
-                })
-              })
-        }else if(e.chart.tooltip.dataPoints?.[0]?.label === "Waste") {
-          axios.get("http://localhost:8080/V9_info")
-            .then(response => {
-              for (const dataObj of response.data) {
-                if (dataObj.sector_info === "Wastewater" || dataObj.sector_info === "Landfills") {
-                  info.push(dataObj.sector_info)
-                  co2.push(dataObj.co2)
+                  }
+                ]
+              }
+            )
+          }
+        )
+      }else if(e.chart.tooltip.dataPoints?.[0]?.label === "Waste") {
+        axios.get(URL2)
+          .then(res => {
+            for (const Object of res.data) {
+              if (Object.sector_info === "Wastewater" || Object.sector_info === "Landfills") 
+                {
+                  info.push(Object.sector_info)
+                  co2.push(Object.co2)
                 }
       
               }
-              setV9Data({
+              setChartData({
                 labels: info,
-                datasets: [{
+                datasets: [
+                  {
                   data: co2,
-                  backgroundColor: [
-                    'rgb(255, 205, 86)',
-                    'rgb(255, 205, 200)'
+                  backgroundColor: 
+                  [
+                    '#D8D829',
+                    '#CA334E',
                   ]
-                }]
-              })
-            })
-        
-   }else if (e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)") {
-    axios.get("http://localhost:8080/V9_info")
-      .then(response => {
-        for (const dataObj of response.data) {
-          if (dataObj.sector_info === "Grassland" || dataObj.sector_info === "Cropland" || dataObj.sector_info === "Crop Burning" || dataObj.sector_info === "Forest Land"
-            || dataObj.sector_info === "Rice cultivation" || dataObj.sector_info === "Agricultural soils" || dataObj.sector_info === "Livestock & Manure") {
-            info.push(dataObj.sector_info)
-            co2.push(dataObj.co2)
-          }
+                }
+              ]
+            }
+          )
+        }
+      )
+    }else if (e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)") {
+      axios.get(URL2)
+        .then(res => {
+          for (const Object of res.data) {
+            if (Object.sector_info === "Grassland" || Object.sector_info === "Cropland" || Object.sector_info === "Crop Burning" || Object.sector_info === "Forest Land"
+            || Object.sector_info === "Rice cultivation" || Object.sector_info === "Agricultural soils" || Object.sector_info === "Livestock & Manure") 
+            {
+            info.push(Object.sector_info)
+            co2.push(Object.co2)
+            }
 
         }
-        setV9Data({
+        setChartData({
           labels: info,
-          datasets: [{
+          datasets: [
+            {
             data: co2,
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(54, 162, 235)',
-              'rgb(255, 205, 86)',
-              'rgb(105, 205, 10)',
-              'rgb(105, 25, 100)',
-              'rgb(155, 250, 10)',
-              'rgb(155, 250, 200)'
+            backgroundColor: 
+            [
+              '#D8D829',
+              '#CA334E',
+              '#44CA33',
+              '#2DD9BC',
+              '#5FB237',
+              '#37B28B'
             ]
-          }]
-        })
-      })
-    }
-   }
-
-   function Back(e) {
-    e.preventDefault();
-    let co2 = []
-    let sector = []
-      axios.get("http://localhost:8080/V9_sector")
-          .then(response => {
-            for (const dataObj of response.data) {
-              sector.push(dataObj.sector)
-              co2.push(dataObj.co2)
-            }
-            setV9Data({
-              labels: sector,
-              datasets: [{
-                data: co2,
-                backgroundColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(54, 162, 235)',
-                  'rgb(255, 205, 86)',
-                  'rgb(105, 25, 10)'
-                ]
-              }]
-            })})} 
+          }
+        ]
+      }
+    )
+  }
+)
+}
+}
 
     const options = {
         type: 'doughnut',
@@ -215,32 +267,37 @@ export default function V9() {
           }, 
         plugins: {
             legend: {
-                position: 'left',
-                temsLayout: 'vertical'
+              position: 'right',
+              temsLayout: 'vertical'
             },
             title:{
-                display: true,
-                text:"CO2 emissions by sector"
+              display: true,
+              text:"Co2 emissions by sectors"
             },
+            subtitle:{
+              display: true,
+              text:"Doughnut chart presenting the Co2 emissions by sectors"
+            }
         }
-        
     }
 
-    if (loading === true) {
-      return("")
-    }
 
     return (
       <div style={{ width: "50%" }}>
-        <Doughnut data={V9Data} options={options}/>
-        <div>
+        <Doughnut data={chartData} options={options}/>
           <form onSubmit={e => Back(e)}>
             <button> Back </button>
           </form>
             <p>
-                Link to description of this graph:
+               Click on a sector to get a breakdown of the sector, click back to get back to main graph.
             </p>
-        </div>
+            <p>
+                Learn more about <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank">measurements</a>.
+            </p>
+            <h4>Data source</h4>
+            <p>
+            <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank">Co2 emissions</a>
+            </p>
     </div>
     )
 
