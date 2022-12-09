@@ -64,8 +64,9 @@ const CreateVisualization = (props) => {
         form.append("style", style)
         console.log(form.getAll("visualizations"))
         console.log(form.getAll("descriptions"))
+        let url = form.getAll("Id")
 
-        /* hae data arraysta ja aseta fomiin uudestaan */
+        window.open("http://localhost:3000/views/"+url, '_blank', 'noopener,noreferrer');
 
         try {
             fetch(URL, {

@@ -13,11 +13,13 @@ import V8 from "./V8"
 export default function N1() {
     return (
         <div id="container">
-            <V1/>
-            <V4/>
-            <V5/>
-            <V6/>
-            <V7/>
+            <V1 text={""}/>
+            <V2 text={""}/>
+            <V3 text={""}/>
+            <V4 text={""}/>
+            <V5 text={""}/>
+            <V6 text={""}/>
+            <V7 text={""}/>
         </div>
     )
 }

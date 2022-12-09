@@ -5,14 +5,19 @@ import Colors from './Colors'
 
 const URL = 'http://localhost:8080/V7'
 
-export default function V7() {
+export default function V7(props) {
     const [chartData, setChartData] = useState([])
     const [colors, setColors] = useState(Colors())
+    const [text, setText] = useState("Subtitle tänne");
+
 
     useEffect(() => {
         axios.get(URL)
             .then((response) => {
                 setChartData(response.data)
+                if (Object.keys(props.text).length > 0) {
+                    setText(props.text)
+                }
             }).catch(error => {
                 alert(error)
             })
@@ -60,6 +65,10 @@ export default function V7() {
             display: true,
             text: "V7",
           },
+          subtitle: {
+            display: true,
+            text: text
+        }
         },
         scales: {
           

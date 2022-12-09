@@ -6,14 +6,19 @@ import Colors from './Colors'
 
 const URL = "http://localhost:8080/V6"
 
-export default function V6() {
+export default function V6(props) {
     const [chartData, setData] = useState([]);
     const [colors, setColors] = useState(Colors())
+    const [text, setText] = useState("Reconstruction of atmospheric CO2 measurements from past 800,000 years.");
+
 
     useEffect(() => {
         axios.get(URL)
         .then((res) => {
             setData(res.data)
+            if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
         }).catch(error => {
             alert(error)
         })
@@ -45,7 +50,7 @@ export default function V6() {
             },
             subtitle: {
                 display: true,
-                text: "Reconstruction of atmospheric CO2 measurements from past 800,000 years."
+                text: text
             }
         },
         scales: {

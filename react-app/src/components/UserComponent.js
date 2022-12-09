@@ -21,10 +21,11 @@ const UserComponent = (props) => {
     const [components, setComp] = useState([]);
     const [data, setData] = useState([]);
     const [counter, setCounter] = useState(10);
-    // const [visuals, setVisuals] = useState([]);
+    const [visuals, setVisuals] = useState([]);
     const [desc, setDesc] = useState([]);
     const Id = useParams()
     const form = new FormData;
+    
 
     useEffect(() => {
         form.append("Id", Id.id)
@@ -36,7 +37,8 @@ const UserComponent = (props) => {
         })
         .then((res) => {
             setData(res.data)
-            // console.log(res.data)
+            setVisuals(res.data.visualizations)
+            setDesc(res.data.descriptions)
             setCounter(1)                
         }).catch(error => {
             alert(error)
@@ -45,58 +47,65 @@ const UserComponent = (props) => {
     },[counter])
 
     if (counter < 2) {
-        // console.log(data)
-        // setComp(
-        //     components => [...components, <V1/>]
-        // )
-        // setComp(
-        //     components => [...components, <V2/>]
-        // )
-        const visuals = data.visualizations
-        // const desc = data.descriptions
-        // setVisuals(data.visualizations)
+        
+        visuals.forEach((element, index) => {
 
-        visuals.forEach(element => {
             switch (element) {
                 case "v1":
-                    setComp(
-                        components => [...components, <V1/>]
-                    )
+                    if (visuals.length > components.length) {
+                        setComp(
+                            components => [...components, <V1 key={components.lenght} text={desc[index]}/>]
+                        )
+                    }
                     break;
                 case "v2":
+                    if (visuals.length > components.length) {
                     setComp(
-                        components => [...components, <V2/>]
+                        components => [...components, <V2 key={components.lenght} text={desc[index]}/>]
                     )
+                    }
                     break;
                 case "v3":
+                    if (visuals.length > components.length) {
                     setComp(
-                        components => [...components, <V3/>]
+                        components => [...components, <V3 key={components.lenght} text={desc[index]}/>]
                     )
+                    }
                     break;
                 case "v4":
+                    if (visuals.length > components.length) {
                     setComp(
-                        components => [...components, <V4/>]
+                        components => [...components, <V4 key={components.lenght} text={desc[index]}/>]
                     )
+                    }
                     break;
                 case "v5":
+                    if (visuals.length > components.length) {
                     setComp(
-                        components => [...components, <V5/>]
-                    )                    
+                        components => [...components, <V5 key={components.lenght} text={desc[index]}/>]
+                    )
+                    }                    
                     break;
                 case "v6":
+                    if (visuals.length > components.length) {
                     setComp(
-                        components => [...components, <V6/>]
+                        components => [...components, <V6 key={components.lenght} text={desc[index]}/>]
                     )
+                    }
                     break;
-                case "v7":                    
+                case "v7":   
+                if (visuals.length > components.length) {                 
                     setComp(
-                        components => [...components, <V7/>]
+                        components => [...components, <V7 key={components.lenght} text={desc[index]}/>]
                     )
+                }
                     break; 
                 case "v8":
+                    if (visuals.length > components.length) {
                     setComp(
-                        components => [...components, <V8/>]
+                        components => [...components, <V8 key={components.lenght} text={desc[index]}/>]
                     )
+                    }
                     break;
                 // case "v9":
                 //     setComp(<V9/>)
@@ -105,18 +114,9 @@ const UserComponent = (props) => {
                     break;
             }
         });
-
-        console.log(visuals)
-        console.log(desc)
         setCounter(counter+1)    
     }
-
-
-
     
-    
-
-    // console.log(Id.id)
     return (
         <>
         {components}
