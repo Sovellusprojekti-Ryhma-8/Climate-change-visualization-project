@@ -1,3 +1,14 @@
+.myviews {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4em;
+    background-color: lightgray;    
+}
+.myviews .Link {
+    width: 100%;
+}
+
 .logout {
     margin: 0;
     text-align: center;

@@ -1,10 +1,13 @@
+import axios from 'axios';
 import React from 'react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import '../styles/createVisualization.css'
+import aToken from './aToken';
 import DropDownMenu from './DropDownMenu'
 
 const URL = "http://localhost:8080/saveView"
+const Identify = "http://localhost:8080/private"
 
 const CreateVisualization = (props) => {
     
@@ -12,7 +15,31 @@ const CreateVisualization = (props) => {
     const [descriptions, setDescriptions] = useState([]);
     const [style, setStyle] = useState(0);
     const [next, setNext] = useState([]);
+    const [user, setUser] = useState('');
     const form = new FormData;
+    let navigate = useNavigate();
+
+    let token = localStorage.getItem('token')
+
+    useEffect(() => {
+        if (!aToken(token)) {
+            navigate('/LogIn')
+        }
+        axios({
+            method: 'get',
+            url : Identify,
+            headers: {
+                "Authorization": "Bearer "+token
+            }
+        })
+        .then((res) => {
+            setUser(res.data)
+            console.log(res.data)
+        }).catch(error => {
+            alert(error)
+        })
+    },[])
+
 
 
     let callback = async (data, key) => {
@@ -49,8 +76,13 @@ const CreateVisualization = (props) => {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
+        
+        console.log(aToken(token))
+        console.log(token)
 
-        const uid = () => 
+
+
+        const uid = () =>   
         String(
             Date.now().toString(32) +
             Math.random().toString(16)
@@ -62,8 +94,10 @@ const CreateVisualization = (props) => {
         visualizations.forEach((item) => form.append("visualizations", item.id+" "+item.component))
         descriptions.forEach((item) => form.append("descriptions", item.id+" "+item.text))
         form.append("style", style)
+        form.append("user", user)
         console.log(form.getAll("visualizations"))
         console.log(form.getAll("descriptions"))
+        console.log(form.getAll("user"))
         let url = form.getAll("Id")
 
         window.open("http://localhost:3000/views/"+url, '_blank', 'noopener,noreferrer');
