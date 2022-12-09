@@ -10,7 +10,6 @@ import Footer from './components/Footer';
 import LogIn from './components/LogIn';
 import SignIn from './components/SignIn';
 import LuoVisualisointinäkymä from './components/LuoVisualisointinäkymä';
-import Profile from './components/Profile';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -29,7 +28,6 @@ function App() {
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
-        <Route path="/Profile"element={<Profile />} />
         </Routes>
       </div>
     <Footer />

@@ -1,7 +1,30 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import {useNavigate } from "react-router-dom";
+import '../styles/Navbar.css';
+import axios from 'axios';
+
 
 export default function Navbar() {
+
+    const navigate = useNavigate();
+    const form = new FormData();
+
+
+    function refreshPage(){
+
+        localStorage.removeItem("token")
+        navigate('/')
+        window.location.reload(false)
+    }
+
+    
+    function deleteUser() {
+        
+    }
+            
+
+
     return (
         <div class="navbar">
 
@@ -29,20 +52,24 @@ export default function Navbar() {
                     )}
                 </li>
                 <li>
-                
                     <Link class="link" to="/LuoVisualisointinäkymä">Luo Visualisointinäkymä</Link>
                 </li>
-                <li>
-                    {localStorage.getItem('token') && (
-                    <>
-                    <Link class="link" to="/Profile">Profile</Link>
+                {localStorage.getItem('token') && (
+                <>
+                <li class="logout">
+                <button class='button' onClick={refreshPage}>Logout</button>
+            </li>
+            </>
+            )}
+            {localStorage.getItem('token') && (
+                <>
+                <li class="deleteUser">
+                    <button class='button' onClick={deleteUser}>Delete user</button>
+                    </li>
                     </>
-                    )}
-                </li>
+            )}
             </ul>
-
-            </div>
+            </div> 
+    )
                         
-         
-      );
-    }
+        }

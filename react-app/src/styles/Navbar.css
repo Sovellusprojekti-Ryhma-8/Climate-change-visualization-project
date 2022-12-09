@@ -1,0 +1,46 @@
+.logout {
+    text-align: center;
+}
+
+
+.logout .button{
+    padding: 15px 25px;
+    background: #42d806;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid white;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    transition-duration: 0.3s;
+}
+
+.logout .button:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid #42d806;
+}
+
+.deleteUser {
+    text-align: center;
+}
+
+.deleteUser .button {
+    padding: 15px 25px;
+    background: #42d806;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid white;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    transition-duration: 0.3s;
+}
+
+.deleteUser .button:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid #42d806;
+}
