@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 07.12.2022 klo 15:49
+-- Generation Time: 08.12.2022 klo 03:37
 -- Palvelimen versio: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -38,7 +38,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
-(1, '', '');
+(1, '', ''),
+(2, 'qwer', '$2a$10$aP3V4Ik7gVfJSoLDQHtd1eZv7uSON22QxqAXbIrTLAygQNPcALEua');
 
 -- --------------------------------------------------------
 
@@ -9933,7 +9934,7 @@ INSERT INTO `v8_data` (`year`, `Afghanistan`, `Albania`, `Algeria`, `Andorra`, `
 
 CREATE TABLE `v9_data` (
   `id` int(11) NOT NULL,
-  `sub_sector` varchar(37) DEFAULT NULL,
+  `sub_sector_info` varchar(37) DEFAULT NULL,
   `emissions` decimal(3,1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -9941,7 +9942,7 @@ CREATE TABLE `v9_data` (
 -- Vedos taulusta `v9_data`
 --
 
-INSERT INTO `v9_data` (`id`, `sub_sector`, `emissions`) VALUES
+INSERT INTO `v9_data` (`id`, `sub_sector_info`, `emissions`) VALUES
 (1, 'Road', '11.9'),
 (2, 'Aviation', '1.9'),
 (3, 'Rail', '0.4'),
@@ -9971,6 +9972,28 @@ INSERT INTO `v9_data` (`id`, `sub_sector`, `emissions`) VALUES
 (27, 'Grassland', '0.1'),
 (28, 'Landfills', '1.9'),
 (29, 'Wastewater', '1.3');
+
+-- --------------------------------------------------------
+
+--
+-- Rakenne taululle `v9_sector`
+--
+
+CREATE TABLE `v9_sector` (
+  `id` int(11) NOT NULL,
+  `sector` varchar(255) DEFAULT NULL,
+  `emissions` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Vedos taulusta `v9_sector`
+--
+
+INSERT INTO `v9_sector` (`id`, `sector`, `emissions`) VALUES
+(1, 'Energy', '73.2'),
+(2, 'Industrial processes', '5.2'),
+(3, 'Waste', '3.2'),
+(4, 'Agriculture, Forestry & Land Use (AFOLU)', '18.4');
 
 -- --------------------------------------------------------
 
@@ -10074,6 +10097,12 @@ ALTER TABLE `v9_data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `v9_sector`
+--
+ALTER TABLE `v9_sector`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `v10_data`
 --
 ALTER TABLE `v10_data`
@@ -10087,7 +10116,7 @@ ALTER TABLE `v10_data`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `v1_annual`

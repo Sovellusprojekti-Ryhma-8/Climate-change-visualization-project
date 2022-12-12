@@ -3,16 +3,25 @@ import {Line} from "react-chartjs-2"
 import axios from 'axios'
 import Colors from './Colors'
 
-const URL = 'http://localhost:8080/V7'
+const URL1 = 'http://localhost:8080/V7'
+const URL2 = 'http://localhost:8080/V10'
 
 export default function V7() {
     const [chartData, setChartData] = useState([])
+    const [eventData, setEventData] = useState([])
+    
     const [colors] = useState(Colors())
 
     useEffect(() => {
-        axios.get(URL)
+        axios.get(URL1)
             .then((response) => {
                 setChartData(response.data)
+            }).catch(error => {
+                alert(error)
+            })
+        axios.get(URL2)
+            .then((response) => {
+                setEventData(response.data)
             }).catch(error => {
                 alert(error)
             })
@@ -41,10 +50,33 @@ export default function V7() {
                 yAxisID: "temp",
                 tension: 0.4,
                 pointRadius: 1,
+            },
+            {
+                label:"Events",
+                data: eventData.map(d=>d.events),
+                borderWidth: 2,
+                borderColor: colors[2],
+                backgroundColor: colors[2] + "50",
+                yAxisID: "events",
+                tension: 0.4,
+                pointRadius: 1
             }
         ]
     }
+        
     const options = {
+        tooltip:{
+            enabled: true,
+            callbacks: {
+                title: function(context) {
+                    
+                  },
+                label: function(context){
+                    
+                  }
+            }
+        
+        },
         type:'line',
         responsive: true,
         maintainAspectRatio: false,
@@ -54,16 +86,19 @@ export default function V7() {
         },
         stacked: false,
         plugins: {
-            legend: {
+          legend: {
             position: "top",
           },
           title: {
             display: true,
-            text: "V7",
+            text: "Evolution of global temperature over the past two million years",
           },
+          subtitle:{
+            display: true,
+            text:"Graph shows the evolution of global temperature over the past two million years and changes in Co2 concentration over the past 800 000 years"
+        }
         },
         scales: {
-          
             temp: {
                 title:{
                     display: true,
@@ -72,8 +107,8 @@ export default function V7() {
                 type: "linear",
                 display: true,
                 position: "right",
-                
                 },
+
             co2: {
                 title:{
                     display: true,
@@ -82,14 +117,14 @@ export default function V7() {
                 type: "linear",
                 display: true,
                 position: "left",
-                grid: {
-                    drawOnChartArea: false
-                   }
-           },
-           x: {
-            title:{
+                },
+            
+            x: {
                 display: true,
-                text:"Kyr bp"
+                reverse: true,
+                title:{
+                    display: true,
+                    text:"Thousands of years before present"
             }
            },
         },
@@ -102,12 +137,14 @@ export default function V7() {
         </div>
         <div class="chartFooter">
             <p>
-                Link to data source:
+                Learn more about <a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf" target="_blank" rel='noreferrer'>measurements</a>.
             </p>
+            <h4>Data source</h4>
             <p>
-                Link to description of this graph:
+            <a href="http://carolynsnyder.com/publications.php" target="_blank" rel='noreferrer'>Temperature evolution</a>
             </p>
         </div>
     </div>
-    );
+
+    )
 };
