@@ -76,12 +76,12 @@ export default function V9() {
       .then(res => {
         for (const Object of res.data) {
           if ((e.chart.tooltip.dataPoints?.[0]?.label === "Energy" && EnergyInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Industrial processes" && IndustrialInfo.includes(Object.sector_info)) ||
-            (e.chart.tooltip.dataPoints?.[0]?.label === "Waste" && WasteInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)" && AgriInfo.includes(Object.sector_info))
-        ) {
+              (e.chart.tooltip.dataPoints?.[0]?.label === "Waste" && WasteInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)" && AgriInfo.includes(Object.sector_info))) 
+          {
           info.push(Object.sector_info);
           co2.push(Object.co2);
+          }
         }
-      }
 
       setChartData({
         labels: info,
@@ -125,10 +125,10 @@ export default function V9() {
       <>
       <div style={{width: '700px', position:'relative',display:'flex', textIndent: 0}}>
         <Doughnut data={chartData} options={options}/>
-        <form onSubmit={e => Back(e)}>
+          <form style={{paddingTop:'120px'}} onSubmit={e => Back(e)}>
             <button> Back </button>
           </form>
-          <form id="form2">
+          <form style={{paddingTop:'170px'}}>
             <p>
               Click on one of the four sectors to get more information about individual factors.
             </p>
@@ -142,7 +142,7 @@ export default function V9() {
             <p>
             <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" rel='noreferrer'>Co2 emissions</a>
             </p>
-          </form>
+        </form>
       </div>
     </>
     )
