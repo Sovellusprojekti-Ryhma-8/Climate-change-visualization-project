@@ -108,7 +108,9 @@ export default function V7() {
                 display: true,
                 position: "right",
                 },
-
+            events: {
+                display: false,
+            },
             co2: {
                 title:{
                     display: true,
