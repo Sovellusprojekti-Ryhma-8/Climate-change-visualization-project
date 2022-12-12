@@ -76,7 +76,7 @@ export default function V9() {
       .then(res => {
         for (const Object of res.data) {
           if ((e.chart.tooltip.dataPoints?.[0]?.label === "Energy" && EnergyInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Industrial processes" && IndustrialInfo.includes(Object.sector_info)) ||
-              (e.chart.tooltip.dataPoints?.[0]?.label === "Waste" && WasteInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)" && AgriInfo.includes(Object.sector_info))) 
+              (e.chart.tooltip.dataPoints?.[0]?.label === "Waste" && WasteInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)" && AgriInfo.includes(Object.sector_info)))
           {
           info.push(Object.sector_info);
           co2.push(Object.co2);

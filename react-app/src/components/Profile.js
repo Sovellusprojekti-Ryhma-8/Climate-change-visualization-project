@@ -12,7 +12,6 @@ const navigate = useNavigate();
         window.location.reload(false)
     }
 
- 
     return(
         <>
             <div class="logout">

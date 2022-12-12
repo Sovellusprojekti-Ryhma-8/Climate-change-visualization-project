@@ -69,10 +69,10 @@ export default function V7() {
             enabled: true,
             callbacks: {
                 title: function(context) {
-                        
+                    
                   },
                 label: function(context){
-                       
+                    
                   }
             }
         
