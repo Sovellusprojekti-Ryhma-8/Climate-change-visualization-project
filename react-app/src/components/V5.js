@@ -8,7 +8,7 @@ const URL = "http://localhost:8080/V5"
 
 export default function V5() {
     const [chartData, setData] = useState([]);
-    const [colors, setColors] = useState(Colors())
+    const [colors] = useState(Colors())
 
     useEffect(() => {
         axios.get(URL)
@@ -35,6 +35,7 @@ export default function V5() {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: "top",
@@ -52,7 +53,7 @@ export default function V5() {
             yAxis: {
                 type: "linear",
                 display: true,
-                position: "right",
+                position: "left",
                 title: {
                     display: true,
                     text: "Co2"
@@ -65,7 +66,7 @@ export default function V5() {
                     text: "Year"
                 }, 
                 ticks: {
-                    maxTicksLimit: 36
+                    maxTicksLimit: 30
                 }               
             }
         },
@@ -73,14 +74,16 @@ export default function V5() {
 
     return (
         <div>
-            <Line data={data} options={options}/>
-            <div>
+            <div class="chart">
+                <Line data={data} options={options}/>
+            </div>
+            <div class="chartFooter">
                 <p>
-                    Learn more about <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank">Vostok ice core measurements</a>.
+                    Learn more about <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" rel="noreferrer">Vostok ice core measurements</a>.
                 </p>
                 <h4>Data source</h4>
                 <p>
-                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank">Vostok Co2 measurements</a>
+                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" rel="noreferrer">Vostok Co2 measurements</a>
                 </p>
             </div>
         </div>

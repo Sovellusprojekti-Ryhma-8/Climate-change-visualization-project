@@ -8,7 +8,7 @@ const URL = "http://localhost:8080/V6"
 
 export default function V6() {
     const [chartData, setData] = useState([]);
-    const [colors, setColors] = useState(Colors())
+    const [colors] = useState(Colors())
 
     useEffect(() => {
         axios.get(URL)
@@ -35,6 +35,7 @@ export default function V6() {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: "top"
@@ -56,13 +57,13 @@ export default function V6() {
                     text: "Year"
                 },
                 ticks: {
-                    maxTicksLimit: 50
+                    maxTicksLimit: 30
                 }
             },
             yAxis: {
                 type: "linear",
                 display: true,
-                position: "right",
+                position: "left",
                 title: {
                     display: true,
                     text: "Co2"
@@ -73,14 +74,16 @@ export default function V6() {
 
     return (
         <div>
-            <Line data={data} options={options}/>
-            <div>
+            <div class="chart">
+                <Line data={data} options={options}/>
+            </div>
+            <div class="chartFooter">
                 <p>
-                    Learn more about <a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975" target="_blank">measurements</a>.
+                    Learn more about <a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975" target="_blank" rel="noreferrer">measurements</a>.
                 </p>
                 <h4>Data source</h4>
                 <p>
-                <a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank">Co2 concentrations</a>
+                <a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank" rel="noreferrer">Co2 concentrations</a>
                 </p>
             </div>
         </div>

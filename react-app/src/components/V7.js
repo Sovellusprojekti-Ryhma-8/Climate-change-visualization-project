@@ -7,7 +7,7 @@ const URL = 'http://localhost:8080/V7'
 
 export default function V7() {
     const [chartData, setChartData] = useState([])
-    const [colors, setColors] = useState(Colors())
+    const [colors] = useState(Colors())
 
     useEffect(() => {
         axios.get(URL)
@@ -47,6 +47,7 @@ export default function V7() {
     const options = {
         type:'line',
         responsive: true,
+        maintainAspectRatio: false,
         interactions: {
             mode: 'index',
             intersect: false
@@ -95,9 +96,11 @@ export default function V7() {
     }
 
     return (
-    <div style={{ width: "95%" }}>
-        <Line data={data} options={options}/>
-        <div>
+    <div>
+        <div class="chart">
+            <Line data={data} options={options}/>
+        </div>
+        <div class="chartFooter">
             <p>
                 Link to data source:
             </p>

@@ -16,7 +16,7 @@ export default function V4() {
     const [dss, setDss] = useState([]);
     const [v3annuadata, setV3annualdata] = useState([])
     const [v3monthlydata, setV3monthlydata] = useState([])
-    const [colors, setColors] = useState(Colors())
+    const [colors] = useState(Colors())
 
     useEffect(() => {
         axios.get(URL)
@@ -89,6 +89,7 @@ export default function V4() {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: "top",
@@ -99,7 +100,7 @@ export default function V4() {
             },
             subtitle: {
                 display: true,
-                text: "This graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica and CO2 measurements monthly and annually from Mauna Loa, Hawaii."
+                text: ["Graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica", "and CO2 measurements monthly and annually from Mauna Loa, Hawaii."]
             },
         },
         interaction: {
@@ -124,7 +125,7 @@ export default function V4() {
             co2: {
                 type: "linear",
                 display: true,
-                position: "right",
+                position: "left",
                 title: {
                     display: true,
                     text: "CO2",
@@ -136,8 +137,10 @@ export default function V4() {
 
   return (
     <div >
+        <div class="chart">
           <Line data={data} options={options}/>
-          <div>
+        </div>
+        <div class="chartFooter">
             <p>
                 Learn more about <a href='https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html' target="_blank" rel="noreferrer">Law Dome</a> or <a href='https://gml.noaa.gov/ccgg/about/co2_measurements.html' target="_blank" rel="noreferrer"> Mauna Loa</a> measurements.
             </p>
@@ -145,7 +148,7 @@ export default function V4() {
             <p>
                 <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel='noreferrer'>Law Dome</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_annmean_mlo.txt" target="_blank" rel="noreferrer">Mauna Loa Annual</a>, <a href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt" target="_blank" rel="noreferrer">Mauna Loa Monthly</a>.
             </p>
-          </div>
+        </div>
     </div>
   )
 }

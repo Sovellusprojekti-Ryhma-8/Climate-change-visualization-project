@@ -22,7 +22,7 @@ export default function V1() {
     const [display2, setDisplay2] = useState(false);
     const [btnState, setState] = useState(false);
     const [counter, setCounter] = useState(0);
-    const [colors, setColors] = useState(Colors())
+    const [colors] = useState(Colors())
 
     
     
@@ -246,6 +246,7 @@ export default function V1() {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: "top",
@@ -270,7 +271,7 @@ export default function V1() {
             yAxis: {
                 type: "linear",
                 display: true,
-                position: "right",
+                position: "left",
                 title: {
                     display: true,
                     text: "K"
@@ -290,13 +291,15 @@ export default function V1() {
 
     return (
         <div>
-            <Line data={chartData} options={options}/>
-            <input type="checkbox" onClick={handleClick}/>
-            <span style={{fontSize:14}}>2000 Year Temperatures</span>
-            <div>
+            <div class="chart">
+                <Line data={chartData} options={options}/>
+            </div>
+            <div class="chartFooter">
+                <input type="checkbox" onClick={handleClick}/>
+                <span style={{fontSize:14}}>2000 Year Temperatures</span>
                 <h4>Data source</h4>
                 <p>
-                    <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html " target="_blank">Surface temperatures</a>, <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank">2000 year temperatures</a>
+                    <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html " target="_blank" rel="noreferrer">Surface temperatures</a>, <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank">2000 year temperatures</a>
                 </p>
             </div>
         </div>
