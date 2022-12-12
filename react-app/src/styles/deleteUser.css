@@ -1,0 +1,37 @@
+.deleteUser {
+    text-align: center;
+}
+
+.deleteUser .button {
+    padding: 10px 15px;
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    background-color: #42d806;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.deleteUser .button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid #42d806;
+}
+
+.deleteUser .delete-form {
+    display: inline-block;
+    width: 20%;
+    border-style: solid;
+    color: #42d806;   
+     border-width: 1px;
+    border-radius: 1em;
+    padding: 2em; 
+}
+
+.deleteUser .delete-form .input {
+    width: 80%;
+}

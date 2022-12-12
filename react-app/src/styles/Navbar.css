@@ -22,10 +22,6 @@
     border: 1px solid #42d806;
 }
 
-.deleteUser {
-    text-align: center;
-}
-
 .deleteUser .button {
     padding: 15px 25px;
     background: #42d806;
@@ -39,8 +35,9 @@
     transition-duration: 0.3s;
 }
 
-.deleteUser .button:hover{
+.deleteUser .button:hover {
     background-color: white;
     color: black;
     border: 1px solid #42d806;
 }
+

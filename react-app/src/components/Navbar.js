@@ -48,22 +48,24 @@ export default function Navbar() {
                     </>
                     )}
                 </li>
+
+                
                 <li>
                     <Link class="link" to="/LuoVisualisointinäkymä">Luo Visualisointinäkymä</Link>
                 </li>
+                {localStorage.getItem('token') && (
+                <>
+                <li class="deleteUser">
+                    </li>
+                    <Link class="link" to="/DeleteUser">Delete user</Link>
+                    </>
+            )}
                 {localStorage.getItem('token') && (
                 <>
                 <li class="logout">
                 <button class='button' onClick={refreshPage}>Logout</button>
             </li>
             </>
-            )}
-            {localStorage.getItem('token') && (
-                <>
-                <li class="deleteUser">
-                    </li>
-                    <Link class="link" to="/DeleteUser">Delete user</Link>
-                    </>
             )}
             </ul>
             </div> 

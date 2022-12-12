@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import '../styles/deleteUser.css';
+
 
 
 const URL= "http://localhost:8080/deleteUser"
@@ -16,29 +18,20 @@ export default function DeleteUser() {
    
     const sendDeleteRequest = async(e) => {
         e.preventDefault();
-        
-        form.append("userName", userName);
 
-        try {
-            fetch(URL, {
-                method: 'POST',
-                body: form
-            })
-            .then((res) => {
-                    console.log(res.status)
-                    localStorage.removeItem("token")
-                    navigate('/')
-                    window.location.reload(false)
-            }).catch((err) => {
+        
+        axios.post(URL, {},
+            {params: {userName}
+            }).then(res => {
+                localStorage.removeItem("token")
+                navigate('/')
+                window.location.reload(false);
+            }).catch(err => {
                 console.log(err)
                 setMessage("Käyttäjää ei ole olemassa")
-            })
-        } catch(err) {
-            console.log(err+ "   err");
-            setMessage("err")
-        }
+            })}
        
-    }
+    
 
 
     return (
@@ -47,7 +40,6 @@ export default function DeleteUser() {
             <form class="delete-form" onSubmit={sendDeleteRequest}>
                 <div class="block">
                     <label>Käyttäjänimi jonka haluat poistaa</label>
-                    
                     <input class="input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
                     </div>
                     <div>
