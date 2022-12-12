@@ -10,7 +10,7 @@ export default function V7() {
     const [chartData, setChartData] = useState([])
     const [eventData, setEventData] = useState([])
     
-    const [colors, setColors] = useState(Colors())
+    const [colors] = useState(Colors())
 
     useEffect(() => {
         axios.get(URL1)
@@ -55,8 +55,8 @@ export default function V7() {
                 label:"Events",
                 data: eventData.map(d=>d.events),
                 borderWidth: 2,
-                borderColor: colors[1],
-                backgroundColor: colors[1] + "50",
+                borderColor: colors[2],
+                backgroundColor: colors[2] + "50",
                 yAxisID: "events",
                 tension: 0.4,
                 pointRadius: 1
@@ -65,6 +65,18 @@ export default function V7() {
     }
         
     const options = {
+        tooltip:{
+            enabled: true,
+            callbacks: {
+                title: function(context) {
+                        
+                  },
+                label: function(context){
+                       
+                  }
+            }
+        
+        },
         type:'line',
         responsive: true,
         interactions: {
@@ -73,7 +85,7 @@ export default function V7() {
         },
         stacked: false,
         plugins: {
-            legend: {
+          legend: {
             position: "top",
           },
           title: {
@@ -94,8 +106,8 @@ export default function V7() {
                 type: "linear",
                 display: true,
                 position: "right",
-                
                 },
+
             co2: {
                 title:{
                     display: true,
@@ -105,31 +117,32 @@ export default function V7() {
                 display: true,
                 position: "left",
                 },
-        
-                
-           x: {
-            reverse: true,
-            title:{
+            
+            x: {
                 display: true,
-                text:"Thousands of years before present"
+                reverse: true,
+                title:{
+                    display: true,
+                    text:"Thousands of years before present"
             }
            },
         },
     }
 
-
     return (
+        <>
         <div>
         <Line data={data} options={options}/>
         <div>
             <p>
-                Learn more about <a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf" target="_blank">measurements</a>.
+                Learn more about <a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf" target="_blank" rel='noreferrer'>measurements</a>.
             </p>
             <h4>Data source</h4>
             <p>
-            <a href="http://carolynsnyder.com/publications.php" target="_blank">Temperature evolution</a>
+            <a href="http://carolynsnyder.com/publications.php" target="_blank" rel='noreferrer'>Temperature evolution</a>
             </p>
         </div>
     </div>
+    </>
     )
 };
