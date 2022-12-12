@@ -22,8 +22,6 @@ export default function Login() {
             }).then(res => {
                 const token = res.data
                 localStorage.setItem("token", token)
-                aToken(token)
-                console.log(token)
                 navigate('/')
                 window.location.reload(false);
             }).catch(err => {

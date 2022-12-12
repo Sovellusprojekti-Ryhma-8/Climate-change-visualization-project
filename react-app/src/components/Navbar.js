@@ -17,13 +17,10 @@ export default function Navbar() {
         navigate('/')
         window.location.reload(false)
     }
-
-    
+            
     function deleteUser() {
         
     }
-            
-
 
     return (
         <div class="navbar">
@@ -64,8 +61,8 @@ export default function Navbar() {
             {localStorage.getItem('token') && (
                 <>
                 <li class="deleteUser">
-                    <button class='button' onClick={deleteUser}>Delete user</button>
                     </li>
+                    <Link class="link" to="/DeleteUser">Delete user</Link>
                     </>
             )}
             </ul>
