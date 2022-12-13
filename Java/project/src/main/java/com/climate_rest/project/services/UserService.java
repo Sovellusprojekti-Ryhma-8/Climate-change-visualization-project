@@ -57,6 +57,19 @@ public class UserService {
         }
     }
 
+    public User deleteById(String userName) {
+        User user =  uRepo.findById(userName).orElse(null);
+       
+
+        if (user != null) {
+            uRepo.delete(user);
+            
+            return user;
+        }
+        return null;
+    }
+
+
     public String login(String userName, String passWord){
         
         User user =  uRepo.findById(userName).orElse(null);
