@@ -2,7 +2,6 @@ import React from "react"
 import axios from "axios"
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import aToken from "../components/aToken";
 import '../styles/login.css'
 
 const URL="http://localhost:8080/login"
