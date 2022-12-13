@@ -40,6 +40,7 @@ export default function Navbar() {
                     <li>
                     </li>           
                     <Link class="link" to ="/SignIn">Sign In</Link>
+                    
                     </>
                     )}
                 </li>
@@ -52,7 +53,7 @@ export default function Navbar() {
                 <>
                 <li class="deleteUser">
                     </li>
-                    <Link class="link" to="/DeleteUser">Delete user</Link>
+                    <Link class="link" to ="/profile">Profile</Link>
                     </>
             )}
                 {localStorage.getItem('token') && (

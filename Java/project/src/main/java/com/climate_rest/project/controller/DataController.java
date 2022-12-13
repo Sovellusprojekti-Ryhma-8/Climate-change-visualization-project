@@ -128,6 +128,10 @@ public class DataController {
 
     @PostMapping("deleteView")
     public ResponseEntity<String> deleteView(@RequestParam String Id){
-        return new ResponseEntity<>(HttpStatus.OK);
+        view v = dataService.deleteView(Id);
+        if(v != null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 }

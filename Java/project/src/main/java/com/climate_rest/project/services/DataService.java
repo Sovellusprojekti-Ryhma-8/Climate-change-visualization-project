@@ -245,4 +245,22 @@ public class DataService {
         }
         return myViews;
      }
+
+    public view deleteView(String Id) {
+        view v = viewsRepo.findById(Id).orElse(null);
+        if (v != null) {
+            viewsRepo.delete(v);
+            return v;
+        }
+        return null;
+    }
+
+    public void deleteUsersViews(String user) {
+        List<view> views = new ArrayList<>();
+        views = viewsRepo.findByuser(user);
+
+        for (view v : views) {
+            viewsRepo.delete(v);           
+        }
+    }
 }

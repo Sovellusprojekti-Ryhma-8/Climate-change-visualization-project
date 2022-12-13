@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {Link, useNavigate } from "react-router-dom";
+import DeleteUser from "./DeleteUser";
 import '../styles/profile.css'
 
 const URL = "http://localhost:8080/myViews"
@@ -11,18 +11,8 @@ let i = 0;
 
 export default function Profile(){
 
-const navigate = useNavigate();
 let token = localStorage.getItem('token')
-const form = new FormData;
 
-    function refreshPage(){
-
-        localStorage.removeItem("token")
-        navigate('/')
-        window.location.reload(false)
-    }
-
-    // const [user, setUser] = useState('');
     const [links, SetLinks] = useState([]);
 
     const getUser = async () => {
@@ -33,7 +23,6 @@ const form = new FormData;
                     "Authorization": "Bearer "+token
                 }
             })
-            // setUser(user.data)
             console.log(user.data)
             if (i < 1) {
             myViews(user.data)
@@ -51,25 +40,21 @@ const form = new FormData;
         arr.forEach(element => {
            SetLinks(
             links => [...links, <><a href={URL_views+element} target="_blank" rel="noreferer" >View</a>
-             <button key={element} class="button" style={{backgroundColor: "red", padding: 7, fontSize: 10}} >Delete view</button></>]
+             <button key={element} class="button" style={{backgroundColor: "red", padding: 7, fontSize: 10}} onClick={() => handleDelete(element)}>Delete view</button></>]
            ) 
         });
     }
 
-    // let handleDelete = (Id) => {
-    //     // e.preventdefault()
-    //     form.append("Id", Id)
-    //     console.log(Id)
-    //     console.log(form.getAll("Id"))
-    //     axios.post(delete_view, 
-    //         {
-    //             body: form
-    //         }).then((res) => {
-    //             console.log(res.data)
-    //         }).catch(error => {
-    //             alert(error)
-    //         })
-    // } 
+    async function handleDelete(Id)   
+     {
+        console.log(Id)
+        const response = await axios.post(delete_view, null,
+            {
+                params: {Id}
+            })
+            console.log(response.status)
+            window.location.reload(false);
+    } 
 
     useEffect(() => {
         getUser() 
@@ -79,12 +64,12 @@ const form = new FormData;
  
     return(
         <>
-            <div class="myviews">
+            <div class="myViews">
                 <h2>My Views</h2>
                 {links}
             </div>
-            <div class="logout">
-                <button class='button' onClick={refreshPage}>Logout</button>
+            <div>
+                <DeleteUser/>
             </div>
         </>
         )

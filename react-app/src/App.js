@@ -13,6 +13,7 @@ import LuoVisualisointinäkymä from './components/LuoVisualisointinäkymä';
 import DeleteUser from './components/DeleteUser';
 import { Routes, Route } from 'react-router-dom';
 import UserComponent from './components/UserComponent';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -30,8 +31,8 @@ function App() {
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä/>} />
-        <Route path="/DeleteUser" element={<DeleteUser />} />
         <Route path='/views/:id' element={<UserComponent/>}/> 
+        <Route path='/profile' element={<Profile/>}/> 
         </Routes>
       </div>
     <Footer />
