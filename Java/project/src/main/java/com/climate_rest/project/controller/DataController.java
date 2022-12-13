@@ -89,9 +89,10 @@ public class DataController {
         @RequestParam String Id,
         @RequestParam List<String> visualizations,
         @RequestParam List<String> descriptions,
-        @RequestParam int style
+        @RequestParam int style,
+        @RequestParam String user
         ) {
-            view v = dataService.saveView(Id, visualizations, descriptions, style);
+            view v = dataService.saveView(Id, visualizations, descriptions, style, user);
             if (v != null) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -100,9 +101,11 @@ public class DataController {
 
     @PostMapping("setView")
     public view getView(@RequestParam String Id){
-        view v = dataService.getView(Id);
-            return v;
-        
+        return dataService.getView(Id);
+    }
 
+    @GetMapping("myViews")
+    public List<String> getMyViews(@RequestParam String user){
+        return dataService.getMyViews(user);
     }
 }

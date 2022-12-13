@@ -1,37 +1,40 @@
 package com.climate_rest.project.data;
 
-// import javax.persistence.Column;
-// import javax.persistence.Entity;
-// import javax.persistence.Id;W
-// import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.ElementCollection;
 import java.util.List;
-import java.util.HashMap;
 
 
-// @Entity
-// @Table(name="views")
+@Entity
+@Table(name="views")
 public class view {
 
-    // @Id
-    // @Column(name="Id")
+    @Id
+    @Column(name="Id")
     private String Id;
-    // @Column(name="visualizations")
+    @ElementCollection
     private List<String> visualizations;
-    // @Column(name="descriptions")
+    @ElementCollection
     private List<String> descriptions;
-    // @Column(name="style")
+    @Column(name="style")
     private int style;
+    @Column(name="user")
+    private String user;
 
     public view() {
 
     }
 
     public view(String Id, List<String> visualizations,
-    List<String> descriptions, int style) {
+    List<String> descriptions, int style, String user) {
         this.Id = Id;
         this.visualizations = visualizations;
         this.descriptions = descriptions;
         this.style = style;
+        this.user = user;
     }
 
 
@@ -65,6 +68,14 @@ public class view {
 
     public void setStyle(int style) {
         this.style = style;
+    }
+
+    public String getUser() {
+        return this.user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
 }

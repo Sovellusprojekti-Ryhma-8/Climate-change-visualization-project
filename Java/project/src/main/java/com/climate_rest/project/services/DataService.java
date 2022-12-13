@@ -19,6 +19,7 @@ import com.climate_rest.project.repo.V2_Repo;
 import com.climate_rest.project.repo.V3_annualRepo;
 import com.climate_rest.project.repo.V7_Repo;
 import com.climate_rest.project.repo.V8_Repo;
+import com.climate_rest.project.repo.viewsRepo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
 import com.climate_rest.project.repo.V4_Repo;
 import com.climate_rest.project.repo.V5_Repo;
@@ -30,7 +31,6 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,10 +38,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+
 
 
 @Service
@@ -77,6 +74,9 @@ public class DataService {
 
     @Autowired
     V8_Repo v8Repo;
+
+    @Autowired
+    viewsRepo viewsRepo;
 
     // testi lista
     List<view> viewList = new ArrayList<>();
@@ -133,40 +133,8 @@ public class DataService {
                     result.add(new V8(year, entry.getKey(), (Double.valueOf(entry.getValue().toString()))));
                 }
             }
-        
-    public view saveView(String Id, List<String> visualizations,
-    List<String> descriptions, int style) {
-        
-        Collections.sort(visualizations); // Visualizations get sorted in right display order
-        Collections.sort(descriptions);
-
-        List<String> sortedVisuals = new ArrayList<>();
-        List<String> sortedDesc = new ArrayList<>();
-
-        for (String string : visualizations) {
-            sortedVisuals.add(string.substring(2));
+            
         }
-
-        for (String string : descriptions) {
-            sortedDesc.add(string.substring(3));
-        }
-
-        view v = new view(Id,sortedVisuals,sortedDesc,style);
-        System.out.println("URL: "+Id+", "+sortedVisuals+", "+sortedDesc+" "+style);
-        //repo savet tähän
-        viewList.add(v);
-        return v;
-     }
-
-     public view getView(String Id) {
-        for (view v : viewList) {
-            if (Id.equals(v.getId())) {
-                return v;
-            }
-        }
-        return null;
-     }
-}
         
 
         //Group list to map by country
@@ -174,6 +142,7 @@ public class DataService {
         
         return sortCountriesByCO2(resultGrouped);
     }
+
 
     //Sorts coutries by total CO2 emissions
     private Map<String,List<V8>> sortCountriesByCO2(Map<String,List<V8>> map){
@@ -200,4 +169,68 @@ public class DataService {
 
         return sortedList;
     }
+
+    /*User made views are saved */
+
+    public view saveView(String Id, List<String> visuals,
+    List<String> descs, int style, String user) {
+        
+        Collections.sort(visuals); // Visualizations get sorted in right display order
+        Collections.sort(descs);
+
+        List<String> visualizations = new ArrayList<>();
+        List<String> descriptions = new ArrayList<>();
+        // String visualsString = new String();
+        // String descsString = new String();
+
+        for (String string : visuals) {
+            visualizations.add(string.substring(2));
+        }
+
+        for (String string : descs) {
+            descriptions.add(string.substring(2));
+        }
+
+        // for (String string : visuals) {
+        //     String sub = string.substring(2);
+        //     visualsString = visualsString.concat(sub+",");
+        // }
+
+        // for (String string : descs) {
+        //     String sub = string.substring(2);
+        //     descsString = descsString.concat(sub+",");
+        // }
+
+        view v = new view(Id,visualizations,descriptions,style,user);
+        System.out.println("URL: "+Id+", "+visualizations+", "+descriptions+" "+style+" "+user);
+        //repo savet tähän
+        // try {
+        //     viewsRepo.save(v);
+        // } catch (Exception e) {
+            
+        // }
+        
+        viewList.add(v);
+        return v;
+     }
+
+     public view getView(String Id) {
+        for (view v : viewList) {
+            if (Id.equals(v.getId())) {
+                return v;
+            }
+        }
+        return null;
+     }
+    
+
+     public List<String> getMyViews(String user) {
+        List<String> myViews = new ArrayList<>();
+        for (view v : viewList) {
+            if (user.equals(v.getUser())){
+                myViews.add(v.getId());
+            }
+        }
+        return myViews;
+     }
 }
