@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08.12.2022 klo 03:37
+-- Generation Time: 13.12.2022 klo 16:44
 -- Palvelimen versio: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,7 +39,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
 (1, '', ''),
-(2, 'qwer', '$2a$10$aP3V4Ik7gVfJSoLDQHtd1eZv7uSON22QxqAXbIrTLAygQNPcALEua');
+(2, 'qwer', '$2a$10$aP3V4Ik7gVfJSoLDQHtd1eZv7uSON22QxqAXbIrTLAygQNPcALEua'),
+(4, 'jone', '$2a$10$ZFYP63g4BfnwGT90PdpI6uQ6Xml8e10qzE/4HneTUV1QwiLyZS0UO');
 
 -- --------------------------------------------------------
 
@@ -10020,6 +10021,20 @@ INSERT INTO `v10_data` (`id`, `year_kyr_bp`, `events`) VALUES
 (6, '40.0', 'Most recent reversal of Earth\'s magnetic poles, lasting 500 years, decreasing stratospheric ozone, driving global climate shifts and extinction events'),
 (7, '2000.0', 'mass extiction, linked with volcanic CO2 equivalent to projections for CE 21st century anthropgenic emissions');
 
+-- --------------------------------------------------------
+
+--
+-- Rakenne taululle `views`
+--
+
+CREATE TABLE `views` (
+  `Id` varchar(50) NOT NULL,
+  `visualizations` varchar(255) NOT NULL,
+  `descriptions` varchar(255) NOT NULL,
+  `style` int(2) NOT NULL,
+  `user` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
@@ -10116,7 +10131,7 @@ ALTER TABLE `v10_data`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `v1_annual`
