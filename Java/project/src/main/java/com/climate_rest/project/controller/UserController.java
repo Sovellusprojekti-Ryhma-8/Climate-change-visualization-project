@@ -53,6 +53,15 @@ public class UserController {
         }
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
    }
+
+   @PostMapping("deleteUser")
+    public ResponseEntity<String> deleteUser (@RequestParam String userName) {
+        User user = uService.deleteById(userName);
+        if (user != null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
 }
 
 
