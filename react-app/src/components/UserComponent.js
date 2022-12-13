@@ -114,6 +114,7 @@ const UserComponent = (props) => {
                     break;
             }
         });
+        console.log(visuals)
         setCounter(counter+1)    
     }
     

@@ -1,9 +1,11 @@
 .myviews {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 4em;
-    background-color: lightgray;    
+    background-color: lightgray;  
+    padding-bottom: 2em;  
 }
 .myviews .Link {
     width: 100%;

@@ -5,12 +5,15 @@ import '../styles/profile.css'
 
 const URL = "http://localhost:8080/myViews"
 const Identify = "http://localhost:8080/private"
-const URL_views = "http://localhost:3000/views"
+const URL_views = "http://localhost:3000/views/"
+const delete_view = "http://localhost:8080/deleteView"
+let i = 0;
 
 export default function Profile(){
 
 const navigate = useNavigate();
 let token = localStorage.getItem('token')
+const form = new FormData;
 
     function refreshPage(){
 
@@ -23,6 +26,7 @@ let token = localStorage.getItem('token')
     const [links, SetLinks] = useState([]);
 
     const getUser = async () => {
+        
         const user = await axios.get(Identify,
             {
                 headers: {
@@ -31,7 +35,10 @@ let token = localStorage.getItem('token')
             })
             // setUser(user.data)
             console.log(user.data)
+            if (i < 1) {
             myViews(user.data)
+            i = 1;
+        }
     }
 
     const myViews = async (user) => {
@@ -43,10 +50,26 @@ let token = localStorage.getItem('token')
         const arr = data.data
         arr.forEach(element => {
            SetLinks(
-            links => [...links, <Link to={URL_views+element}>View</Link>]
+            links => [...links, <><a href={URL_views+element} target="_blank" rel="noreferer" >View</a>
+             <button key={element} class="button" style={{backgroundColor: "red", padding: 7, fontSize: 10}} >Delete view</button></>]
            ) 
         });
     }
+
+    // let handleDelete = (Id) => {
+    //     // e.preventdefault()
+    //     form.append("Id", Id)
+    //     console.log(Id)
+    //     console.log(form.getAll("Id"))
+    //     axios.post(delete_view, 
+    //         {
+    //             body: form
+    //         }).then((res) => {
+    //             console.log(res.data)
+    //         }).catch(error => {
+    //             alert(error)
+    //         })
+    // } 
 
     useEffect(() => {
         getUser() 

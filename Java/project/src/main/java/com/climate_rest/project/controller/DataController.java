@@ -27,7 +27,6 @@ import com.climate_rest.project.services.DataService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 @CrossOrigin
 @RestController
@@ -125,5 +124,10 @@ public class DataController {
     @GetMapping("myViews")
     public List<String> getMyViews(@RequestParam String user){
         return dataService.getMyViews(user);
+    }
+
+    @PostMapping("deleteView")
+    public ResponseEntity<String> deleteView(@RequestParam String Id){
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

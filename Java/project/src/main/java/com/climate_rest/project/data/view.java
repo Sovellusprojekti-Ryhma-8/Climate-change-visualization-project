@@ -1,11 +1,13 @@
 package com.climate_rest.project.data;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.ElementCollection;
-import java.util.List;
+
 
 
 @Entity
@@ -15,10 +17,10 @@ public class view {
     @Id
     @Column(name="Id")
     private String Id;
-    @ElementCollection
-    private List<String> visualizations;
-    @ElementCollection
-    private List<String> descriptions;
+    @Column(name="visualizations")
+    private String visualizations;
+    @Column(name="descriptions")
+    private String descriptions;
     @Column(name="style")
     private int style;
     @Column(name="user")
@@ -28,8 +30,8 @@ public class view {
 
     }
 
-    public view(String Id, List<String> visualizations,
-    List<String> descriptions, int style, String user) {
+    public view(String Id, String visualizations,
+    String descriptions, int style, String user) {
         this.Id = Id;
         this.visualizations = visualizations;
         this.descriptions = descriptions;
@@ -47,18 +49,19 @@ public class view {
     }
 
     public List<String> getVisualizations() {
-        return this.visualizations;
+        
+        return Arrays.asList(visualizations.split(";"));
     }
 
-    public void setVisualizations(List<String> visualizations) {
+    public void setVisualizations(String visualizations) {
         this.visualizations = visualizations;
     }
 
     public List<String> getDescriptions() {
-        return this.descriptions;
+        return Arrays.asList(descriptions.split(";"));
     }
 
-    public void setDescriptions(List<String> descriptions) {
+    public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
     }
 

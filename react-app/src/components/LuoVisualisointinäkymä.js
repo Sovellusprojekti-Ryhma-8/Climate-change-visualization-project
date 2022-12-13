@@ -3,7 +3,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../styles/createVisualization.css'
-import aToken from './aToken';
 import DropDownMenu from './DropDownMenu'
 
 const URL = "http://localhost:8080/saveView"
@@ -22,10 +21,10 @@ const CreateVisualization = (props) => {
     let token = localStorage.getItem('token')
 
     useEffect(() => {
-        if (!aToken(token)) {
+        if (!token) {
             navigate('/LogIn')
-        }
-        axios({
+        }else{        
+            axios({
             method: 'get',
             url : Identify,
             headers: {
@@ -37,7 +36,9 @@ const CreateVisualization = (props) => {
             console.log(res.data)
         }).catch(error => {
             alert(error)
-        })
+        })}
+
+
     },[])
 
 
@@ -52,8 +53,6 @@ const CreateVisualization = (props) => {
             }
         });
         setVisualizations(current => [...current, {id: key, component: data}])
-        console.log(data)
-        console.log(key)
     }
 
     let callback2 = async (data, key) => {
@@ -77,11 +76,6 @@ const CreateVisualization = (props) => {
     let handleSubmit = async (e) => {
         e.preventDefault();
         
-        console.log(aToken(token))
-        console.log(token)
-
-
-
         const uid = () =>   
         String(
             Date.now().toString(32) +
@@ -114,8 +108,6 @@ const CreateVisualization = (props) => {
             alert(error)
         }
 
-        // console.log(visualizations)
-        // console.log(descriptions)
         console.log(style)      
     }
 

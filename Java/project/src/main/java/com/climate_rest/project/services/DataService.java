@@ -91,9 +91,6 @@ public class DataService {
     @Autowired
     viewsRepo viewsRepo;
 
-    // testi lista
-    List<view> viewList = new ArrayList<>();
-    List<String> sorted = new ArrayList<>();
 
     public List<V3_annual> getV3_annualData(){
         return v3annualRepo.findAll();
@@ -201,56 +198,47 @@ public class DataService {
         
         Collections.sort(visuals); // Visualizations get sorted in right display order
         Collections.sort(descs);
-
+        
         List<String> visualizations = new ArrayList<>();
         List<String> descriptions = new ArrayList<>();
-        // String visualsString = new String();
-        // String descsString = new String();
-
+        
         for (String string : visuals) {
             visualizations.add(string.substring(2));
         }
-
+        
         for (String string : descs) {
             descriptions.add(string.substring(2));
         }
+        String visualString = String.join(";", visualizations);
+        String descsString = String.join(";", descriptions);
 
-        // for (String string : visuals) {
-        //     String sub = string.substring(2);
-        //     visualsString = visualsString.concat(sub+",");
-        // }
-
-        // for (String string : descs) {
-        //     String sub = string.substring(2);
-        //     descsString = descsString.concat(sub+",");
-        // }
-
-        view v = new view(Id,visualizations,descriptions,style,user);
-        System.out.println("URL: "+Id+", "+visualizations+", "+descriptions+" "+style+" "+user);
+        view v = new view(Id,visualString,descsString,style,user);
         //repo savet tähän
-        // try {
-        //     viewsRepo.save(v);
-        // } catch (Exception e) {
+        try {
+            viewsRepo.save(v);
+        } catch (Exception e) {
             
-        // }
-        
-        viewList.add(v);
+        }
+    
         return v;
      }
 
      public view getView(String Id) {
-        for (view v : viewList) {
-            if (Id.equals(v.getId())) {
+            try {
+                view v = viewsRepo.findById(Id).orElse(null);
                 return v;
+            } catch (Exception e) {
+                return null;
             }
-        }
-        return null;
      }
     
 
      public List<String> getMyViews(String user) {
         List<String> myViews = new ArrayList<>();
-        for (view v : viewList) {
+        List<view> views = new ArrayList<>();
+        views = viewsRepo.findByuser(user);
+
+        for (view v : views) {
             if (user.equals(v.getUser())){
                 myViews.add(v.getId());
             }
