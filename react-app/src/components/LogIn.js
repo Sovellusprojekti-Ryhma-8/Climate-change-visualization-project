@@ -2,7 +2,6 @@ import React from "react"
 import axios from "axios"
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import aToken from "../components/aToken";
 import '../styles/login.css'
 
 const URL="http://localhost:8080/login"
@@ -22,8 +21,6 @@ export default function Login() {
             }).then(res => {
                 const token = res.data
                 localStorage.setItem("token", token)
-                aToken(token)
-                console.log(token)
                 navigate('/')
                 window.location.reload(false);
             }).catch(err => {

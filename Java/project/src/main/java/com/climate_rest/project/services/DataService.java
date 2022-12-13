@@ -5,11 +5,15 @@ import org.springframework.stereotype.Service;
 
 import com.climate_rest.project.data.V1_annual;
 import com.climate_rest.project.data.V2;
+import com.climate_rest.project.repo.V10_Repo;
 import com.climate_rest.project.repo.V1_annualRepo;
 
 import com.climate_rest.project.data.V1;
+import com.climate_rest.project.data.V10;
 import com.climate_rest.project.data.V3_annual;
 import com.climate_rest.project.data.V7;
+import com.climate_rest.project.data.V9_info;
+import com.climate_rest.project.data.V9_sector;
 import com.climate_rest.project.data.V8;
 import com.climate_rest.project.data.view;
 import com.climate_rest.project.repo.V1_monthlyRepo;
@@ -18,6 +22,8 @@ import com.climate_rest.project.data.V4;
 import com.climate_rest.project.repo.V2_Repo;
 import com.climate_rest.project.repo.V3_annualRepo;
 import com.climate_rest.project.repo.V7_Repo;
+import com.climate_rest.project.repo.V9_infoRepo;
+import com.climate_rest.project.repo.V9_sectorRepo;
 import com.climate_rest.project.repo.V8_Repo;
 import com.climate_rest.project.repo.viewsRepo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
@@ -27,7 +33,6 @@ import com.climate_rest.project.repo.V6_repo;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.data.V6;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 
@@ -60,10 +64,6 @@ public class DataService {
     V3_monthlyRepo v3monthlyRepo;
 
     @Autowired
-    V7_Repo v7Repo;
-
-
-    @Autowired
     V4_Repo v4repo;
 
     @Autowired
@@ -71,6 +71,19 @@ public class DataService {
 
     @Autowired
     V6_repo v6repo;
+
+    @Autowired
+    V7_Repo v7Repo;
+
+    @Autowired
+    V9_infoRepo v9Repo;
+
+    @Autowired
+    V9_sectorRepo v9secRepo;
+
+    @Autowired
+    V10_Repo v10Repo;
+
 
     @Autowired
     V8_Repo v8Repo;
@@ -114,6 +127,17 @@ public class DataService {
         return v5repo.findAll();
     }
 
+    public List<V9_info> getV9_data() {
+        return v9Repo.findAll();
+    }
+
+    public List<V9_sector> getV9_sector() {
+        return v9secRepo.findAll();
+    }
+
+    public List<V10> getV10_data() {
+        return v10Repo.findAll();
+    }
     public List<V6> getV6_Data() {
         return v6repo.findAll();
     }
