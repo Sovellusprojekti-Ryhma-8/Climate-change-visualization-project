@@ -48,7 +48,7 @@ public class UserController {
             String token = bearer.split(" ")[1];
             String userName = uService.validateJwt(token);
             if(userName!=null){
-                return new ResponseEntity<>("Private data for "+userName, HttpStatus.OK);
+                return new ResponseEntity<>(userName, HttpStatus.OK);
             }
         }
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

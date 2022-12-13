@@ -6,16 +6,27 @@ import Colors from './Colors'
 const URL1 = 'http://localhost:8080/V7'
 const URL2 = 'http://localhost:8080/V10'
 
-export default function V7() {
+export default function V7(props) {
     const [chartData, setChartData] = useState([])
+    const [colors, setColors] = useState(Colors())
+    const [text, setText] = useState("Subtitle tänne");
+
     const [eventData, setEventData] = useState([])
-    
-    const [colors] = useState(Colors())
+
 
     useEffect(() => {
         axios.get(URL1)
             .then((response) => {
                 setChartData(response.data)
+                if (Object.keys(props.text).length > 0) {
+                    setText(props.text)
+                }
+            }).catch(error => {
+                alert(error)
+            })
+        axios.get(URL2)
+            .then((response) => {
+                setEventData(response.data)
             }).catch(error => {
                 alert(error)
             })
@@ -92,9 +103,9 @@ export default function V7() {
             display: true,
             text: "Evolution of global temperature over the past two million years",
           },
-          subtitle:{
+          subtitle: {
             display: true,
-            text:"Graph shows the evolution of global temperature over the past two million years and changes in Co2 concentration over the past 800 000 years"
+            text: text
         }
         },
         scales: {

@@ -14,7 +14,7 @@ const URL_annual = "http://localhost:8080/V1annual"
 const URL_monthly = "http://localhost:8080/V1monthly"
 const URL_V2 = "http://localhost:8080/V2"
 
-export default function V1() {
+export default function V1(props) {
     const [annualData, setAnnualData] = useState([]);
     const [monthlyData, setMonthlyData] = useState([]);
     const [v2Data, setV2data] = useState([]);
@@ -23,6 +23,7 @@ export default function V1() {
     const [btnState, setState] = useState(false);
     const [counter, setCounter] = useState(0);
     const [colors, setColors] = useState(Colors())
+    const [text, setText] = useState("");
 
     
     
@@ -61,6 +62,9 @@ export default function V1() {
         .then((res) => {
             setV2data(res.data)
             setCounter(0)
+            if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
         }).catch(error => {
             alert(error)
         })
@@ -254,6 +258,10 @@ export default function V1() {
                 display: true,
                 text: "Global surface temperature anomalies",
             },
+            subtitle: {
+                display: true,
+                text: text
+            }
         },
         scales: {
             x: {

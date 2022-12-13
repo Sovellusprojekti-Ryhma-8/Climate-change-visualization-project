@@ -6,9 +6,11 @@ import Colors from './Colors'
 const URL_V8 = "http://localhost:8080/V8"
 
 
-export default function V8() {
+export default function V8(props) {
     const [chartData, setChartData] = useState([])
     const [colors, setColors] = useState(Colors())
+    const [text, setText] = useState("Graph presents carbondioxide emissions by country from year 1959 to 2020");
+
     let colorPicker = 0
 
 
@@ -16,6 +18,9 @@ export default function V8() {
         axios.get(URL_V8)
         .then((res) => {
             setChartData(res.data)
+            if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
         }).catch(error => {
             alert(error)
         })
@@ -66,7 +71,7 @@ export default function V8() {
             },
             subtitle: {
                 display: true,
-                text: "Graph presents carbondioxide emissions by country from year 1959 to 2020"
+                text: text
             },            
         },
         interaction: {

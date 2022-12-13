@@ -1,8 +1,12 @@
 package com.climate_rest.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.climate_rest.project.data.V1_annual;
@@ -18,6 +22,7 @@ import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
 import com.climate_rest.project.data.V5;
 import com.climate_rest.project.data.V6;
+import com.climate_rest.project.data.view;
 import com.climate_rest.project.services.DataService;
 
 import java.util.List;
@@ -94,5 +99,39 @@ public class DataController {
     @GetMapping("V8")
     public Map<String,List<V8>> getV8_Data() {
         return dataService.getV8_Data();
+    }
+
+    @PostMapping("saveView")
+    public ResponseEntity<String> saveView(
+        @RequestParam String Id,
+        @RequestParam List<String> visualizations,
+        @RequestParam List<String> descriptions,
+        @RequestParam int style,
+        @RequestParam String user
+        ) {
+            view v = dataService.saveView(Id, visualizations, descriptions, style, user);
+            if (v != null) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+    @PostMapping("setView")
+    public view getView(@RequestParam String Id){
+        return dataService.getView(Id);
+    }
+
+    @GetMapping("myViews")
+    public List<String> getMyViews(@RequestParam String user){
+        return dataService.getMyViews(user);
+    }
+
+    @PostMapping("deleteView")
+    public ResponseEntity<String> deleteView(@RequestParam String Id){
+        view v = dataService.deleteView(Id);
+        if(v != null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 }
