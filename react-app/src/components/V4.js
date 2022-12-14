@@ -19,7 +19,7 @@ export default function V4(props) {
     const [v3monthlydata, setV3monthlydata] = useState([])
     const [v10data, setV10Data] = useState([])
     const [colors] = useState(Colors())
-    const [text, setText] = useState("This graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica and CO2 measurements monthly and annually from Mauna Loa, Hawaii.");
+    const [text, setText] = useState(["This graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica", "and Co2 measurements monthly and annually from Mauna Loa, Hawaii.", "Major human evolution and activities events are shown in own time scale"]);
 
 
     useEffect(() => {
@@ -82,7 +82,7 @@ export default function V4(props) {
                 pointRadius: 1,
             },
             {
-                label:"Mauna Loa Annual CO2",
+                label:"Mauna Loa Annual Co2",
                 data: v3annuadata,
                 borderWidth: 2,
                 borderColor: colors[3],
@@ -90,7 +90,7 @@ export default function V4(props) {
                 pointRadius: 1,
             },
             {
-                label:"Mauna Loa Monthly CO2",
+                label:"Mauna Loa Monthly Co2",
                 data: v3monthlydata,
                 borderWidth: 2,
                 borderColor: colors[4],
@@ -124,7 +124,7 @@ export default function V4(props) {
             },
             title: {
                 display: true,
-                text: "Antarctic Ice Core CO2 records with Mauna Loa CO2 measurements",
+                text: "Antarctic Ice Core Co2 records with Mauna Loa Co2 measurements",
             },
             subtitle: {
                 display: true,
@@ -174,7 +174,7 @@ export default function V4(props) {
             xV10: {
                 type: "logarithmic",
                 reverse: true,
-                display: true,
+                display: false,
                 title: {
                     display: true,
                     text: "Years before present",
@@ -186,7 +186,7 @@ export default function V4(props) {
                 position: "left",
                 title: {
                     display: true,
-                    text: "CO2",
+                    text: "Co2",
                 }
             },
             yV10: {

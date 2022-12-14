@@ -9,7 +9,7 @@ const URL = "http://localhost:8080/V6"
 export default function V6(props) {
     const [chartData, setData] = useState([]);
     const [colors, setColors] = useState(Colors())
-    const [text, setText] = useState("Reconstruction of atmospheric CO2 measurements from past 800,000 years.");
+    const [text, setText] = useState("Reconstruction of atmospheric Co2 measurements from past 800,000 years.");
 
 
     useEffect(() => {

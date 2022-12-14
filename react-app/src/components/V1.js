@@ -23,7 +23,7 @@ export default function V1(props) {
     const [btnState, setState] = useState(false);
     const [counter, setCounter] = useState(0);
     const [colors] = useState(Colors())
-    const [text, setText] = useState("");
+    const [text, setText] = useState(["Graph displays historical surface temperature anomalies", "with option to show 2000-year temperature reconstruction from northern hemisphere"]);
 
     
     

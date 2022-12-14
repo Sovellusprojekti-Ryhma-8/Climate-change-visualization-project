@@ -9,7 +9,7 @@ const URL2 = 'http://localhost:8080/V10'
 export default function V7(props) {
     const [chartData, setChartData] = useState([])
     const [colors, setColors] = useState(Colors())
-    const [text, setText] = useState("Subtitle tänne");
+    const [text, setText] = useState(["Graph shows the evolution of global temperature over the past two million years", "and changes in Co2 Concentration over the past 800 000 years"]);
 
     const [eventData, setEventData] = useState([])
 
