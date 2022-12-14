@@ -13,8 +13,6 @@ export default function N1() {
     return (
         <div id="container">
             <V1 text={""}/>
-            <V2 text={""}/>
-            <V3 text={""}/>
             <V4 text={""}/>
             <V5 text={""}/>
             <V6 text={""}/>

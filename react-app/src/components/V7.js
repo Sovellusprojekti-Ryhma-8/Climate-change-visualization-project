@@ -9,7 +9,7 @@ const URL2 = 'http://localhost:8080/V10'
 export default function V7(props) {
     const [chartData, setChartData] = useState([])
     const [colors, setColors] = useState(Colors())
-    const [text, setText] = useState("Subtitle tänne");
+    const [text, setText] = useState(["Graph shows the evolution of global temperature over the past two million years", "and changes in Co2 Concentration over the past 800 000 years"]);
 
     const [eventData, setEventData] = useState([])
 
@@ -90,6 +90,7 @@ export default function V7(props) {
         },
         type:'line',
         responsive: true,
+        maintainAspectRatio: false,
         interactions: {
             mode: 'index',
             intersect: false
@@ -118,7 +119,9 @@ export default function V7(props) {
                 display: true,
                 position: "right",
                 },
-
+            events: {
+                display: false,
+            },
             co2: {
                 title:{
                     display: true,
@@ -141,10 +144,11 @@ export default function V7(props) {
     }
 
     return (
-        <>
-        <div>
-        <Line data={data} options={options}/>
-        <div>
+    <div>
+        <div class="chart">
+            <Line data={data} options={options}/>
+        </div>
+        <div class="chartFooter">
             <p>
                 Learn more about <a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf" target="_blank" rel='noreferrer'>measurements</a>.
             </p>
@@ -154,6 +158,6 @@ export default function V7(props) {
             </p>
         </div>
     </div>
-    </>
+
     )
 };

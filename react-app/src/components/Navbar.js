@@ -22,49 +22,38 @@ export default function Navbar() {
 
             <ul>
                 <li>
-                    <Link class="link" to="/">Home</Link>
-                </li>
-                <li>
                     <Link class="link" to="/N1">N1</Link>
                 </li>
                 <li>
                     <Link class="link" to="/N2">N2</Link>
                 </li>
-                <li>
-                    <Link class="link" to="/N3">N3</Link>
-                </li>
-                <li>
-                    {!localStorage.getItem('token') && (
+                {!localStorage.getItem('token') && (
                     <>
-                    <Link class="link" to="/LogIn">Log In</Link>
                     <li>
-                    </li>           
-                    <Link class="link" to ="/SignIn">Sign In</Link>
-                    
-                    </>
-                    )}
-                </li>
-
-                
-                <li>
-                    <Link class="link" to="/LuoVisualisointinäkymä">Luo Visualisointinäkymä</Link>
-                </li>
-                {localStorage.getItem('token') && (
-                <>
-                <li class="deleteUser">
+                        <Link class="link" to="/LogIn">Log In</Link>
                     </li>
-                    <Link class="link" to ="/profile">Profile</Link>
-                    </>
-            )}
+                    <li>
+                        <Link class="link" to ="/SignIn">Sign Up</Link>
+                    </li>       
+                </>
+                )}
+                <li>
+                    <Link class="link" to="/LuoVisualisointinäkymä">Create New View</Link>
+                </li>
                 {localStorage.getItem('token') && (
-                <>
-                <li class="logout">
-                <button class='button' onClick={refreshPage}>Logout</button>
-            </li>
-            </>
-            )}
+                    <li>
+                    <Link class="link" to ="/profile">Profile</Link>
+                    </li>
+                )}
+                {localStorage.getItem('token') && (
+            
+                    <li class="logout">
+                        <button class='button' onClick={refreshPage}>Logout</button>
+                    </li>
+                )}
+                
             </ul>
-            </div> 
+        </div> 
     )
                         
-        }
+}
