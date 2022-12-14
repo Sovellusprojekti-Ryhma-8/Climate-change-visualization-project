@@ -212,7 +212,7 @@ public class DataService {
         String descsString = String.join(";", descriptions);
 
         view v = new view(Id,visualString,descsString,style,user);
-        //repo savet tähän
+        
         try {
             viewsRepo.save(v);
         } catch (Exception e) {

@@ -19,7 +19,7 @@ export default function DeleteUser() {
         e.preventDefault();
 
         
-        /* Sending delete request */
+        // Sending delete request
 
         axios.post(URL, {},
             {params: {userName}
@@ -28,7 +28,6 @@ export default function DeleteUser() {
                 localStorage.removeItem("token")
                 navigate('/')
                 window.location.reload(false);
-                console.log("jjuu")
             }).catch(err => {
                 console.log(err)
                 setMessage("User not found")
