@@ -4,6 +4,7 @@ import '../styles/DropDown.css'
 const DropDown = (props) => {
     
     const [text, setText] = useState('');
+    const [message, setMessage] = useState('');
     let ID = props.componentKey    
 
     if (ID == undefined) {
@@ -62,8 +63,11 @@ const DropDown = (props) => {
     }
 
     let addVisualization = (e) => {
-        props.func2(text, ID)
-        console.log("componentID = "+ID)
+        if (text.length > 0) {
+            props.func2(text, ID)
+        }else {
+            setMessage("Description is empty!")
+        }
     }
 
     return (
@@ -84,7 +88,9 @@ const DropDown = (props) => {
         </div>
             <div class="textbox" >
                 <textarea class="textarea" onChange={handleChange}></textarea>
-                <button style={{padding: 10, fontSize: 14}} class="button" onClick={addVisualization}>Add visualization</button>
+                <p style={{color: "red"}}>{message}</p>
+                <button style={{padding: 10, fontSize: 14, marginRight: "2em"}} class="button" onClick={addVisualization}>Add visualization</button>
+                
             </div>
         </div>
     )
