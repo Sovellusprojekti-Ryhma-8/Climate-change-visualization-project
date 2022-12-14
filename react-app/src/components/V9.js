@@ -5,10 +5,12 @@ import { Doughnut } from "react-chartjs-2";
 import Colors from "./Colors";
 
 
-export default function V9() {
+export default function V9(props) {
     const [chartData, setChartData] = useState([]);
     const [infodata, setInfoData] = useState([]);
     const [loading, setloading] = useState(true);
+    const [text, setText] = useState("Doughnut chart presenting the Co2 emissions by sectors");
+
     const [colors] = useState(Colors())
 
     const URL1 = "http://localhost:8080/V9_sector"
@@ -16,6 +18,9 @@ export default function V9() {
 
     useEffect(() => {
       V9Chart()
+      if (Object.keys(props.text).length > 0) {
+        setText(props.text)
+    }
     },[])
 
     const V9Chart = () => {
@@ -107,7 +112,7 @@ export default function V9() {
             },
             subtitle:{
               display: true,
-              text:"Doughnut chart presenting the Co2 emissions by sectors"
+              text: text
             }
         }
     }

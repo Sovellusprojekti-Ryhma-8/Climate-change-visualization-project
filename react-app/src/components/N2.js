@@ -7,7 +7,7 @@ export default function N2() {
     return (
         <div id="container">
             <V8 text={""}/>
-            <V9/>
+            <V9 text={""}/>
         </div>
     )
 }
