@@ -69,7 +69,7 @@ export default function V7(props) {
             },
             {
                 label:"Activities",
-                data: eventData.map(d=>({key: d.year, value: "0.7", event: d.events})),
+                data: eventData.map(d=>({key: d.kyr_bp, value: "0.7", event: d.events})),
                 borderWidth: 2,
                 borderColor: colors[2],
                 backgroundColor: colors[2] + "50",

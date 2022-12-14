@@ -179,9 +179,9 @@ const CreateVisualization = (props) => {
 
             </div>
             <div>
-                <span>Tyyli 1</span>
+                <span>Style 1</span>
                 <input id='style1' type="checkbox" onChange={handleChange1}></input>
-                <span>Tyyli 2</span>
+                <span>Style 2</span>
                 <input id='style2' type="checkbox" onChange={handleChange2}></input>
             </div>
             <div class="button-container">
