@@ -8,7 +8,6 @@ import Footer from './components/Footer';
 import LogIn from './components/LogIn';
 import SignIn from './components/SignIn';
 import LuoVisualisointinäkymä from './components/LuoVisualisointinäkymä';
-import DeleteUser from './components/DeleteUser';
 import { Routes, Route } from 'react-router-dom';
 import UserComponent from './components/UserComponent';
 import Profile from './components/Profile';

@@ -20,6 +20,8 @@ export default function DeleteUser() {
         e.preventDefault();
 
         
+        /* Sending delete request */
+
         axios.post(URL, {},
             {params: {userName}
             }).then(res => {
