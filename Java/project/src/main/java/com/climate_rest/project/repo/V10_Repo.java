@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.climate_rest.project.data.V10;
 
 @Repository
-public interface V10_Repo extends JpaRepository<V10, Integer> {
+public interface V10_Repo extends JpaRepository<V10, Double> {
     
 }
