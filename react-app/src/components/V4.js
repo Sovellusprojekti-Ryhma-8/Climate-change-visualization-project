@@ -11,7 +11,7 @@ const URL_V10 = 'http://localhost:8080/V10'
 
 
 
-export default function V4() {
+export default function V4(props) {
     const [de08, setDe08] = useState([]);
     const [de08_2, setDe08_02] = useState([]);
     const [dss, setDss] = useState([]);
@@ -19,6 +19,8 @@ export default function V4() {
     const [v3monthlydata, setV3monthlydata] = useState([])
     const [v10data, setV10Data] = useState([])
     const [colors] = useState(Colors())
+    const [text, setText] = useState("This graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica and CO2 measurements monthly and annually from Mauna Loa, Hawaii.");
+
 
     useEffect(() => {
         axios.get(URL)
@@ -39,6 +41,9 @@ export default function V4() {
         axios.get(URL_V3_MONTHLY)
         .then((response) => {
             setV3monthlydata(response.data)
+            if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
         }).catch(error => {
             alert(error)
         })
@@ -123,10 +128,7 @@ export default function V4() {
             },
             subtitle: {
                 display: true,
-                text: ["Graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica",
-                    "and CO2 measurements monthly and annually from Mauna Loa, Hawaii.",
-                    "Major human evolution and activities events are shown in own time scale."
-                ]
+                text: text
             },
             tooltip: {  
                 yAlign: 'bottom',

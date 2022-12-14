@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
@@ -12,6 +12,8 @@ import SignIn from './components/SignIn';
 import LuoVisualisointinäkymä from './components/LuoVisualisointinäkymä';
 import DeleteUser from './components/DeleteUser';
 import { Routes, Route } from 'react-router-dom';
+import UserComponent from './components/UserComponent';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -28,8 +30,9 @@ function App() {
         <Route path="/N3" element={<N3 />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä />} />
-        <Route path="/DeleteUser" element={<DeleteUser />} />
+        <Route path="/LuoVisualisointinäkymä" element={<LuoVisualisointinäkymä/>} />
+        <Route path='/views/:id' element={<UserComponent/>}/> 
+        <Route path='/profile' element={<Profile/>}/> 
         </Routes>
       </div>
     <Footer />
@@ -38,3 +41,4 @@ function App() {
 }
 
 export default App;
+

@@ -6,13 +6,19 @@ import axios from "axios";
 
 const URL = "http://localhost:8080/V2"
 
-export default function V2() {
+export default function V2(props) {
     const [chartData, setData] = useState([]);
+    const [text, setText] = useState("2000-year temperature reconstruction mainly from tree-ring data and other data sets.");
+    
 
     useEffect(() => {
         axios.get(URL)
         .then((res) => {
             setData(res.data)
+            console.log(Object.keys(props.text).length)
+            if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
         }).catch(error => {
             alert(error)
         })
@@ -44,7 +50,7 @@ export default function V2() {
             },
             subtitle: {
                 display: true,
-                text: "2000-year temperature reconstruction mainly from tree-ring data and other data sets."
+                text: text
             }
         },
         scales: {

@@ -15,6 +15,7 @@ import com.climate_rest.project.data.V7;
 import com.climate_rest.project.data.V9_info;
 import com.climate_rest.project.data.V9_sector;
 import com.climate_rest.project.data.V8;
+import com.climate_rest.project.data.view;
 import com.climate_rest.project.repo.V1_monthlyRepo;
 import com.climate_rest.project.data.V3_monthly;
 import com.climate_rest.project.data.V4;
@@ -24,6 +25,7 @@ import com.climate_rest.project.repo.V7_Repo;
 import com.climate_rest.project.repo.V9_infoRepo;
 import com.climate_rest.project.repo.V9_sectorRepo;
 import com.climate_rest.project.repo.V8_Repo;
+import com.climate_rest.project.repo.viewsRepo;
 import com.climate_rest.project.repo.V3_monthlyRepo;
 import com.climate_rest.project.repo.V4_Repo;
 import com.climate_rest.project.repo.V5_Repo;
@@ -40,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+
+
 
 @Service
 public class DataService {
@@ -83,6 +87,10 @@ public class DataService {
 
     @Autowired
     V8_Repo v8Repo;
+
+    @Autowired
+    viewsRepo viewsRepo;
+
 
     public List<V3_annual> getV3_annualData(){
         return v3annualRepo.findAll();
@@ -146,13 +154,16 @@ public class DataService {
                     result.add(new V8(year, entry.getKey(), (Double.valueOf(entry.getValue().toString()))));
                 }
             }
+            
         }
         
+
         //Group list to map by country
         Map<String,List<V8>> resultGrouped = result.stream().collect(Collectors.groupingBy(w -> w.getCountry()));
         
         return sortCountriesByCO2(resultGrouped);
     }
+
 
     //Sorts coutries by total CO2 emissions
     private Map<String,List<V8>> sortCountriesByCO2(Map<String,List<V8>> map){
@@ -178,5 +189,78 @@ public class DataService {
         }
 
         return sortedList;
+    }
+
+    /*User made views are saved */
+
+    public view saveView(String Id, List<String> visuals,
+    List<String> descs, int style, String user) {
+        
+        Collections.sort(visuals); // Visualizations get sorted in right display order
+        Collections.sort(descs);
+        
+        List<String> visualizations = new ArrayList<>();
+        List<String> descriptions = new ArrayList<>();
+        
+        for (String string : visuals) {
+            visualizations.add(string.substring(2));
+        }
+        
+        for (String string : descs) {
+            descriptions.add(string.substring(2));
+        }
+        String visualString = String.join(";", visualizations);
+        String descsString = String.join(";", descriptions);
+
+        view v = new view(Id,visualString,descsString,style,user);
+        //repo savet tähän
+        try {
+            viewsRepo.save(v);
+        } catch (Exception e) {
+            
+        }
+    
+        return v;
+     }
+
+     public view getView(String Id) {
+            try {
+                view v = viewsRepo.findById(Id).orElse(null);
+                return v;
+            } catch (Exception e) {
+                return null;
+            }
+     }
+    
+
+     public List<String> getMyViews(String user) {
+        List<String> myViews = new ArrayList<>();
+        List<view> views = new ArrayList<>();
+        views = viewsRepo.findByuser(user);
+
+        for (view v : views) {
+            if (user.equals(v.getUser())){
+                myViews.add(v.getId());
+            }
+        }
+        return myViews;
+     }
+
+    public view deleteView(String Id) {
+        view v = viewsRepo.findById(Id).orElse(null);
+        if (v != null) {
+            viewsRepo.delete(v);
+            return v;
+        }
+        return null;
+    }
+
+    public void deleteUsersViews(String user) {
+        List<view> views = new ArrayList<>();
+        views = viewsRepo.findByuser(user);
+
+        for (view v : views) {
+            viewsRepo.delete(v);           
+        }
     }
 }

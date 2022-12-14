@@ -6,14 +6,19 @@ import Colors from './Colors'
 
 const URL = "http://localhost:8080/V5"
 
-export default function V5() {
+export default function V5(props) {
     const [chartData, setData] = useState([]);
-    const [colors] = useState(Colors())
+    const [colors, setColors] = useState(Colors())
+    const [text, setText] = useState("Graph displays Co2 measurements from Vostok station.");
+
 
     useEffect(() => {
         axios.get(URL)
         .then((res) => {
             setData(res.data)
+            if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
         }).catch(error => {
             alert(error)
         })
@@ -46,7 +51,7 @@ export default function V5() {
             },  
             subtitle: {
                 display: true,
-                text: "Graph displays Co2 measurements from Vostok station."
+                text: text
             }    
         },
         scales: {

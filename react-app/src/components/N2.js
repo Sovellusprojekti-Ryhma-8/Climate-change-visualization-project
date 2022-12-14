@@ -6,7 +6,7 @@ import '../styles/N1.css'
 export default function N2() {
     return (
         <div id="container">
-            <V8/>
+            <V8 text={""}/>
             <V9/>
         </div>
     )

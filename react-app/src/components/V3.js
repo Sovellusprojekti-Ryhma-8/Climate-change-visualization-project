@@ -6,22 +6,26 @@ import axios from 'axios'
 const URL_annual = 'http://localhost:8080/V3annual'
 const URL_monthly = 'http://localhost:8080/V3monthly'
 
-export default function V3() {
+export default function V3(props) {
     const [annualData, setAnnualData] = useState([])
     const [monthlyData, setMonthlyData] = useState([])
     const [chartData, setChartData] = useState([])
+    const [text, setText] = useState("This graph presents atmospheric carbon dioxide measurements annually and monthly from Mauna Loa Observatory in Hawaii");
+
 
     useEffect(() => {
         axios.get(URL_annual)
             .then((response) => {
               setAnnualData(response.data)
-              console.log(annualData)
             }).catch(error => {
               alert(error)
             })
         axios.get(URL_monthly)
             .then((response) => {
               setMonthlyData(response.data)
+              if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
             }).catch(error => {
               alert(error)
             })
@@ -60,7 +64,7 @@ export default function V3() {
           },
           subtitle: {
             display: true,
-            text: "This graph presents atmospheric carbon dioxide measurements annually and monthly from Mauna Loa Observatory in Hawaii"
+            text: text
         },
         },
         parsing: {
