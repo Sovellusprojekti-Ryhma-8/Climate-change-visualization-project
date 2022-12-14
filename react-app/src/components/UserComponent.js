@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import CreateVisualization from "./LuoVisualisointinäkymä";
 import V1 from "./V1";
 import V2 from "./V2";
 import V3 from "./V3";
@@ -9,10 +8,11 @@ import V5 from "./V5";
 import V6 from "./V6";
 import V7 from "./V7";
 import V8 from "./V8";
-
+import V9 from "./V9";
 
 import { useParams } from "react-router";
 import axios from "axios";
+
 
 const URL = "http://localhost:8080/setView"
 
@@ -107,9 +107,13 @@ const UserComponent = (props) => {
                     )
                     }
                     break;
-                // case "v9":
-                //     setComp(<V9/>)
-                //     break;           
+                case "v9":
+                    if (visuals.length > components.length) {
+                        setComp(
+                            components => [...components, <V9 key={components.length} text={desc[index]}/>]
+                        )
+                    }
+                    break;           
                 default:
                     break;
             }

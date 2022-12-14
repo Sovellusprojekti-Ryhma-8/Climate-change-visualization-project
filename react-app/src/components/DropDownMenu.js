@@ -5,6 +5,7 @@ const DropDown = (props) => {
     
     const [text, setText] = useState('');
     const [message, setMessage] = useState('');
+    const [btntext, setBtntext] = useState('Visualizations');
     let ID = props.componentKey    
 
     if (ID == undefined) {
@@ -12,8 +13,9 @@ const DropDown = (props) => {
     }
 
     let handleClick = async (e) => {
+        e.preventDefault()
         console.log("click")
-
+        setBtntext(e.target.text)
         switch (e.target.text) {
             case "V1":
                 console.log("v1")
@@ -60,10 +62,11 @@ const DropDown = (props) => {
 
     let handleChange = (e) => {
         setText(e.target.value)
+        setMessage("")
     }
 
     let addVisualization = (e) => {
-        if (text.length > 0) {
+    if (text.length > 0 && btntext.length < 3) {
             props.func2(text, ID)
         }else {
             setMessage("Description is empty!")
@@ -73,7 +76,7 @@ const DropDown = (props) => {
     return (
         <div class="conf-component">
         <div class="dropdown">
-            <button class="dropbtn">Visualizations</button>
+            <button class="dropbtn">{btntext}</button>
             <div class="dropdown-list">
                 <a href='#' onClick={handleClick}>V1</a>
                 <a href='#' onClick={handleClick}>V2</a>
