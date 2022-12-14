@@ -223,6 +223,8 @@ public class DataService {
         return v;
      }
 
+     /*User made view is found by its Id */
+
      public view getView(String Id) {
             try {
                 view v = viewsRepo.findById(Id).orElse(null);
@@ -232,6 +234,8 @@ public class DataService {
             }
      }
     
+
+     /*User gets own views */
 
      public List<String> getMyViews(String user) {
         List<String> myViews = new ArrayList<>();

@@ -21,14 +21,6 @@ const DropDown = (props) => {
                 console.log("v1")
                 props.func("v1", ID)
                 break;
-            case "V2":
-                console.log("v2")
-                props.func("v2", ID)
-                break;
-            case "V3":
-                console.log("v3")
-                props.func("v3", ID)
-                break;
             case "V4":
                 console.log("v4")
                 props.func("v4", ID)
@@ -54,7 +46,7 @@ const DropDown = (props) => {
                 props.func("v9", ID)
                 break;
             default:
-                console.log("Ei ole")
+                props.func("v1", ID)
                 break;
         }
         
@@ -79,8 +71,6 @@ const DropDown = (props) => {
             <button class="dropbtn">{btntext}</button>
             <div class="dropdown-list">
                 <a href='#' onClick={handleClick}>V1</a>
-                <a href='#' onClick={handleClick}>V2</a>
-                <a href='#' onClick={handleClick}>V3</a>
                 <a href='#' onClick={handleClick}>V4</a>
                 <a href='#' onClick={handleClick}>V5</a>
                 <a href='#' onClick={handleClick}>V6</a>

@@ -66,30 +66,6 @@ const UserComponent = (props) => {
                         }
                     }
                     break;
-                case "v2":
-                    if (visuals.length > components.length) {
-                        if (style == 1) {
-                            setComp(
-                                components => [...components,<li> <V2 key={components.lenght} text={desc[index]}/></li>]
-                            )
-                        }else{
-                    setComp(
-                        components => [...components,<li style={{display: "inline-block", width: "47%"}}> <V2 key={components.lenght} text={desc[index]}/></li>]
-                    )
-                    }}
-                    break;
-                case "v3":
-                    if (visuals.length > components.length) {
-                        if (style == 1) {
-                            setComp(
-                                components => [...components,<li> <V3 key={components.lenght} text={desc[index]}/></li>]
-                            )
-                        }else{
-                    setComp(
-                        components => [...components,<li style={{display: "inline-block", width: "47%"}}> <V3 key={components.lenght} text={desc[index]}/></li>]
-                    )
-                    }}
-                    break;
                 case "v4":
                     if (visuals.length > components.length) {
                         if (style == 1) {
