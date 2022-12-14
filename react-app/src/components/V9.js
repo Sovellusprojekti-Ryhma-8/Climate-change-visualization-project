@@ -2,13 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
-import Colors from './Colors'
+import Colors from "./Colors";
 
 
-export default function V9() {
-    //Constants for data and URLs
+export default function V9(props) {
     const [chartData, setChartData] = useState([]);
     const [loading, setloading] = useState(true);
+    const [text, setText] = useState("Doughnut chart presenting the Co2 emissions by sectors");
+
     const [colors] = useState(Colors())
 
     const URL1 = "http://localhost:8080/V9_sector"
@@ -16,6 +17,9 @@ export default function V9() {
 
     useEffect(() => {
       V9Chart()
+      if (Object.keys(props.text).length > 0) {
+        setText(props.text)
+    }
     },[])
 
     //Fetching the data for main chart and creating the main chart
@@ -155,36 +159,36 @@ export default function V9() {
             },
             subtitle:{
               display: true,
-              text:"Doughnut chart presenting the Co2 emissions by sectors"
+              text: text
             }
         }  
     }
 
 
     return (
-      <>
-      <div style={{width: '700px', position:'relative',display:'flex'}}>
-        <Doughnut data={chartData} options={options}/>
-          <div style={{paddingTop:'170px'}}>
-            <p>
-              Click on one of the four sectors to get more information about individual factors.
-            </p>
-            <p>
-              Click back to get back to main graph.
-            </p>
-            <p>
-              Learn more about <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" rel='noreferrer'>measurements</a>.
-            </p>
-            <h4>Data source(downloads excel file)</h4>
-            <p>
-            <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" rel='noreferrer'>Co2 emissions</a>
-            </p>
-            <form style={{paddingTop:'120px'}} onSubmit={e => Back(e)}>
+      <div class="v9chart" >
+        <div class="doughnut">
+          <Doughnut data={chartData} options={options}/>
+        </div>
+        <div class="v9footer">
+          <p>
+            Click on one of the four sectors to get more information about individual factors.
+          </p>
+          <p>
+            Click back to get back to main graph.
+          </p>
+          <p>
+            Learn more about <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" rel='noreferrer'>measurements</a>.
+          </p>
+          <h4>Data source(downloads excel file)</h4>
+          <p>
+          <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" rel='noreferrer'>Co2 emissions</a>
+          </p>
+          <form onSubmit={e => Back(e)}>
             <button> Back </button>
           </form>
         </div>
       </div>
-    </>
     )
 
 }

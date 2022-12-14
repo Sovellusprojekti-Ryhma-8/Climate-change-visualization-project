@@ -14,7 +14,7 @@ const URL_annual = "http://localhost:8080/V1annual"
 const URL_monthly = "http://localhost:8080/V1monthly"
 const URL_V2 = "http://localhost:8080/V2"
 
-export default function V1() {
+export default function V1(props) {
     const [annualData, setAnnualData] = useState([]);
     const [monthlyData, setMonthlyData] = useState([]);
     const [v2Data, setV2data] = useState([]);
@@ -22,7 +22,8 @@ export default function V1() {
     const [display2, setDisplay2] = useState(false);
     const [btnState, setState] = useState(false);
     const [counter, setCounter] = useState(0);
-    const [colors, setColors] = useState(Colors())
+    const [colors] = useState(Colors())
+    const [text, setText] = useState(["Graph displays historical surface temperature anomalies", "with option to show 2000-year temperature reconstruction from northern hemisphere"]);
 
     
     
@@ -61,6 +62,9 @@ export default function V1() {
         .then((res) => {
             setV2data(res.data)
             setCounter(0)
+            if (Object.keys(props.text).length > 0) {
+                setText(props.text)
+            }
         }).catch(error => {
             alert(error)
         })
@@ -241,11 +245,9 @@ export default function V1() {
         ]
     }
 
-
-    
-
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: "top",
@@ -254,6 +256,10 @@ export default function V1() {
                 display: true,
                 text: "Global surface temperature anomalies",
             },
+            subtitle: {
+                display: true,
+                text: text
+            }
         },
         scales: {
             x: {
@@ -270,7 +276,7 @@ export default function V1() {
             yAxis: {
                 type: "linear",
                 display: true,
-                position: "right",
+                position: "left",
                 title: {
                     display: true,
                     text: "K"
@@ -290,13 +296,15 @@ export default function V1() {
 
     return (
         <div>
-            <Line data={chartData} options={options}/>
-            <input type="checkbox" onClick={handleClick}/>
-            <span style={{fontSize:14}}>2000 Year Temperatures</span>
-            <div>
+            <div class="chart">
+                <Line data={chartData} options={options}/>
+            </div>
+            <div class="chartFooter">
+                <input type="checkbox" onClick={handleClick}/>
+                <span style={{fontSize:14}}>2000 Year Temperatures</span>
                 <h4>Data source</h4>
                 <p>
-                    <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html " target="_blank">Surface temperatures</a>, <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank">2000 year temperatures</a>
+                    <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html " target="_blank" rel="noreferrer">Surface temperatures</a>, <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank">2000 year temperatures</a>
                 </p>
             </div>
         </div>

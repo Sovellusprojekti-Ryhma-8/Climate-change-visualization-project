@@ -8,17 +8,29 @@ const URL1 = 'http://localhost:8080/V7'
 const URL2 = 'http://localhost:8080/V10'
 
 
-export default function V7() {
+export default function V7(props) {
     //Constants for data
     const [chartData, setChartData] = useState([])
+    const [colors, setColors] = useState(Colors())
+    const [text, setText] = useState(["Graph shows the evolution of global temperature over the past two million years", "and changes in Co2 Concentration over the past 800 000 years"]);
+
     const [eventData, setEventData] = useState([])
-    const [colors] = useState(Colors())
+
 
     //Fetching the data
     useEffect(() => {
         axios.get(URL1)
             .then((response) => {
                 setChartData(response.data)
+                if (Object.keys(props.text).length > 0) {
+                    setText(props.text)
+                }
+            }).catch(error => {
+                alert(error)
+            })
+        axios.get(URL2)
+            .then((response) => {
+                setEventData(response.data)
             }).catch(error => {
                 alert(error)
             })
@@ -76,6 +88,7 @@ export default function V7() {
     const options = {
         type:'line',
         responsive: true,
+        maintainAspectRatio: false,
         interactions: {
             mode: 'index',
             intersect: false
@@ -89,9 +102,9 @@ export default function V7() {
             display: true,
             text: "Evolution of global temperature over the past two million years",
           },
-          subtitle:{
+          subtitle: {
             display: true,
-            text:"Graph shows the evolution of global temperature over the past two million years and changes in Co2 concentration over the past 800 000 years"
+            text: text
         },
         tooltip:{
             yAlign: 'bottom',
@@ -124,7 +137,9 @@ export default function V7() {
                 display: true,
                 position: "right",
                 },
-
+            events: {
+                display: false,
+            },
             co2: {
                 title:{
                     display: true,
@@ -152,10 +167,11 @@ export default function V7() {
     
 
     return (
-        <>
-        <div>
-        <Line data={data} options={options}/>
-        <div>
+    <div>
+        <div class="chart">
+            <Line data={data} options={options}/>
+        </div>
+        <div class="chartFooter">
             <p>
                 Learn more about <a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf" target="_blank" rel='noreferrer'>measurements</a>.
             </p>
@@ -165,6 +181,6 @@ export default function V7() {
             </p>
         </div>
     </div>
-    </>
+
     )
 };
