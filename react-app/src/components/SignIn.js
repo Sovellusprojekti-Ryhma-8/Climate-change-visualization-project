@@ -42,12 +42,12 @@ export default function SignIn() {
                     console.log(res.status)
                     navigate('/LogIn')
                 }else if (res.status === 403) {
-                    setMessage("Käyttäjänimi jo olemassa!")
+                    setMessage("User already exists!")
                 }
             }) 
             .catch((error) => {
                 console.log(error+ "  error")
-                setMessage("Jokin meni vikaan")
+                setMessage("Something went wrong")
             })
         } catch(err) {
             console.log(err+ "   err");
@@ -63,18 +63,18 @@ export default function SignIn() {
             <div class="register">
                 <form class="register-form" onSubmit={handleSubmit}>
                     <div class="block">
-                        <label>Käyttäjänimi</label>
+                        <label>Username</label>
                         <input class="input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)}/>
                     </div>
                     <div class="block">
-                        <label>Salasana</label>
+                        <label>Password</label>
                         <input class="input" type="text" value={passWord} onChange={(e) => setPassWord(e.target.value)}/>
                     </div>
                     <div class="block">
-                        <label>Salasana uudelleen</label>
+                        <label>Password again</label>
                         <input class="input" type="text" value={passWord2} onChange={(e) => setPassWord2(e.target.value)}/>
                     </div>
-                    <button class='button' type='submit'>Rekisteröidy</button>
+                    <button class='button' type='submit'>Register</button>
                     <div>
                         <Link to='/LogIn'>Log in</Link>
                     </div>

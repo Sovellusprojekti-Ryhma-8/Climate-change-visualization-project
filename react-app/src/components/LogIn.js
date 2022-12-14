@@ -16,6 +16,7 @@ export default function Login() {
     const sendLoginRequest = (e) => {
         e.preventDefault()
 
+        //Sending login request
         axios.post(URL, {},
             {params: {userName,passWord}
             }).then(res => {
@@ -25,7 +26,7 @@ export default function Login() {
                 window.location.reload(false);
             }).catch(err => {
                 console.log(err)
-                setMessage("Salasana tai käyttäjänimi väärin")
+                setMessage("Wrong password or username")
             })}
 
 
@@ -35,11 +36,11 @@ export default function Login() {
            <div class="login">
                 <form class="login-form" onSubmit={sendLoginRequest}>
                     <div class="block">
-                        <label>Käyttäjänimi</label>
+                        <label>Username</label>
                         <input class="input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)}/>
                     </div>
                     <div class="block">
-                        <label>Salasana</label>
+                        <label>Password</label>
                         <input class="input" type="text" value={passWord} secureTextEntry={false} onChange={(e) => setPassWord(e.target.value)}/>
                     </div>
                     <button class='button' type='submit'>Login</button>

@@ -13,7 +13,6 @@ export default function DeleteUser() {
     const [userName, setUserName] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate() 
-    const form = new FormData;
     
    
     const sendDeleteRequest = async(e) => {
@@ -23,12 +22,14 @@ export default function DeleteUser() {
         axios.post(URL, {},
             {params: {userName}
             }).then(res => {
+
                 localStorage.removeItem("token")
                 navigate('/')
                 window.location.reload(false);
+                console.log("jjuu")
             }).catch(err => {
                 console.log(err)
-                setMessage("Käyttäjää ei ole olemassa")
+                setMessage("User not found")
             })}
        
     
@@ -39,7 +40,7 @@ export default function DeleteUser() {
         <div class="deleteUser">
             <form class="delete-form" onSubmit={sendDeleteRequest}>
                 <div class="block">
-                    <label>Käyttäjänimi jonka haluat poistaa</label>
+                    <label>Type your username to delete your user</label>
                     <input class="input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
                     </div>
                     <div>
