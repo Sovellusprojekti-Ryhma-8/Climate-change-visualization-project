@@ -11,23 +11,23 @@ public class V10 {
     
     @Id
     @Column(name="year_kyr_bp")
-    private int year;
+    private double year;
     @Column(name="events")
     private String events;
 
     public V10() {
     }
 
-    public V10(int year, String events) {
+    public V10(double year, String events) {
         this.year = year;
         this.events = events;
     }
 
-    public int getYear() {
+    public double getyear() {
         return this.year;
     }
 
-    public void setYear(int year) {
+    public void setyear(double year) {
         this.year = year;
     }
 
@@ -39,8 +39,8 @@ public class V10 {
         this.events = events;
     }
 
-    public V10 year(int year) {
-        setYear(year);
+    public V10 year(double year) {
+        setyear(year);
         return this;
     }
 

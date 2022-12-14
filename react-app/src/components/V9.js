@@ -6,6 +6,7 @@ import Colors from './Colors'
 
 
 export default function V9() {
+    //Constants for data and URLs
     const [chartData, setChartData] = useState([]);
     const [loading, setloading] = useState(true);
     const [colors] = useState(Colors())
@@ -17,6 +18,7 @@ export default function V9() {
       V9Chart()
     },[])
 
+    //Fetching the data for main chart and creating the main chart
     const V9Chart = () => {
       const co2 = []
       const sector = [] 
@@ -49,16 +51,19 @@ export default function V9() {
     return(null)
   } 
 
+  //Function for back-button, that takes you back to the main chart, pushing back the data from V9Chart
   function Back(e) {
     e.preventDefault();
     V9Chart();
   } 
 
-   function Info (e){
+  //Function for creating a new chart from the additionak info of selected sector
+   function Info (e) {
 
         const co2 = []
         const info = []
 
+        //Arrays, that will be turned into charts
         const EnergyInfo = ["Iron & Steel","Chemical & petrochemical (energy)","Food and tobacco","Non-ferous metals"
         ,"Paper. pulp & printing","Machinery" ,"Aviation","Ship","Rail","Road" ,"Pipeline","Residential","Commercial"  
         ,"Energy in Agri and Fishing","Oil and Natural Gas","Coal","Other industry","Unallocated fuel combustion"]
@@ -69,6 +74,8 @@ export default function V9() {
     axios.get(URL2)
       .then(res => {
         for (const Object of res.data) {
+          //If you click on the "Energy" sector in the doughnut chart, data from EnergyInfo-array will be pushed to the chartData, 
+          //that previously held the data for main chart
           if (e.chart.tooltip.dataPoints?.[0]?.label === "Energy") {
                if(EnergyInfo.includes(Object.sector_info))
                   {
@@ -132,8 +139,7 @@ export default function V9() {
                 }}
             })};
     
-    
-
+    //Options for the chart
     const options = {
         type: 'doughnut',
         maintainAspectRatio: true,

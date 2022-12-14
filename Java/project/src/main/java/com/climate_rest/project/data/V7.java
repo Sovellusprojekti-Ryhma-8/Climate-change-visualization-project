@@ -11,7 +11,7 @@ public class V7 {
     
     @Id
     @Column(name="time_kyr_bp")
-    private int year;
+    private int kyr_bp;
     @Column(name="temperature_change")
     private double temp;
     @Column(name="co2")
@@ -19,18 +19,18 @@ public class V7 {
 
     public V7() {}
 
-    public V7(int year, double temp, double co2) {
-        this.year = year;
+    public V7(int kyr_bp, double temp, double co2) {
+        this.kyr_bp = kyr_bp;
         this.temp = temp;
         this.co2 = co2;
     }
 
-    public int getYear() {
-        return this.year;
+    public int getkyr_bp() {
+        return this.kyr_bp;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setkyr_bp(int kyr_bp) {
+        this.kyr_bp = kyr_bp;
     }
 
     public double getTemp() {
@@ -49,8 +49,8 @@ public class V7 {
         this.co2 = co2;
     }
 
-    public V7 year(int year) {
-        setYear(year);
+    public V7 kyr_bp(int kyr_bp) {
+        setkyr_bp(kyr_bp);
         return this;
     }
 

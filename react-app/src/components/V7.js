@@ -3,15 +3,18 @@ import {Line} from "react-chartjs-2"
 import axios from 'axios'
 import Colors from './Colors'
 
+//URL-links for fetching data from the database
 const URL1 = 'http://localhost:8080/V7'
 const URL2 = 'http://localhost:8080/V10'
 
+
 export default function V7() {
+    //Constants for data
     const [chartData, setChartData] = useState([])
     const [eventData, setEventData] = useState([])
-    
     const [colors] = useState(Colors())
 
+    //Fetching the data
     useEffect(() => {
         axios.get(URL1)
             .then((response) => {
@@ -28,11 +31,12 @@ export default function V7() {
             
     },[])
 
+    //Creating charts out of fetched data
     const data = {
-        labels: chartData.map(d=>d.year),
+        labels: chartData.map(d=>d.kyr_bp),
         datasets: [
             {
-                label:"Co2 ppm",
+                label:"Co2",
                 data: chartData.filter(d=>d.co2>0).map(d=>d.co2),
                 borderWidth: 2,
                 borderColor: colors[0],
@@ -52,31 +56,24 @@ export default function V7() {
                 pointRadius: 1,
             },
             {
-                label:"Events",
-                data: eventData.map(d=>d.events),
+                label:"Activities",
+                data: eventData.map(d=>({key: d.year, value: "0.7", event: d.events})),
                 borderWidth: 2,
                 borderColor: colors[2],
                 backgroundColor: colors[2] + "50",
-                yAxisID: "events",
-                tension: 0.4,
-                pointRadius: 1
+                parsing:{
+                    xAxisKey: "key",
+                    yAxisKey: "value"
+                },
+                yAxisID: "yv10",
+                xAxisID: "xv10",
+                pointRadius: 7,
+                showLine: false
             }
         ]
     }
-        
+    //Options for the charts
     const options = {
-        tooltip:{
-            enabled: true,
-            callbacks: {
-                title: function(context) {
-                    
-                  },
-                label: function(context){
-                    
-                  }
-            }
-        
-        },
         type:'line',
         responsive: true,
         interactions: {
@@ -95,13 +92,33 @@ export default function V7() {
           subtitle:{
             display: true,
             text:"Graph shows the evolution of global temperature over the past two million years and changes in Co2 concentration over the past 800 000 years"
+        },
+        tooltip:{
+            yAlign: 'bottom',
+            callbacks: {
+                title: (e) => {
+                    if(e[0].dataset.label === "Activities"){
+                        return e[0].raw.key + " thousand years before present"
+                  }else {
+                        return e[0].label
+                  }
+                },
+                label: (e) => {
+                    console.log(e)
+                    if(e.dataset.label === "Activities"){
+                        return e.raw.event
+                  }else {
+                        return e.dataset.label + ": "+e.raw
+                  }
+                }
+            }
         }
         },
         scales: {
             temp: {
                 title:{
                     display: true,
-                    text: "Surface temperature change"
+                    text: "Surface temperature change C°"
                 },
                 type: "linear",
                 display: true,
@@ -116,18 +133,23 @@ export default function V7() {
                 type: "linear",
                 display: true,
                 position: "left",
-                },
-            
-            x: {
+            },
+            xv10:{
+              type:"linear",
+              reverse: true,
+              display: true,
+              title:{
                 display: true,
-                reverse: true,
-                title:{
-                    display: true,
-                    text:"Thousands of years before present"
-            }
-           },
-        },
+                text:"Thousands of years before present"
+              }
+            },    
+             yv10:{
+                display: false,
+                type:"linear"
+            }, 
+        }
     }
+    
 
     return (
         <>
