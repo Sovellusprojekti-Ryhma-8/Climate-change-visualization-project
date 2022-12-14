@@ -7,6 +7,7 @@ import Colors from './Colors'
 const URL = 'http://localhost:8080/V4'
 const URL_V3_ANNUAL = 'http://localhost:8080/V3annual'
 const URL_V3_MONTHLY = 'http://localhost:8080/V3monthly'
+const URL_V10 = 'http://localhost:8080/V10'
 
 
 
@@ -16,6 +17,7 @@ export default function V4() {
     const [dss, setDss] = useState([]);
     const [v3annuadata, setV3annualdata] = useState([])
     const [v3monthlydata, setV3monthlydata] = useState([])
+    const [v10data, setV10Data] = useState([])
     const [colors] = useState(Colors())
 
     useEffect(() => {
@@ -37,6 +39,12 @@ export default function V4() {
         axios.get(URL_V3_MONTHLY)
         .then((response) => {
             setV3monthlydata(response.data)
+        }).catch(error => {
+            alert(error)
+        })
+        axios.get(URL_V10)
+        .then((response) => {
+            setV10Data(response.data)
         }).catch(error => {
             alert(error)
         })
@@ -83,6 +91,21 @@ export default function V4() {
                 borderColor: colors[4],
                 backgroundColor: colors[4] + "50",
                 pointRadius: 1,
+            },
+            {
+                label: "Human evolution and activities",
+                data: v10data.map(e => ({key: e.yr_bp, value: "0.7", event: e.events})),
+                borderWidth: 2,
+                showLine: false,
+                borderColor: colors[5],
+                backgroundColor: colors[5] + "50",
+                parsing: {
+                    xAxisKey: "key",
+                    yAxisKey: "value"
+                },
+                xAxisID: "xV10",
+                yAxisID: "yV10",
+                pointRadius: 5,
             }
         ]
     }
@@ -100,13 +123,37 @@ export default function V4() {
             },
             subtitle: {
                 display: true,
-                text: ["Graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica", "and CO2 measurements monthly and annually from Mauna Loa, Hawaii."]
+                text: ["Graph presents carbon dioxide records from three ice cores (DSS, DE08-2, DE08) at Law Dome, East Antarctica",
+                    "and CO2 measurements monthly and annually from Mauna Loa, Hawaii.",
+                    "Major human evolution and activities events are shown in own time scale."
+                ]
             },
+            tooltip: {  
+                yAlign: 'bottom',
+                callbacks: {
+                    title: (e) => {
+                        if(e[0].dataset.label === "Human evolution and activities"){
+                            return e[0].raw.key + " years before present"
+                        }else {
+
+                            return e[0].label
+                        }
+
+                    },
+                    label: (e) => {
+                        if(e.dataset.label === "Human evolution and activities"){
+                            return e.raw.event
+                        }else {
+                            return e.dataset.label + ": " + e.raw.co2
+                        }
+                    }
+                }
+            }
         },
         interaction: {
             intersect: false,
             mode: "nearest",
-            axis: "x",
+            axis: "xy",
         },
         parsing:{
             xAxisKey: "time",
@@ -119,8 +166,17 @@ export default function V4() {
                 title: {
                     display: true,
                     text: "Year",
-                    color: "" //Tähän joku väri?
-                }
+                },
+                
+            },
+            xV10: {
+                type: "logarithmic",
+                reverse: true,
+                display: true,
+                title: {
+                    display: true,
+                    text: "Years before present",
+                },
             },
             co2: {
                 type: "linear",
@@ -129,9 +185,14 @@ export default function V4() {
                 title: {
                     display: true,
                     text: "CO2",
-                    color: "" //Tähän joku väri?
                 }
             },
+            yV10: {
+                display: false,
+                min: 0,
+                max: 1,
+                type: "linear",
+            }
         },
     }
 

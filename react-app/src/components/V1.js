@@ -241,9 +241,6 @@ export default function V1() {
         ]
     }
 
-
-    
-
     const options = {
         responsive: true,
         maintainAspectRatio: false,
