@@ -42,6 +42,7 @@ const CreateVisualization = (props) => {
     },[])
 
 
+    /*Selected visualizations from child component are pushed to list*/ 
 
     let callback = async (data, key) => {
         visualizations.forEach(element => {
@@ -54,6 +55,8 @@ const CreateVisualization = (props) => {
         });
         setVisualizations(current => [...current, {id: key, component: data}])
     }
+
+    /*Selected descriptions from child component are pushed to list*/ 
 
     let callback2 = async (data, key) => {
         descriptions.forEach(element => {
@@ -74,7 +77,7 @@ const CreateVisualization = (props) => {
     and unique id for view is generated. */
 
     let handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         
         const uid = () =>   
         String(
@@ -94,7 +97,9 @@ const CreateVisualization = (props) => {
         console.log(form.getAll("user"))
         let url = form.getAll("Id")
 
+        window.location.reload(false);  
         window.open("http://localhost:3000/views/"+url, '_blank', 'noopener,noreferrer');
+
 
         try {
             fetch(URL, {
@@ -108,8 +113,11 @@ const CreateVisualization = (props) => {
             alert(error)
         }
 
-        console.log(style)      
+        console.log(style) 
+        
     }
+
+    /*New component is added to list when "Add new" is pressed*/
 
     let addElement = (e) => {
         e.preventDefault();
@@ -119,6 +127,8 @@ const CreateVisualization = (props) => {
                 componentKey={next.length+1}/>]
         )
     }
+
+    /*Component is deleted from the list*/
 
     let deleteComponent = async () => {
         console.log("poistetaan ")
@@ -138,11 +148,13 @@ const CreateVisualization = (props) => {
         )  
     }
 
+    /*Selected styles are set */
+
     let handleChange1 = event => {
         if(event.target.checked) {
             setStyle(1)
         }else {
-            setStyle(0)
+            setStyle(1)
             
         }
     }
@@ -151,7 +163,7 @@ const CreateVisualization = (props) => {
         if(event.target.checked) {
             setStyle(2)
         }else {
-            setStyle(0)
+            setStyle(1)
         }
     }
 
@@ -167,9 +179,9 @@ const CreateVisualization = (props) => {
 
             </div>
             <div>
-                <span>Tyyli 1</span>
+                <span>Style 1</span>
                 <input id='style1' type="checkbox" onChange={handleChange1}></input>
-                <span>Tyyli 2</span>
+                <span>Style 2</span>
                 <input id='style2' type="checkbox" onChange={handleChange2}></input>
             </div>
             <div class="button-container">

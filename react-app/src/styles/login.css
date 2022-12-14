@@ -8,7 +8,7 @@
     display: inline-block;
     width: 240px;
     border-style: solid;
-    color: lightseagreen;   
+    color: #42d806;   
     border-width: 1px;
     border-radius: 1em;
     padding: 2em;
@@ -17,8 +17,8 @@
   .login .button {
     padding: 10px 15px;
     margin-top: 1em;
-    margin-bottom: 1em;  
-    background-color: lightseagreen;
+    margin-bottom: 1em;
+    background-color: #42d806;
     border: none;
     border-radius: 5px;
     color: white;
@@ -31,7 +31,7 @@
   .button:hover{
     background-color: white;
     color:black;
-    border: 1px solid lightseagreen;
+    border: 1px solid #42d806;
   }
 
   .login .login-form .input {

@@ -5,10 +5,11 @@ import { Doughnut } from "react-chartjs-2";
 import Colors from "./Colors";
 
 
-export default function V9() {
+export default function V9(props) {
     const [chartData, setChartData] = useState([]);
-    const [infodata, setInfoData] = useState([]);
     const [loading, setloading] = useState(true);
+    const [text, setText] = useState("Doughnut chart presenting the Co2 emissions by sectors");
+
     const [colors] = useState(Colors())
 
     const URL1 = "http://localhost:8080/V9_sector"
@@ -16,8 +17,12 @@ export default function V9() {
 
     useEffect(() => {
       V9Chart()
+      if (Object.keys(props.text).length > 0) {
+        setText(props.text)
+    }
     },[])
 
+    //Fetching the data for main chart and creating the main chart
     const V9Chart = () => {
       const co2 = []
       const sector = [] 
@@ -50,56 +55,103 @@ export default function V9() {
     return(null)
   } 
 
+  //Function for back-button, that takes you back to the main chart, pushing back the data from V9Chart
   function Back(e) {
     e.preventDefault();
     V9Chart();
   } 
 
-  function Info (e){
+  //Function for creating a new chart from the additionak info of selected sector
+   function Info (e) {
 
-    let co2 = []
-    let info = []
+        const co2 = []
+        const info = []
+
+        //Arrays, that will be turned into charts
+        const EnergyInfo = ["Iron & Steel","Chemical & petrochemical (energy)","Food and tobacco","Non-ferous metals"
+        ,"Paper. pulp & printing","Machinery" ,"Aviation","Ship","Rail","Road" ,"Pipeline","Residential","Commercial"  
+        ,"Energy in Agri and Fishing","Oil and Natural Gas","Coal","Other industry","Unallocated fuel combustion"]
+        const IndustrialInfo = ["Cement","Chemical & petrochemical (industrial)"]
+        const WasteInfo = ["Wastewater","Landfills"]
+        const AgriInfo = ["Grassland","Cropland","Crop Burning","Forest Land","Rice cultivation","Agricultural soils","Livestock & Manure"]
+
+    axios.get(URL2)
+      .then(res => {
+        for (const Object of res.data) {
+          //If you click on the "Energy" sector in the doughnut chart, data from EnergyInfo-array will be pushed to the chartData, 
+          //that previously held the data for main chart
+          if (e.chart.tooltip.dataPoints?.[0]?.label === "Energy") {
+               if(EnergyInfo.includes(Object.sector_info))
+                  {
+                  info.push(Object.sector_info);
+                  co2.push(Object.co2);
+                  }
+                  setChartData({
+                    labels: info,
+                    datasets: [
+                      {
+                        data: co2,
+                        backgroundColor: colors
+                      }
+                    ]
+                  })
+      }else if(e.chart.tooltip.dataPoints?.[0]?.label === "Industrial processes") {
+                if(IndustrialInfo.includes(Object.sector_info))
+                  {
+                  info.push(Object.sector_info);
+                  co2.push(Object.co2);
+                  }
+                  setChartData({
+                    labels: info,
+                    datasets: [
+                      { 
+                        data: co2,
+                        backgroundColor: colors
+                      }
+                    ]
+                  })
+      }else if(e.chart.tooltip.dataPoints?.[0]?.label === "Waste") {
+                if(WasteInfo.includes(Object.sector_info))
+                  {
+                  info.push(Object.sector_info);
+                  co2.push(Object.co2);
+                  }
+                  setChartData({
+                    labels: info,
+                    datasets: [
+                      {
+                        data: co2,
+                        backgroundColor: colors
+                      }
+                    ]
+                  })
+      }else if(e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)") {
+                if(AgriInfo.includes(Object.sector_info))
+                  {
+                  info.push(Object.sector_info);
+                  co2.push(Object.co2);
+                  }
+                  setChartData({
+                    labels: info,
+                    datasets: [
+                      {
+                        data: co2,
+                        backgroundColor: colors
+                      }
+                    ]
+                  })
+                }}
+            })};
     
-    const EnergyInfo = ["Iron & Steel","Chemical & petrochemical (energy)","Food and tobacco","Non-ferous metals"
-    ,"Paper. pulp & printing","Machinery" ,"Aviation","Ship","Rail","Road" ,"Pipeline","Residential","Commercial"  
-    ,"Energy in Agri and Fishing","Oil and Natural Gas","Coal","Other industry","Unallocated fuel combustion"]
-    const IndustrialInfo = ["Cement","Chemical & petrochemical (industrial)"]
-    const WasteInfo = ["Wastewater","Landfills"]
-    const AgriInfo = ["Grassland","Cropland","Crop Burning","Forest Land","Rice cultivation","Agricultural soils","Livestock & Manure"]
-    
-     setInfoData()
-     axios.get(URL2)
-        .then(res => {
-          for (const Object of res.data) {
-            if ((e.chart.tooltip.dataPoints?.[0]?.label === "Energy" && EnergyInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Industrial processes" && IndustrialInfo.includes(Object.sector_info)) ||
-                (e.chart.tooltip.dataPoints?.[0]?.label === "Waste" && WasteInfo.includes(Object.sector_info)) || (e.chart.tooltip.dataPoints?.[0]?.label === "Agriculture, Forestry & Land Use (AFOLU)" && AgriInfo.includes(Object.sector_info)))
-              {
-                console.log(e.chart.tooltip.dataPoints?.[0]?.label)
-                info.push(Object.sector_info);
-                co2.push(Object.co2);
-              }
-          }
-
-          setChartData({
-            labels: info,
-            datasets: [
-              {
-                data: co2,
-                backgroundColor: colors
-              }
-            ]
-          });
-        });
-    }
-
+    //Options for the chart
     const options = {
         type: 'doughnut',
         maintainAspectRatio: true,
         responsive: true,
         aspectRatio: 1,
-        onClick: (e) => {
+          onClick: (e) => {
             Info(e)
-          }, 
+          },
         plugins: {
             title:{
               display: true,
@@ -107,9 +159,9 @@ export default function V9() {
             },
             subtitle:{
               display: true,
-              text:"Doughnut chart presenting the Co2 emissions by sectors"
+              text: text
             }
-        }
+        }  
     }
 
 

@@ -84,7 +84,6 @@ public class DataService {
     @Autowired
     V10_Repo v10Repo;
 
-
     @Autowired
     V8_Repo v8Repo;
 
@@ -213,7 +212,7 @@ public class DataService {
         String descsString = String.join(";", descriptions);
 
         view v = new view(Id,visualString,descsString,style,user);
-        //repo savet tähän
+        
         try {
             viewsRepo.save(v);
         } catch (Exception e) {
@@ -222,6 +221,8 @@ public class DataService {
     
         return v;
      }
+
+     /*User made view is found by its Id */
 
      public view getView(String Id) {
             try {
@@ -232,6 +233,8 @@ public class DataService {
             }
      }
     
+
+     /*User gets own views */
 
      public List<String> getMyViews(String user) {
         List<String> myViews = new ArrayList<>();

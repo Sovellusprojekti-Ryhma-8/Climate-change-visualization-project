@@ -60,10 +60,9 @@ public class UserService {
         }
     }
 
+
     public User deleteById(String userName) {
         User user =  uRepo.findById(userName).orElse(null);
-        
-
         if (user != null) {
             uRepo.delete(user);
             dataService.deleteUsersViews(userName);

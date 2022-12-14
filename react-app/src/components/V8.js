@@ -104,7 +104,7 @@ export default function V8(props) {
                 title: {
                     display: true,
                     text: "Year",
-                    color: "" //Tähän joku väri?
+                    color: "" 
                 }
             },
             co2: {
@@ -115,7 +115,7 @@ export default function V8(props) {
                 title: {
                     display: true,
                     text: "CO2",
-                    color: "" //Tähän joku väri?
+                    color: "" 
                 }
             },
         },
