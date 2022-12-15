@@ -41,7 +41,7 @@ Jere Nissinen
 - Tietokannan suunnittelu ja luonti. Visualisointien luominen tietokantadatasta.
 
 Jonne Mustajärvi
-- Käyttäjän rekisteröinti. Visualisointi luominen tietokantadatasta.
+- Käyttäjän rekisteröinti. Visualisointien luominen tietokantadatasta ja käyttäjän näkymän luominen.
 
 Aaro Putto
 - React-komponenttien reititykset. Käyttäjän poistaminen.
