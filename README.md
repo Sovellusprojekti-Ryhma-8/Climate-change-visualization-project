@@ -12,6 +12,7 @@ Sovelluksen käyttöliittymä on toteutettu ReactJS-sovelluskehystä käyttäen.
 Kuva 2.
 
 
+
 ## Sovelluksen arkkitehtuuri
 
 ![Blank_diagram](https://user-images.githubusercontent.com/101468709/207817807-ce30c9df-5c3b-4d8d-b6f1-8430cf97e75e.png)
