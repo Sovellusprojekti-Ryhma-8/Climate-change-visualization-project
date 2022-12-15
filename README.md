@@ -37,16 +37,16 @@ Kuva 4.
 
 ## Tekijät ja roolit
 
-Jere Nissinen
+Jere Nissinen [GitHub](https://github.com/nismq)
 - Tietokannan suunnittelu ja luonti. Visualisointien luominen tietokantadatasta.
 
-Jonne Mustajärvi
+Jonne Mustajärvi [GitHub](https://github.com/JoneMus)
 - Käyttäjän rekisteröinti. Visualisointien luominen tietokantadatasta ja käyttäjän näkymän luominen.
 
-Aaro Putto
+Aaro Putto [GitHub](https://github.com/aaroputto)
 - React-komponenttien reititykset. Käyttäjän poistaminen.
 
-Saku Suorajärvi
+Saku Suorajärvi [GitHub](https://github.com/Sakuss)
 - Käyttäjän kirjautuminen ja autentikointi. Visualisointien luominen tietokantadatasta.
 
 
