@@ -1,7 +1,8 @@
 # Climate Change Visualization Tool
 
 Tämä projekti on Oulun ammattikorkeakoulun toisen vuoden ohjelmistokehityksen opiskelijoiden toteuttama web-sovellus. Ideana oli suunnitella ja toteuttaa ilmastonmuutokseen liittyvän tiedon visualisointityökalu (kuva 1). 
- 
+
+![v1](https://user-images.githubusercontent.com/101468709/207816797-26e077fa-766c-4340-8ddc-b613f9339c29.PNG)
 Kuva 1.
 
 Teknologiat
