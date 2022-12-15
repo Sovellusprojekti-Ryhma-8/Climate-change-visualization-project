@@ -2,14 +2,16 @@
 
 Tämä projekti on Oulun ammattikorkeakoulun toisen vuoden ohjelmistokehityksen opiskelijoiden toteuttama web-sovellus. Ideana oli suunnitella ja toteuttaa ilmastonmuutokseen liittyvän tiedon visualisointityökalu (kuva 1). 
 
-![v1](https://user-images.githubusercontent.com/101468709/207816797-26e077fa-766c-4340-8ddc-b613f9339c29.PNG)
+![joo1](https://user-images.githubusercontent.com/101468709/207819623-eab93a7d-19f3-4533-8afe-b3dcaf570d3b.PNG)
 Kuva 1.
+
 
 Teknologiat
 Sovelluksen käyttöliittymä on toteutettu ReactJS-sovelluskehystä käyttäen. Käyttöliittymä kommunikoi Java Spring Bootilla toteutetun REST-rajapinnan kanssa (kuva 2), joka on yhteydessä SQL-tietokantaan. Projektissa versionhallintana on käytetty Gitiä ja GitHubia.
 
-![register](https://user-images.githubusercontent.com/101468709/207817234-3f3b92d7-2ee5-4efe-8e8a-f12d7d24c7d4.PNG)
+![seffsdsfdsdf](https://user-images.githubusercontent.com/101468709/207819793-82a073c7-aa78-4c32-b722-7ea19d497a06.PNG)
 Kuva 2.
+
 
 
 
