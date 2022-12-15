@@ -9,7 +9,7 @@ Kuva 1.
 Teknologiat
 Sovelluksen käyttöliittymä on toteutettu ReactJS-sovelluskehystä käyttäen. Käyttöliittymä kommunikoi Java Spring Bootilla toteutetun REST-rajapinnan kanssa (kuva 2), joka on yhteydessä SQL-tietokantaan. Projektissa versionhallintana on käytetty Gitiä ja GitHubia.
 
-![seffsdsfdsdf](https://user-images.githubusercontent.com/101468709/207819793-82a073c7-aa78-4c32-b722-7ea19d497a06.PNG)
+![register](https://user-images.githubusercontent.com/101468709/207819897-9011c74e-2f45-4fb2-a382-ba011bdfd198.PNG)
 Kuva 2.
 
 
@@ -28,7 +28,7 @@ Kuva 3.
 -	Käyttäjien luomia näkymiä voi katsella ilman kirjautumista niiden uniikilla URL-osoitteella.
 
 
-![register2](https://user-images.githubusercontent.com/101468709/207817591-6dbd0029-f759-4bd8-837c-92294062d519.PNG)
+![seffsdsfdsdf](https://user-images.githubusercontent.com/101468709/207819793-82a073c7-aa78-4c32-b722-7ea19d497a06.PNG)
 Kuva 4.
 
 ## Tekijät ja roolit
