@@ -7,7 +7,8 @@ Tämä projekti on Oulun ammattikorkeakoulun toisen vuoden ohjelmistokehityksen 
 Kuva 1.
 
 
-Teknologiat
+## Teknologiat
+
 Sovelluksen käyttöliittymä on toteutettu ReactJS-sovelluskehystä käyttäen. Käyttöliittymä kommunikoi Java Spring Bootilla toteutetun REST-rajapinnan kanssa (kuva 2), joka on yhteydessä SQL-tietokantaan. Projektissa versionhallintana on käytetty Gitiä ja GitHubia.
 
 ![register](https://user-images.githubusercontent.com/101468709/207819897-9011c74e-2f45-4fb2-a382-ba011bdfd198.PNG)
