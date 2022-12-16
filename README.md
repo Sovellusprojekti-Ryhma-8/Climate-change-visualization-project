@@ -54,7 +54,7 @@ Saku Suorajärvi [GitHub](https://github.com/Sakuss)
 
 ## Käyttöönotto paikallisesti
 
-Aja climatedb.sql tiedosto esimerkiksi XAMPP tai MySQL Workbench työkalussa, jotta saat tietokannan paikallisesti käyttöön. Avaa Java sekä React kansiot Visual Studio Codessa. Aja React projektissa npm install. Tietokannan ollessa päällä, käynnistä ensin Java palvelin, jonka jälkeen käynnistä React sovellus npm start komennolla.
+Aja climatedb.sql tiedosto esimerkiksi XAMPP tai MySQL Workbench työkalussa, jotta saat tietokannan paikallisesti käyttöön. Avaa Java sekä React kansiot Visual Studio Codessa. Tarkista Java projektin application.properties tiedostosta tietokannan käyttäjänimi ja salasana ja tarvittaessa päivitä omaa tietokantaasi vastaaviin. Aja React projektissa npm install. Tietokannan ollessa päällä, käynnistä ensin Java palvelin, jonka jälkeen käynnistä React sovellus npm start komennolla.
 
 
 
